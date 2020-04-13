@@ -16,10 +16,12 @@
         {
             return this.inputTable.rows[i].cells[j];
         }
+
         getCell(0, 1).innerHTML = '<button>↑</button>';
         getCell(1, 0).innerHTML = '<button>←</button>';
         getCell(1,2).innerHTML = '<button>→</button>';
         getCell(2, 1).innerHTML = '<button>↓</button>';
-        getCell(1,1).innerHTML = '<button>Bomb!</button>';
+        getCell(1, 1).innerHTML = '<button>Bomb!</button>';
+        getCell(2, 2).innerHTML = '<button>Pass</button>';
     }
 }

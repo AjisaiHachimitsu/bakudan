@@ -23,11 +23,11 @@ div {
 
 
 #controler {
-    border:solid medium;
+    display: flex;
 }
 
 #buttontable {
-    display:inline-block;
+    flex-basis: auto;
     border: solid medium;
     border-collapse: collapse;
 }
@@ -45,7 +45,7 @@ div {
         font-size: 24px;
     }
 
-    #message{
-        display:inline-block;
-        width:100%;
-    }
+#message {
+    /*width:100%;*/
+    flex-grow: 1;
+}

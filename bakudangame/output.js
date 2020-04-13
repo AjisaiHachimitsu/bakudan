@@ -5,7 +5,7 @@ export default class Output {
         this.blockCollor = "gray";
         this.fieldColor = "lightgreen";
     }
-    Draw(field) {
+    FieldDraw(field) {
         this.table.innerHTML = "";
         for (let i = 0; i < field.height; i++) {
             this.table.insertRow();
@@ -17,6 +17,12 @@ export default class Output {
                     cell.style.backgroundColor = this.fieldColor;
             }
         }
+    }
+    PlayerDraw(player) {
+        this.AccessCell(player.y, player.x).innerHTML = '<img src="' + player.imagePath + '"/>';
+    }
+    AccessCell(i, j) {
+        return this.table.rows[i].cells[j];
     }
 }
 //# sourceMappingURL=output.js.map

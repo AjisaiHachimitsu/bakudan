@@ -1,4 +1,5 @@
 ﻿import {fieldStatus,default as Field} from "./field.js"
+import Player from "./player.js";
 
 export default class Output
 {
@@ -12,7 +13,7 @@ export default class Output
         this.fieldColor = "lightgreen";
     }
 
-    Draw(field: Field):void
+    FieldDraw(field: Field):void
     {
         this.table.innerHTML = "";
         for (let i = 0; i < field.height; i++)
@@ -27,5 +28,13 @@ export default class Output
                     cell.style.backgroundColor = this.fieldColor;
             }
         }
+    }
+    PlayerDraw(player: Player): void
+    {
+        this.AccessCell(player.y, player.x).innerHTML = '<img src="' + player.imagePath + '"/>';
+    }
+    private AccessCell(i: number, j: number): HTMLTableCellElement
+    {
+        return this.table.rows[i].cells[j];
     }
 }

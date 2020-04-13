@@ -15,6 +15,7 @@ export default class Input {
         getCell(1, 2).innerHTML = '<button>→</button>';
         getCell(2, 1).innerHTML = '<button>↓</button>';
         getCell(1, 1).innerHTML = '<button>Bomb!</button>';
+        getCell(2, 2).innerHTML = '<button>Pass</button>';
     }
 }
 //# sourceMappingURL=input.js.map
