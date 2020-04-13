@@ -1,4 +1,4 @@
-var fieldStatus;
+export var fieldStatus;
 (function (fieldStatus) {
     fieldStatus[fieldStatus["NONE"] = 0] = "NONE";
     fieldStatus[fieldStatus["BLOCK"] = 1] = "BLOCK";
@@ -13,11 +13,14 @@ export default class Field {
         for (let i = 0; i < this.height; i++) {
             this.mainfield[i] = [];
             for (let j = 0; j < this.width; j++) {
-                if (i % 2 == 0 || j % 2 == 0) {
+                if (i % 2 == 0 && j % 2 == 0) {
                     this.mainfield[i][j] = fieldStatus.BLOCK;
                 }
                 else {
                     this.mainfield[i][j] = fieldStatus.NONE;
+                }
+                if (i == 0 || i == this.height - 1 || j == 0 || j == this.width - 1) {
+                    this.mainfield[i][j] = fieldStatus.BLOCK;
                 }
             }
         }
