@@ -7,9 +7,16 @@ span {
 }
 
 div {
-    margin-bottom: 2em;
+    margin: 1em;
 }
 
+#content {
+    display:flex;
+    width:100%;
+}
+#field{
+    flex-basis:auto;
+}
 #maintable {
     border: solid medium;
     border-collapse: collapse;
@@ -24,6 +31,8 @@ div {
 
 #controler {
     display: flex;
+    flex-grow:1;
+    flex-direction:column;
 }
 
 #buttontable {
@@ -48,4 +57,5 @@ div {
 #message {
     /*width:100%;*/
     flex-grow: 1;
+    height:100%;
 }
