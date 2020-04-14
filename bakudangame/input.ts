@@ -1,7 +1,10 @@
-﻿export default class Input
+﻿import PlayerControler from "./player_controler.js";
+import Player from "./player.js";
+export default class Input
 {
     readonly inputTable: HTMLTableElement;
-    constructor(inputTable0: HTMLTableElement)
+    static playerControler: PlayerControler;
+    constructor(inputTable0: HTMLTableElement,playerControler0:PlayerControler)
     {
         this.inputTable = inputTable0;
         for (let i = 0; i < 3; i++)
@@ -17,7 +20,8 @@
             return this.inputTable.rows[i].cells[j];
         }
 
-        getCell(0, 1).innerHTML = '<button>↑</button>';
+        Input.playerControler =playerControler0;
+        getCell(0, 1).innerHTML = '<button OnClick="Input.playerControler.UpButtonClick()">↑</button>';
         getCell(1, 0).innerHTML = '<button>←</button>';
         getCell(1,2).innerHTML = '<button>→</button>';
         getCell(2, 1).innerHTML = '<button>↓</button>';

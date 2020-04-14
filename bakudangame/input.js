@@ -1,5 +1,5 @@
 export default class Input {
-    constructor(inputTable0) {
+    constructor(inputTable0, playerControler0) {
         this.inputTable = inputTable0;
         for (let i = 0; i < 3; i++) {
             this.inputTable.insertRow();
@@ -10,7 +10,8 @@ export default class Input {
         let getCell = (i, j) => {
             return this.inputTable.rows[i].cells[j];
         };
-        getCell(0, 1).innerHTML = '<button>↑</button>';
+        Input.playerControler = playerControler0;
+        getCell(0, 1).innerHTML = '<button OnClick="Input.playerControler.UpButtonClick()">↑</button>';
         getCell(1, 0).innerHTML = '<button>←</button>';
         getCell(1, 2).innerHTML = '<button>→</button>';
         getCell(2, 1).innerHTML = '<button>↓</button>';

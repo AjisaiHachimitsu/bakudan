@@ -13,12 +13,8 @@ window.onload = () =>
     let field = new Field(21, 15);
     let output = new Output((document.getElementById("maintable") as HTMLTableElement));
     output.FieldDraw(field);
-    let input = new Input((document.getElementById("buttontable")) as HTMLTableElement);
-    let playerControler = new PlayerControler;
-    let player1 = playerControler.players[0];
-    output.PlayerDraw(player1);
-    let message = new Messge(document.getElementById("message")) 
-    message.AddMessage("こんにちは。", "red");
-    message.AddImage(player1.imagePath);
-    message.AddMessage("こんにちは。", "brown");
+    let playerControler = new PlayerControler(field,output);
+    let input = new Input((document.getElementById("buttontable")) as HTMLTableElement, playerControler);
+    output.PlayerDraw(playerControler.players[0]);
+    //let player1 = playerControler.players[0];
 };
