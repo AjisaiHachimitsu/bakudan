@@ -1,14 +1,14 @@
 export default class Input {
     constructor(inputTable0, playerControler0) {
-        this.inputTable = inputTable0;
+        Input.inputTable = inputTable0;
         for (let i = 0; i < 3; i++) {
-            this.inputTable.insertRow();
+            Input.inputTable.insertRow();
             for (let j = 0; j < 3; j++) {
-                this.inputTable.rows[i].insertCell();
+                Input.inputTable.rows[i].insertCell();
             }
         }
         let getCell = (i, j) => {
-            return this.inputTable.rows[i].cells[j];
+            return Input.inputTable.rows[i].cells[j];
         };
         Input.playerControler = playerControler0;
         //Input.playerControler.UpButtonClick();

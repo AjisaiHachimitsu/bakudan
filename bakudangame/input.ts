@@ -2,22 +2,22 @@
 import Player from "./player.js";
 export default class Input
 {
-    readonly inputTable: HTMLTableElement;
+    static inputTable: HTMLTableElement;
     static playerControler: PlayerControler;
     constructor(inputTable0: HTMLTableElement,playerControler0:PlayerControler)
     {
-        this.inputTable = inputTable0;
+        Input.inputTable = inputTable0;
         for (let i = 0; i < 3; i++)
         {
-            this.inputTable.insertRow();
+            Input.inputTable.insertRow();
             for (let j = 0; j < 3; j++)
             {
-                this.inputTable.rows[i].insertCell();
+                Input.inputTable.rows[i].insertCell();
             }
         }
         let getCell =(i: number, j: number) =>
         {
-            return this.inputTable.rows[i].cells[j];
+            return Input.inputTable.rows[i].cells[j];
         }
         
         Input.playerControler = playerControler0;
