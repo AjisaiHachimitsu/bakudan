@@ -89,6 +89,7 @@
     <TypeScriptCompile Include="message.ts" />
     <TypeScriptCompile Include="output.ts" />
     <TypeScriptCompile Include="player.ts" />
+    <TypeScriptCompile Include="player_controler.ts" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

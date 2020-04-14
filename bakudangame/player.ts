@@ -1,11 +1,10 @@
-﻿import { fieldStatus, default as Field } from "./field.js"
+﻿import { default as Field, fieldStatus } from "./field.js";
 
-export enum Direction
-{
-    TOLEFT,
-    TORIGHT,
+export enum Direction {
+    TODOWN,
     TOUP,
-    TODOWN
+    TOLEFT,
+    TORIGHT
 };
 
 export default class Player
@@ -35,7 +34,7 @@ export default class Player
                 dir = [0,1];
                 break;
             case Direction.TOLEFT:
-                dir = [0,-1];
+                dir = [0, -1];
                 break;
         }
         if (field.GetField(this.y + dir[0], this.x + dir[1]) != fieldStatus.NONE)
