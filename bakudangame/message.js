@@ -1,17 +1,17 @@
 export default class Message {
-    constructor(messageWindow0) {
+    static start(messageWindow0) {
         this.messageWindow = messageWindow0;
     }
-    ClearMessage() {
+    static ClearMessage() {
         this.messageWindow.innerHTML = "";
     }
-    AddMessage(message, collor = "initial") {
+    static AddMessage(message, collor = "initial") {
         this.messageWindow.innerHTML += '<span style="color:' + collor + '">' + message + '</span>';
     }
-    BeginNewLine() {
+    static BeginNewLine() {
         this.messageWindow.innerHTML += '<br>';
     }
-    AddImage(imgPath) {
+    static AddImage(imgPath) {
         this.messageWindow.innerHTML += '<img src="' + imgPath + '"/>';
     }
 }

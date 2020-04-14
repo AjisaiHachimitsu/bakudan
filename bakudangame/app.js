@@ -1,6 +1,7 @@
 import Field from "./field.js";
 import Output from "./output.js";
 import Input from "./input.js";
+import Messge from "./message.js";
 import PlayerControler from "./player_controler.js";
 function main() {
 }
@@ -9,6 +10,8 @@ window.onload = () => {
     Output.start(document.getElementById("maintable"));
     PlayerControler.start(field);
     Input.start((document.getElementById("buttontable")));
+    Messge.start(document.getElementById("message"));
+    Messge.AddMessage("こんにちは。", "brue");
     //let player1 = playerControler.players[0];
 };
 //Output.PlayerDraw(PlayerControler.players[0]);

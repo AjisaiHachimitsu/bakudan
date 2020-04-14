@@ -1,23 +1,23 @@
 ﻿export default class Message
 {
-    readonly messageWindow: HTMLElement;
-    constructor(messageWindow0: HTMLElement)
+    private static messageWindow: HTMLElement;
+    static start(messageWindow0: HTMLElement)
     {
         this.messageWindow = messageWindow0;
     }
-    ClearMessage():void
+    static ClearMessage():void
     {
         this.messageWindow.innerHTML = "";
     }
-    AddMessage(message:string,collor:string="initial"): void
+    static AddMessage(message:string,collor:string="initial"): void
     {
         this.messageWindow.innerHTML +='<span style="color:'+collor+'">'+ message+'</span>';
     }
-    BeginNewLine(): void
+    static BeginNewLine(): void
     {
         this.messageWindow.innerHTML += '<br>';
     }
-    AddImage(imgPath: string): void
+    static AddImage(imgPath: string): void
     {
         this.messageWindow.innerHTML += '<img src="' + imgPath + '"/>';
     }
