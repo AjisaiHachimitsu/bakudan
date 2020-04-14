@@ -11,7 +11,6 @@ window.onload = () => {
     PlayerControler.start(field);
     Input.start((document.getElementById("buttontable")));
     Messge.start(document.getElementById("message"));
-    Messge.AddMessage("こんにちは。", "brue");
     //let player1 = playerControler.players[0];
 };
 //Output.PlayerDraw(PlayerControler.players[0]);

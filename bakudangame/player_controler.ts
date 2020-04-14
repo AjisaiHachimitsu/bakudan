@@ -2,6 +2,7 @@
 import Input from "./input"
 import Field from "./field.js";
 import Output from "./output.js";
+import Message from "./message.js";
 
 
 let field: Field;
@@ -18,9 +19,12 @@ function start(field0: Field)
     }
     Output.Draw(field, players[0]);
 }
-function ArrowButtonClick(direction:Direction):void
+function ArrowButtonClick(direction: Direction): void
 {
-    players[junban].move(direction, field);
+    if (players[junban].move(direction, field) == false)
+    {
+        Message.AddMessage("そこには行けません。<br>");
+    }
     Output.Draw(field, players[junban]);
 }
 export default { start, ArrowButtonClick }

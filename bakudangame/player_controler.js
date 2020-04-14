@@ -1,5 +1,6 @@
 import Player from "./player.js";
 import Output from "./output.js";
+import Message from "./message.js";
 let field;
 let ninzu = 1;
 let junban = 0;
@@ -13,7 +14,9 @@ function start(field0) {
     Output.Draw(field, players[0]);
 }
 function ArrowButtonClick(direction) {
-    players[junban].move(direction, field);
+    if (players[junban].move(direction, field) == false) {
+        Message.AddMessage("そこには行けません。<br>");
+    }
     Output.Draw(field, players[junban]);
 }
 export default { start, ArrowButtonClick };
