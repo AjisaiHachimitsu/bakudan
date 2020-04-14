@@ -11,7 +11,8 @@ export default class Input {
             return this.inputTable.rows[i].cells[j];
         };
         Input.playerControler = playerControler0;
-        getCell(0, 1).innerHTML = '<button OnClick="Input.playerControler.UpButtonClick()">↑</button>';
+        //Input.playerControler.UpButtonClick();
+        getCell(0, 1).innerHTML = '<button onclick=alert(Input.playerControler)>↑</button>';
         getCell(1, 0).innerHTML = '<button>←</button>';
         getCell(1, 2).innerHTML = '<button>→</button>';
         getCell(2, 1).innerHTML = '<button>↓</button>';
