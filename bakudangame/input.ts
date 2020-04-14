@@ -22,7 +22,9 @@ export default class Input
         
         Input.playerControler = playerControler0;
         //Input.playerControler.UpButtonClick();
-        getCell(0, 1).innerHTML = '<button onclick=alert(Input.playerControler)>↑</button>';
+        getCell(0, 1).innerHTML = '<button id="up-button">↑</button>';
+        let upButton = document.getElementById("up-button") as HTMLButtonElement;
+        upButton.onclick = PlayerControler.UpButtonClick;
         getCell(1, 0).innerHTML = '<button>←</button>';
         getCell(1,2).innerHTML = '<button>→</button>';
         getCell(2, 1).innerHTML = '<button>↓</button>';
