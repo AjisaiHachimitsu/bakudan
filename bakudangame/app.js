@@ -1,8 +1,8 @@
 import Field from "./field.js";
 import Output from "./output.js";
 import Input from "./input.js";
-import Player from "./player.js";
 import Messge from "./message.js";
+import PlayerControler from "./player_controler.js";
 function main() {
 }
 window.onload = () => {
@@ -10,7 +10,8 @@ window.onload = () => {
     let output = new Output(document.getElementById("maintable"));
     output.FieldDraw(field);
     let input = new Input((document.getElementById("buttontable")));
-    let player1 = new Player("img/char1/char1_001.png", 1, 1);
+    let playerControler = new PlayerControler;
+    let player1 = playerControler.players[0];
     output.PlayerDraw(player1);
     let message = new Messge(document.getElementById("message"));
     message.AddMessage("こんにちは。", "red");
