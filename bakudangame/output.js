@@ -11,7 +11,7 @@ export default class Output {
             this.table.insertRow();
             for (let j = 0; j < field.width; j++) {
                 let cell = this.table.rows[i].insertCell();
-                if (field.mainfield[i][j] == fieldStatus.BLOCK)
+                if (field.GetField(i, j) == fieldStatus.BLOCK)
                     cell.style.backgroundColor = this.blockCollor;
                 else
                     cell.style.backgroundColor = this.fieldColor;

@@ -5,6 +5,7 @@ export var fieldStatus;
     fieldStatus[fieldStatus["BOMB"] = 2] = "BOMB";
     fieldStatus[fieldStatus["EXPLOSION"] = 3] = "EXPLOSION";
 })(fieldStatus || (fieldStatus = {}));
+;
 export default class Field {
     constructor(width0, height0) {
         this.width = width0;
@@ -24,6 +25,9 @@ export default class Field {
                 }
             }
         }
+    }
+    GetField(i, j) {
+        return this.mainfield[i][j];
     }
 }
 //# sourceMappingURL=field.js.map

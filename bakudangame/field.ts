@@ -5,12 +5,16 @@
     BOMB,
     EXPLOSION
 
-}
+};
 export default class Field
 {
     readonly width: number;
     readonly height: number;
-    mainfield: number[][];
+    private mainfield: number[][];
+    GetField(i: number, j: number): fieldStatus
+    {
+        return this.mainfield[i][j];
+    }
 
     constructor(width0: number, height0: number)
     {
