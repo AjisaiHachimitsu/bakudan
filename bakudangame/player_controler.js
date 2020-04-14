@@ -1,4 +1,4 @@
-import Player, { Direction } from "./player.js";
+import Player from "./player.js";
 import Output from "./output.js";
 let field;
 let ninzu = 1;
@@ -12,10 +12,9 @@ function start(field0) {
     }
     Output.Draw(field, players[0]);
 }
-function UpButtonClick() {
-    alert("↑");
-    players[junban].move(Direction.TOUP, field);
+function ArrowButtonClick(direction) {
+    players[junban].move(direction, field);
     Output.Draw(field, players[junban]);
 }
-export default { start, UpButtonClick };
+export default { start, ArrowButtonClick };
 //# sourceMappingURL=player_controler.js.map

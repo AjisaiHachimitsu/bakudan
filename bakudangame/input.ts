@@ -1,4 +1,5 @@
 ﻿import PlayerControler from "./player_controler.js";
+import { Direction } from "./player.js";
 
 
 let inputTable: HTMLTableElement;
@@ -17,14 +18,18 @@ function start(inputTable0: HTMLTableElement)
     {
         return inputTable.rows[i].cells[j];
     }
-
-    //playerControler.UpButtonClick();
     getCell(0, 1).innerHTML = '<button id="up-button">↑</button>';
     let upButton = document.getElementById("up-button") as HTMLButtonElement;
-    upButton.onclick = PlayerControler.UpButtonClick;
-    getCell(1, 0).innerHTML = '<button>←</button>';
-    getCell(1, 2).innerHTML = '<button>→</button>';
-    getCell(2, 1).innerHTML = '<button>↓</button>';
+    upButton.onclick = function () { PlayerControler.ArrowButtonClick(Direction.TOUP); };
+    getCell(1, 0).innerHTML = '<button id="left-button">←</button>';
+    let leftButton = document.getElementById("left-button") as HTMLButtonElement;
+    leftButton.onclick = function () { PlayerControler.ArrowButtonClick(Direction.TOLEFT); };
+    getCell(1, 2).innerHTML = '<button id="right-button">→</button>';
+    let rightButton = document.getElementById("right-button") as HTMLButtonElement;
+    rightButton.onclick = function () { PlayerControler.ArrowButtonClick(Direction.TORIGHT); };
+    getCell(2, 1).innerHTML = '<button id="down-button">↓</button>';
+    let downButton = document.getElementById("down-button") as HTMLButtonElement;
+    downButton.onclick = function () { PlayerControler.ArrowButtonClick(Direction.TODOWN); };
     getCell(1, 1).innerHTML = '<button>Bomb!</button>';
     getCell(2, 2).innerHTML = '<button>Pass</button>';
 }

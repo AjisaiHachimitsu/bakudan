@@ -18,11 +18,9 @@ function start(field0: Field)
     }
     Output.Draw(field, players[0]);
 }
-function UpButtonClick()
+function ArrowButtonClick(direction:Direction):void
 {
-    alert("↑");
-    players[junban].move(Direction.TOUP, field);
+    players[junban].move(direction, field);
     Output.Draw(field, players[junban]);
 }
-
-export default { start, UpButtonClick }
+export default { start, ArrowButtonClick }
