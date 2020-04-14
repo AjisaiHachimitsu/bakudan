@@ -2,24 +2,27 @@
 import Input from "./input"
 import Field from "./field.js";
 import Output from "./output.js";
-export default class PlayerControler
+
+
+let field: Field;
+let ninzu: number = 1;
+let junban: number = 0;
+let players: Player[];
+function start(field0: Field)
 {
-    static field: Field;
-    static  ninzu: number = 1;
-    static junban: number = 0;
-    static players: Player[];
-    constructor(field0:Field)
+    field = field0;
+    players = new Array<Player>(ninzu);
+    for (let i = 0; i < ninzu; i++)
     {
-        PlayerControler.players = new Array<Player>(PlayerControler.ninzu);
-        for (let i = 0; i < PlayerControler.ninzu;i++)
-        {
-            PlayerControler.players[i] = new Player("img/char1/char1_001.png", 1, 3)
-        }
+        players[i] = new Player("img/char1/char1_001.png", 1, 3)
     }
-    static UpButtonClick()
-    {
-        alert("↑");
-        this.players[this.junban].move(Direction.TOUP, this.field);
-        Output.PlayerDraw(this.players[this.junban]);
-    }
+    Output.Draw(field, players[0]);
 }
+function UpButtonClick()
+{
+    alert("↑");
+    players[junban].move(Direction.TOUP, field);
+    Output.Draw(field, players[junban]);
+}
+
+export default { start, UpButtonClick }

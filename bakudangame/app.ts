@@ -11,12 +11,11 @@ function main():void
 window.onload = () =>
 {
 
+    let field = new Field(21, 15);
+    Output.start((document.getElementById("maintable") as HTMLTableElement));
+    PlayerControler.start(field);
+    Input.start((document.getElementById("buttontable")) as HTMLTableElement);
     //let player1 = playerControler.players[0];
 };
 
-let field = new Field(21, 15);
-let output = new Output((document.getElementById("maintable") as HTMLTableElement));
-output.FieldDraw(field);
-let playerControler = new PlayerControler(field);
-let input = new Input((document.getElementById("buttontable")) as HTMLTableElement, playerControler);
-Output.PlayerDraw(PlayerControler.players[0]);
+//Output.PlayerDraw(PlayerControler.players[0]);

@@ -1,40 +1,44 @@
-﻿import {fieldStatus,default as Field} from "./field.js"
+﻿import { fieldStatus, default as Field } from "./field.js"
 import Player from "./player.js";
 
-export default class Output
-{
-    static table: HTMLTableElement;
-    static blockCollor: string;
-    static  fieldColor: string;
-    constructor(table0: HTMLTableElement)
-    {
-        Output.table = table0;
-        Output.blockCollor = "gray";
-        Output.fieldColor = "lightgreen";
-    }
 
-    FieldDraw(field: Field):void
+let table: HTMLTableElement;
+let blockCollor: string;
+let fieldColor: string;
+function start(table0: HTMLTableElement)
+{
+    table = table0;
+    blockCollor = "gray";
+    fieldColor = "lightgreen";
+}
+
+function FieldDraw(field: Field): void
+{
+    table.innerHTML = "";
+    for (let i = 0; i < field.height; i++)
     {
-        Output.table.innerHTML = "";
-        for (let i = 0; i < field.height; i++)
+        table.insertRow();
+        for (let j = 0; j < field.width; j++)
         {
-            Output.table.insertRow();
-            for (let j = 0; j < field.width; j++)
-            {
-                let cell = Output.table.rows[i].insertCell();
-                if (field.GetField(i,j) == fieldStatus.BLOCK)
-                    cell.style.backgroundColor = Output.blockCollor;
-                else
-                    cell.style.backgroundColor = Output.fieldColor;
-            }
+            let cell = table.rows[i].insertCell();
+            if (field.GetField(i, j) == fieldStatus.BLOCK)
+                cell.style.backgroundColor = blockCollor;
+            else
+                cell.style.backgroundColor = fieldColor;
         }
     }
-    static PlayerDraw(player: Player): void
-    {
-        Output.AccessCell(player.y, player.x).innerHTML = '<img src="' + player.imagePath + '"/>';
-    }
-    private static AccessCell(i: number, j: number): HTMLTableCellElement
-    {
-        return Output.table.rows[i].cells[j];
-    }
 }
+function PlayerDraw(player: Player): void
+{
+    AccessCell(player.y, player.x).innerHTML = '<img src="' + player.imagePath + '"/>';
+}
+function AccessCell(i: number, j: number): HTMLTableCellElement
+{
+    return table.rows[i].cells[j];
+}
+function Draw(field:Field,player:Player)
+{
+    FieldDraw(field);
+    PlayerDraw(player)
+}
+export default { start,Draw };

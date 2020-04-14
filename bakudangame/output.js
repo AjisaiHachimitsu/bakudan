@@ -1,28 +1,34 @@
 import { fieldStatus } from "./field.js";
-export default class Output {
-    constructor(table0) {
-        Output.table = table0;
-        Output.blockCollor = "gray";
-        Output.fieldColor = "lightgreen";
-    }
-    FieldDraw(field) {
-        Output.table.innerHTML = "";
-        for (let i = 0; i < field.height; i++) {
-            Output.table.insertRow();
-            for (let j = 0; j < field.width; j++) {
-                let cell = Output.table.rows[i].insertCell();
-                if (field.GetField(i, j) == fieldStatus.BLOCK)
-                    cell.style.backgroundColor = Output.blockCollor;
-                else
-                    cell.style.backgroundColor = Output.fieldColor;
-            }
+let table;
+let blockCollor;
+let fieldColor;
+function start(table0) {
+    table = table0;
+    blockCollor = "gray";
+    fieldColor = "lightgreen";
+}
+function FieldDraw(field) {
+    table.innerHTML = "";
+    for (let i = 0; i < field.height; i++) {
+        table.insertRow();
+        for (let j = 0; j < field.width; j++) {
+            let cell = table.rows[i].insertCell();
+            if (field.GetField(i, j) == fieldStatus.BLOCK)
+                cell.style.backgroundColor = blockCollor;
+            else
+                cell.style.backgroundColor = fieldColor;
         }
     }
-    static PlayerDraw(player) {
-        Output.AccessCell(player.y, player.x).innerHTML = '<img src="' + player.imagePath + '"/>';
-    }
-    static AccessCell(i, j) {
-        return Output.table.rows[i].cells[j];
-    }
 }
+function PlayerDraw(player) {
+    AccessCell(player.y, player.x).innerHTML = '<img src="' + player.imagePath + '"/>';
+}
+function AccessCell(i, j) {
+    return table.rows[i].cells[j];
+}
+function Draw(field, player) {
+    FieldDraw(field);
+    PlayerDraw(player);
+}
+export default { start, Draw };
 //# sourceMappingURL=output.js.map
