@@ -1,10 +1,10 @@
 import { fieldStatus } from "./field.js";
 export var Direction;
 (function (Direction) {
-    Direction[Direction["TOLEFT"] = 0] = "TOLEFT";
-    Direction[Direction["TORIGHT"] = 1] = "TORIGHT";
-    Direction[Direction["TOUP"] = 2] = "TOUP";
-    Direction[Direction["TODOWN"] = 3] = "TODOWN";
+    Direction[Direction["TODOWN"] = 0] = "TODOWN";
+    Direction[Direction["TOUP"] = 1] = "TOUP";
+    Direction[Direction["TOLEFT"] = 2] = "TOLEFT";
+    Direction[Direction["TORIGHT"] = 3] = "TORIGHT";
 })(Direction || (Direction = {}));
 ;
 export default class Player {
