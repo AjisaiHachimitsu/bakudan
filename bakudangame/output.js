@@ -1,28 +1,28 @@
 import { fieldStatus } from "./field.js";
 export default class Output {
     constructor(table0) {
-        this.table = table0;
-        this.blockCollor = "gray";
-        this.fieldColor = "lightgreen";
+        Output.table = table0;
+        Output.blockCollor = "gray";
+        Output.fieldColor = "lightgreen";
     }
     FieldDraw(field) {
-        this.table.innerHTML = "";
+        Output.table.innerHTML = "";
         for (let i = 0; i < field.height; i++) {
-            this.table.insertRow();
+            Output.table.insertRow();
             for (let j = 0; j < field.width; j++) {
-                let cell = this.table.rows[i].insertCell();
+                let cell = Output.table.rows[i].insertCell();
                 if (field.GetField(i, j) == fieldStatus.BLOCK)
-                    cell.style.backgroundColor = this.blockCollor;
+                    cell.style.backgroundColor = Output.blockCollor;
                 else
-                    cell.style.backgroundColor = this.fieldColor;
+                    cell.style.backgroundColor = Output.fieldColor;
             }
         }
     }
-    PlayerDraw(player) {
-        this.AccessCell(player.y, player.x).innerHTML = '<img src="' + player.imagePath + '"/>';
+    static PlayerDraw(player) {
+        Output.AccessCell(player.y, player.x).innerHTML = '<img src="' + player.imagePath + '"/>';
     }
-    AccessCell(i, j) {
-        return this.table.rows[i].cells[j];
+    static AccessCell(i, j) {
+        return Output.table.rows[i].cells[j];
     }
 }
 //# sourceMappingURL=output.js.map

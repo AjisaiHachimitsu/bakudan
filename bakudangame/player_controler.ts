@@ -7,12 +7,10 @@ export default class PlayerControler
     readonly field: Field;
     readonly ninzu: number = 1;
     private junban: number = 0;
-    readonly output:Output
    players: Player[];
-    constructor(field0:Field,output0:Output)
+    constructor(field0:Field)
     {
         this.players = new Array<Player>(this.ninzu);
-        this.output = output0;
         for (let i = 0; i < this.ninzu;i++)
         {
             this.players[i] = new Player("img/char1/char1_001.png", 1, 3)
@@ -22,6 +20,6 @@ export default class PlayerControler
     {
         alert("↑");
         this.players[this.junban].move(Direction.TOUP, this.field);
-        this.output.PlayerDraw(this.players[this.junban]);
+        Output.PlayerDraw(this.players[this.junban]);
     }
 }
