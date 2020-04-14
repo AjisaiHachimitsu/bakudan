@@ -13,4 +13,12 @@
     {
         this.messageWindow.innerHTML +='<span style="color:'+collor+'">'+ message+'</span>';
     }
+    BeginNewLine(): void
+    {
+        this.messageWindow.innerHTML += '<br>';
+    }
+    AddImage(imgPath: string): void
+    {
+        this.messageWindow.innerHTML += '<img src="' + imgPath + '"/>';
+    }
 }

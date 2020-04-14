@@ -8,5 +8,11 @@ export default class Message {
     AddMessage(message, collor = "initial") {
         this.messageWindow.innerHTML += '<span style="color:' + collor + '">' + message + '</span>';
     }
+    BeginNewLine() {
+        this.messageWindow.innerHTML += '<br>';
+    }
+    AddImage(imgPath) {
+        this.messageWindow.innerHTML += '<img src="' + imgPath + '"/>';
+    }
 }
 //# sourceMappingURL=message.js.map

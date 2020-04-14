@@ -16,5 +16,7 @@ window.onload = () =>
     let player1 = new Player("img/char1/char1_001.png", 1, 1);
     output.PlayerDraw(player1);
     let message = new Messge(document.getElementById("message")) 
-    message.AddMessage("Hello");
+    message.AddMessage("こんにちは。", "red");
+    message.AddImage(player1.imagePath);
+    message.AddMessage("こんにちは。", "brown");
 };
