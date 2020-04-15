@@ -13,7 +13,7 @@ export default class Output
         this.fieldColor = "lightgreen";
     }
 
-    static FieldDraw(field: Field): void
+    private static FieldDraw(field: Field): void
     {
         this.table.innerHTML = "";
         for (let i = 0; i < field.height; i++)
@@ -29,7 +29,7 @@ export default class Output
             }
         }
     }
-    static PlayerDraw(players: Player[]): void
+    private static PlayerDraw(players: Player[]): void
     {
         for(let item of players)
         this.AccessCell(item.y, item.x).innerHTML += '<img src="' + item.imagePath + '"/>';

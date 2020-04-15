@@ -19,7 +19,7 @@ export default class PlayerControler
             let path = "img/char" + i + "/char" + i + "_001.png";
             this.players[i] = new Player(path, i + 1, 1)
         }
-        Output.PlayerDraw(this.players);
+        Output.Draw(this.field,this.players);
     }
     static ArrowButtonClick(direction: Direction): void
     {

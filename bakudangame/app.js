@@ -8,7 +8,7 @@ function main() {
 window.onload = () => {
     let field = new Field(21, 15);
     Output.start(document.getElementById("maintable"));
-    Output.FieldDraw(field);
+    //Output.FieldDraw(field);
     PlayerControler.start(field);
     Input.start((document.getElementById("buttontable")));
     Messge.start(document.getElementById("message"));

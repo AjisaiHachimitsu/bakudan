@@ -13,7 +13,7 @@ window.onload = () =>
 
     let field = new Field(21, 15);
     Output.start((document.getElementById("maintable") as HTMLTableElement));
-    Output.FieldDraw(field);
+    //Output.FieldDraw(field);
     PlayerControler.start(field);
     Input.start((document.getElementById("buttontable")) as HTMLTableElement);
     Messge.start(document.getElementById("message"));
