@@ -1,4 +1,4 @@
-import { fieldStatus } from "./field.js";
+import { fieldStatus, Position } from "./field.js";
 export default class Output {
     static start(table0) {
         this.table = table0;
@@ -11,7 +11,7 @@ export default class Output {
             this.table.insertRow();
             for (let j = 0; j < field.width; j++) {
                 let cell = this.table.rows[i].insertCell();
-                if (field.GetField(i, j) == fieldStatus.BLOCK)
+                if (field.GetField(new Position(j, i)) == fieldStatus.BLOCK)
                     cell.style.backgroundColor = this.blockCollor;
                 else
                     cell.style.backgroundColor = this.fieldColor;
@@ -20,7 +20,7 @@ export default class Output {
     }
     static PlayerDraw(players) {
         for (let item of players)
-            this.AccessCell(item.y, item.x).innerHTML += '<img src="' + item.imagePath + '"/>';
+            this.AccessCell(item.position.y, item.position.x).innerHTML += '<img src="' + item.imagePath + '"/>';
     }
     static AccessCell(i, j) {
         return this.table.rows[i].cells[j];

@@ -6,6 +6,24 @@ export var fieldStatus;
     fieldStatus[fieldStatus["EXPLOSION"] = 3] = "EXPLOSION";
 })(fieldStatus || (fieldStatus = {}));
 ;
+export class Position {
+    constructor(x0, y0) {
+        this.x = x0;
+        this.y = y0;
+    }
+    get Right() {
+        return new Position(this.x + 1, this.y);
+    }
+    get Left() {
+        return new Position(this.x - 1, this.y);
+    }
+    get Up() {
+        return new Position(this.x, this.y - 1);
+    }
+    get Down() {
+        return new Position(this.x, this.y + 1);
+    }
+}
 export default class Field {
     constructor(width0, height0) {
         this.width = width0;
@@ -26,8 +44,8 @@ export default class Field {
             }
         }
     }
-    GetField(i, j) {
-        return this.mainfield[i][j];
+    GetField(position) {
+        return this.mainfield[position.y][position.x];
     }
 }
 //# sourceMappingURL=field.js.map

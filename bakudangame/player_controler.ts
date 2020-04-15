@@ -1,5 +1,5 @@
 ﻿import Player, { Direction } from "./player.js"
-import Field from "./field.js";
+import Field, { Position } from "./field.js";
 import Output from "./output.js";
 import Message from "./message.js";
 
@@ -24,7 +24,7 @@ export default class PlayerControler
             else x0 = this.field.width - 2;//right
             if (Math.floor(i / 2) == 0) y0 = 1;//top
             else y0 = this.field.height - 2;//bottom
-            this.players[i] = new Player(path, x0, y0)
+            this.players[i] = new Player(path, new Position(x0, y0))
         }
         Output.Draw(this.field, this.players);
         this.ShowJunban();

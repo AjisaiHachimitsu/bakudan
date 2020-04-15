@@ -1,6 +1,7 @@
-﻿import { default as Field, fieldStatus } from "./field.js";
+﻿import { default as Field, fieldStatus, Position } from "./field.js";
 
-export enum Direction {
+export enum Direction
+{
     TODOWN,
     TOUP,
     TOLEFT,
@@ -10,39 +11,36 @@ export enum Direction {
 export default class Player
 {
     imagePath: string;
-    x: number;
-    y: number;
+    position: Position;
 
-    constructor(img: string, x0: number, y0: number)
+    constructor(img: string, position0: Position)
     {
         this.imagePath = img;
-        this.x = x0;
-        this.y = y0;
+        this.position = position0;
     }
     move(direction: Direction, field: Field): boolean
     {
-        let dir = new Array<number>(2);
+        let target: Position;
         switch (direction)
         {
             case Direction.TODOWN:
-                dir = [1, 0];
+                target = this.position.Down;
                 break;
             case Direction.TOUP:
-                dir = [-1, 0];
+                target = this.position.Up;
                 break;
             case Direction.TORIGHT:
-                dir = [0,1];
+                target = this.position.Right;
                 break;
             case Direction.TOLEFT:
-                dir = [0, -1];
+                target = this.position.Left;
                 break;
         }
-        if (field.GetField(this.y + dir[0], this.x + dir[1]) != fieldStatus.NONE)
+        if (field.GetField(target) != fieldStatus.NONE)
         {
             return false;
         }
-        this.y += dir[0];
-        this.x += dir[1];
+        this.position = target;
         return true;
     }
 }

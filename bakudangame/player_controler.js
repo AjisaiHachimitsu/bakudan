@@ -1,4 +1,5 @@
 import Player from "./player.js";
+import { Position } from "./field.js";
 import Output from "./output.js";
 import Message from "./message.js";
 export default class PlayerControler {
@@ -17,7 +18,7 @@ export default class PlayerControler {
                 y0 = 1; //top
             else
                 y0 = this.field.height - 2; //bottom
-            this.players[i] = new Player(path, x0, y0);
+            this.players[i] = new Player(path, new Position(x0, y0));
         }
         Output.Draw(this.field, this.players);
         this.ShowJunban();

@@ -8,32 +8,30 @@ export var Direction;
 })(Direction || (Direction = {}));
 ;
 export default class Player {
-    constructor(img, x0, y0) {
+    constructor(img, position0) {
         this.imagePath = img;
-        this.x = x0;
-        this.y = y0;
+        this.position = position0;
     }
     move(direction, field) {
-        let dir = new Array(2);
+        let target;
         switch (direction) {
             case Direction.TODOWN:
-                dir = [1, 0];
+                target = this.position.Down;
                 break;
             case Direction.TOUP:
-                dir = [-1, 0];
+                target = this.position.Up;
                 break;
             case Direction.TORIGHT:
-                dir = [0, 1];
+                target = this.position.Right;
                 break;
             case Direction.TOLEFT:
-                dir = [0, -1];
+                target = this.position.Left;
                 break;
         }
-        if (field.GetField(this.y + dir[0], this.x + dir[1]) != fieldStatus.NONE) {
+        if (field.GetField(target) != fieldStatus.NONE) {
             return false;
         }
-        this.y += dir[0];
-        this.x += dir[1];
+        this.position = target;
         return true;
     }
 }
