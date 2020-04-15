@@ -23,7 +23,16 @@ div {
         width: 36px;
         height: 36px;
         border: dashed 1px;
+        position:relative;
     }
+        #maintable td img {
+            position: absolute;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            margin:auto;
+        }
 
 
 #controler {
