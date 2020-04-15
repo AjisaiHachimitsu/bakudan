@@ -18,15 +18,16 @@ export default class Output {
             }
         }
     }
-    static PlayerDraw(player) {
-        this.AccessCell(player.y, player.x).innerHTML += '<img src="' + player.imagePath + '"/>';
+    static PlayerDraw(players) {
+        for (let item of players)
+            this.AccessCell(item.y, item.x).innerHTML += '<img src="' + item.imagePath + '"/>';
     }
     static AccessCell(i, j) {
         return this.table.rows[i].cells[j];
     }
-    static Draw(field, player) {
+    static Draw(field, players) {
         this.FieldDraw(field);
-        this.PlayerDraw(player);
+        this.PlayerDraw(players);
     }
 }
 //# sourceMappingURL=output.js.map

@@ -29,17 +29,18 @@ export default class Output
             }
         }
     }
-    static PlayerDraw(player: Player): void
+    static PlayerDraw(players: Player[]): void
     {
-        this.AccessCell(player.y, player.x).innerHTML += '<img src="' + player.imagePath + '"/>';
+        for(let item of players)
+        this.AccessCell(item.y, item.x).innerHTML += '<img src="' + item.imagePath + '"/>';
     }
     private static AccessCell(i: number, j: number): HTMLTableCellElement
     {
         return this.table.rows[i].cells[j];
     }
-    static Draw(field: Field, player: Player)
+    static Draw(field: Field, players: Player[])
     {
         this.FieldDraw(field);
-        this.PlayerDraw(player)
+        this.PlayerDraw(players)
     }
 }

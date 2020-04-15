@@ -17,9 +17,9 @@ export default class PlayerControler
         for (let i = 0; i < this.ninzu; i++)
         {
             let path = "img/char" + i + "/char" + i + "_001.png";
-            this.players[i] = new Player(path, i+1, 1)
-            Output.PlayerDraw(this.players[i]);
+            this.players[i] = new Player(path, i + 1, 1)
         }
+        Output.PlayerDraw(this.players);
     }
     static ArrowButtonClick(direction: Direction): void
     {
@@ -27,6 +27,10 @@ export default class PlayerControler
         {
             Message.AddMessage("そこには行けません。<br>");
         }
-        Output.PlayerDraw( this.players[this.junban]);
+        Output.Draw(this.field,this.players);
+    }
+    static GetPlayers(): Player[]
+    {
+        return this.players;
     }
 }
