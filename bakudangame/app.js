@@ -7,11 +7,11 @@ function main() {
 }
 window.onload = () => {
     let field = new Field(21, 15);
+    Messge.start(document.getElementById("message"));
     Output.start(document.getElementById("maintable"));
     //Output.FieldDraw(field);
     PlayerControler.start(field);
     Input.start((document.getElementById("buttontable")));
-    Messge.start(document.getElementById("message"));
     //let player1 = playerControler.players[0];
 };
 //Output.PlayerDraw(PlayerControler.players[0]);

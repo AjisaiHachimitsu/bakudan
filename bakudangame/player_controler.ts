@@ -1,5 +1,4 @@
 ﻿import Player, { Direction } from "./player.js"
-import Input from "./input"
 import Field from "./field.js";
 import Output from "./output.js";
 import Message from "./message.js";
@@ -27,7 +26,8 @@ export default class PlayerControler
             else y0 = this.field.height - 2;//bottom
             this.players[i] = new Player(path, x0, y0)
         }
-        Output.Draw(this.field,this.players);
+        Output.Draw(this.field, this.players);
+        this.ShowJunban();
     }
     static ArrowButtonClick(direction: Direction): void
     {
@@ -56,5 +56,12 @@ export default class PlayerControler
         this.acttionCounter = 0;
         this.junban++
         this.junban %= this.ninzu;
+        this.ShowJunban();
+    }
+    static ShowJunban(): void
+    {
+        Message.ClearMessage();
+        Message.AddImage(this.players[this.junban].imagePath);
+        Message.AddMessage("の番です。<br>")
     }
 }

@@ -20,6 +20,7 @@ export default class PlayerControler {
             this.players[i] = new Player(path, x0, y0);
         }
         Output.Draw(this.field, this.players);
+        this.ShowJunban();
     }
     static ArrowButtonClick(direction) {
         if (this.players[this.junban].move(direction, this.field) == false) {
@@ -42,6 +43,12 @@ export default class PlayerControler {
         this.acttionCounter = 0;
         this.junban++;
         this.junban %= this.ninzu;
+        this.ShowJunban();
+    }
+    static ShowJunban() {
+        Message.ClearMessage();
+        Message.AddImage(this.players[this.junban].imagePath);
+        Message.AddMessage("の番です。<br>");
     }
 }
 PlayerControler.ninzu = 4;

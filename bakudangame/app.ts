@@ -12,11 +12,11 @@ window.onload = () =>
 {
 
     let field = new Field(21, 15);
+    Messge.start(document.getElementById("message"));
     Output.start((document.getElementById("maintable") as HTMLTableElement));
     //Output.FieldDraw(field);
     PlayerControler.start(field);
     Input.start((document.getElementById("buttontable")) as HTMLTableElement);
-    Messge.start(document.getElementById("message"));
     //let player1 = playerControler.players[0];
 };
 
