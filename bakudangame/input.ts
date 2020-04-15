@@ -3,7 +3,7 @@ import { Direction } from "./player.js";
 
 export default class Input 
 {
-        private static inputTable: HTMLTableElement;
+    private static inputTable: HTMLTableElement;
     static start(inputTable0: HTMLTableElement)
     {
         this.inputTable = inputTable0;

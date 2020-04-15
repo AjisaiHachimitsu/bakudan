@@ -6,7 +6,7 @@ export default class PlayerControler {
         this.field = field0;
         this.players = new Array(this.ninzu);
         for (let i = 0; i < this.ninzu; i++) {
-            this.players[i] = new Player("img/char1/char1_001.png", 1, 3);
+            this.players[i] = new Player("img/char1/char1_001.png", 1, 1);
         }
         Output.Draw(this.field, this.players[0]);
     }

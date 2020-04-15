@@ -3,7 +3,7 @@ import Player from "./player.js";
 
 export default class Output
 {
-        private static table: HTMLTableElement;
+    private static table: HTMLTableElement;
     private static blockCollor: string;
     private static fieldColor: string;
     static start(table0: HTMLTableElement)
@@ -33,7 +33,7 @@ export default class Output
     {
         this.AccessCell(player.y, player.x).innerHTML = '<img src="' + player.imagePath + '"/>';
     }
-    static AccessCell(i: number, j: number): HTMLTableCellElement
+    private static AccessCell(i: number, j: number): HTMLTableCellElement
     {
         return this.table.rows[i].cells[j];
     }

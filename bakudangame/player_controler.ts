@@ -6,7 +6,7 @@ import Message from "./message.js";
 
 export default class PlayerControler
 {
-        private static field: Field;
+    private static field: Field;
     private static ninzu: number = 1;
     private static junban: number = 0;
     private static players: Player[];
@@ -16,7 +16,7 @@ export default class PlayerControler
         this.players = new Array<Player>(this.ninzu);
         for (let i = 0; i < this.ninzu; i++)
         {
-            this.players[i] = new Player("img/char1/char1_001.png", 1, 3)
+            this.players[i] = new Player("img/char1/char1_001.png", 1, 1)
         }
         Output.Draw(this.field, this.players[0]);
     }
