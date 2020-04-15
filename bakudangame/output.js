@@ -19,7 +19,7 @@ export default class Output {
         }
     }
     static PlayerDraw(player) {
-        this.AccessCell(player.y, player.x).innerHTML = '<img src="' + player.imagePath + '"/>';
+        this.AccessCell(player.y, player.x).innerHTML += '<img src="' + player.imagePath + '"/>';
     }
     static AccessCell(i, j) {
         return this.table.rows[i].cells[j];

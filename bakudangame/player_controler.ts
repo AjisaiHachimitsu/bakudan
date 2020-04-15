@@ -7,7 +7,7 @@ import Message from "./message.js";
 export default class PlayerControler
 {
     private static field: Field;
-    private static ninzu: number = 1;
+    private static ninzu: number = 4;
     private static junban: number = 0;
     private static players: Player[];
     static start(field0: Field)
@@ -16,9 +16,10 @@ export default class PlayerControler
         this.players = new Array<Player>(this.ninzu);
         for (let i = 0; i < this.ninzu; i++)
         {
-            this.players[i] = new Player("img/char1/char1_001.png", 1, 1)
+            let path = "img/char" + i + "/char" + i + "_001.png";
+            this.players[i] = new Player(path, i+1, 1)
+            Output.PlayerDraw(this.players[i]);
         }
-        Output.Draw(this.field, this.players[0]);
     }
     static ArrowButtonClick(direction: Direction): void
     {
@@ -26,6 +27,6 @@ export default class PlayerControler
         {
             Message.AddMessage("そこには行けません。<br>");
         }
-        Output.Draw(this.field, this.players[this.junban]);
+        Output.PlayerDraw( this.players[this.junban]);
     }
 }

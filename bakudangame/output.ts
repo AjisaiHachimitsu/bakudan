@@ -31,7 +31,7 @@ export default class Output
     }
     static PlayerDraw(player: Player): void
     {
-        this.AccessCell(player.y, player.x).innerHTML = '<img src="' + player.imagePath + '"/>';
+        this.AccessCell(player.y, player.x).innerHTML += '<img src="' + player.imagePath + '"/>';
     }
     private static AccessCell(i: number, j: number): HTMLTableCellElement
     {
