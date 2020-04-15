@@ -10,8 +10,11 @@ export default class PlayerControler
     private static ninzu: number = 4;
     private static junban: number = 0;
     private static players: Player[];
+    private static numOfAction: number;
+    private static acttionCounter = 0;
     static start(field0: Field)
     {
+        this.numOfAction = 3;
         this.field = field0;
         this.players = new Array<Player>(this.ninzu);
         for (let i = 0; i < this.ninzu; i++)
@@ -31,11 +34,27 @@ export default class PlayerControler
         if (this.players[this.junban].move(direction, this.field) == false)
         {
             Message.AddMessage("そこには行けません。<br>");
+            return;
         }
         Output.Draw(this.field,this.players);
+        this.acttionCounter++;
+        if (this.acttionCounter >= this.numOfAction)
+        {
+            this.ChangeToNextPlayer();
+        }
+    }
+    static PassButtonClick():void
+    {
+        this.ChangeToNextPlayer();
     }
     static GetPlayers(): Player[]
     {
         return this.players;
+    }
+    static ChangeToNextPlayer(): void
+    {
+        this.acttionCounter = 0;
+        this.junban++
+        this.junban %= this.ninzu;
     }
 }

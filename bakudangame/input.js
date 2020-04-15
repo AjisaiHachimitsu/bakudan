@@ -25,7 +25,9 @@ export default class Input {
         let downButton = document.getElementById("down-button");
         downButton.onclick = function () { PlayerControler.ArrowButtonClick(Direction.TODOWN); };
         getCell(1, 1).innerHTML = '<button>Bomb!</button>';
-        getCell(2, 2).innerHTML = '<button>Pass</button>';
+        getCell(2, 2).innerHTML = '<button id="pass-button">Pass</button>';
+        let passButton = document.getElementById("pass-button");
+        passButton.onclick = function () { PlayerControler.PassButtonClick(); };
     }
 }
 //# sourceMappingURL=input.js.map
