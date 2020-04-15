@@ -78,7 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app_mobile.css" />
-    <Content Include="app_pc.css" />
+    <Content Include="app.css" />
     <Content Include="index.html" />
     <Content Include="Web.config" />
   </ItemGroup>
