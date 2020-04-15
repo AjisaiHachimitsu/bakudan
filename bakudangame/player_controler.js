@@ -7,7 +7,16 @@ export default class PlayerControler {
         this.players = new Array(this.ninzu);
         for (let i = 0; i < this.ninzu; i++) {
             let path = "img/char" + i + "/char" + i + "_001.png";
-            this.players[i] = new Player(path, i + 1, 1);
+            let x0, y0;
+            if (i % 2 == 0)
+                x0 = 1; //left
+            else
+                x0 = this.field.width - 2; //right
+            if (Math.floor(i / 2) == 0)
+                y0 = 1; //top
+            else
+                y0 = this.field.height - 2; //bottom
+            this.players[i] = new Player(path, x0, y0);
         }
         Output.Draw(this.field, this.players);
     }
