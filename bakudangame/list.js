@@ -12,14 +12,24 @@ export default class List {
         if (this.firstnode == null) {
             this.firstnode = new listnode(data);
             this.lastnode = this.firstnode;
+            this.iterator = this.firstnode;
         }
-        this.lastnode.next = new listnode(data);
+        else {
+            this.lastnode = this.lastnode.next = new listnode(data);
+        }
     }
-    foreach(func) {
-        let it = this.firstnode;
-        while (it.next == null) {
-            func(it.data);
-        }
+    delete() {
+        this.iterator.data = this.iterator.next.data;
+        this.iterator.next = this.iterator.next.next;
+    }
+    Next() {
+        this.iterator = this.iterator.next;
+    }
+    get IsNull() {
+        return this.iterator == null;
+    }
+    get Value() {
+        return this.iterator.data;
     }
 }
 //# sourceMappingURL=list.js.map

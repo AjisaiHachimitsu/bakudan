@@ -13,14 +13,22 @@ window.onload = () =>
 
     let field = new Field(21, 15);
     Messge.start(document.getElementById("message"));
-    Output.start((document.getElementById("maintable") as HTMLTableElement));
-    //Output.FieldDraw(field);
+    /*Output.start((document.getElementById("maintable") as HTMLTableElement));
     PlayerControler.start(field);
-    Input.start((document.getElementById("buttontable")) as HTMLTableElement);
+    Input.start((document.getElementById("buttontable")) as HTMLTableElement);*/
 
     let testlist = new List<number>();
-    testlist.add(1);
-    testlist.add(2);
+    for (let i = 0; i < 10; i++)
+    {
+        testlist.add(i);
+    }
+    while (testlist.IsNull == false)
+    {
+        if (testlist.Value === 3) testlist.delete();
+        Messge.AddMessage(String(testlist.Value));
+        Messge.BeginNewLine();
+        testlist.Next();
+    }
 
 };
 

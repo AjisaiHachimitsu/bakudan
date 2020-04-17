@@ -14,7 +14,7 @@ export default class List<T>
 {
     private firstnode: listnode<T>;
     private lastnode: listnode<T>;
-    private iterator: listnode<T>;
+    private iterator: listnode<T>
     constructor()
     {
         this.firstnode = null;
@@ -25,16 +25,28 @@ export default class List<T>
         {
             this.firstnode = new listnode<T>(data);
             this.lastnode = this.firstnode;
+            this.iterator = this.firstnode;
         }
-        this.lastnode.next = new listnode<T>(data);
-    }
-    foreach(func: (item: T) => any)
-    {
-        let it = this.firstnode;
-        while (it.next == null)
+        else
         {
-            func(it.data)
+            this.lastnode = this.lastnode.next = new listnode<T>(data);
         }
-
+    }
+    delete()
+    {
+        this.iterator.data = this.iterator.next.data;
+        this.iterator.next = this.iterator.next.next;
+    }
+    Next()
+    {
+        this.iterator = this.iterator.next;
+    }
+    get IsNull(): boolean
+    {
+        return this.iterator == null;
+    }
+    get Value(): T
+    {
+        return this.iterator.data;
     }
 }
