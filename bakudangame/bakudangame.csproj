@@ -84,6 +84,7 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="bomb.ts" />
     <TypeScriptCompile Include="field.ts" />
     <TypeScriptCompile Include="input.ts" />
     <TypeScriptCompile Include="message.ts" />
