@@ -9,17 +9,32 @@ class listnode<T>
     }
 }
 
-export default class list<T>
+
+export default class List<T>
 {
+    private firstnode: listnode<T>;
     private lastnode: listnode<T>;
+    private iterator: listnode<T>;
+    constructor()
+    {
+        this.firstnode = null;
+    }
     add(data: T)
     {
-        if (this.lastnode == undefined)
+        if (this.firstnode == null)
         {
-            this.lastnode = new listnode<T>(data);
+            this.firstnode = new listnode<T>(data);
+            this.lastnode = this.firstnode;
         }
         this.lastnode.next = new listnode<T>(data);
     }
+    foreach(func: (item: T) => any)
+    {
+        let it = this.firstnode;
+        while (it.next == null)
+        {
+            func(it.data)
+        }
 
+    }
 }
-
