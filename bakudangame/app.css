@@ -1,4 +1,7 @@
-﻿body {
+﻿html{
+    touch-action:manipulation;
+}
+body {
     font-family: 'Segoe UI', sans-serif;
 }
 
