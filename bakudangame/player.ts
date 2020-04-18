@@ -12,7 +12,7 @@ export default class Player
 {
     imagePath: string;
     private position: Position;
-
+    isKilled: boolean=false;
     constructor(img: string, position0: Position)
     {
         this.imagePath = img;

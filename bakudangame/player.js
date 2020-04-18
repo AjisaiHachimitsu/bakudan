@@ -9,6 +9,7 @@ export var Direction;
 ;
 export default class Player {
     constructor(img, position0) {
+        this.isKilled = false;
         this.imagePath = img;
         this.position = position0;
     }

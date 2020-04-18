@@ -3,19 +3,16 @@ import Field, { Position } from "./field.js";
 import Output from "./output.js";
 import Message from "./message.js";
 import BombControler from "./bomb_controler.js";
-import GameManager from "./game_manager.js";
+//import GameManager from "./game_manager.js";
 
 export default class PlayerControler
 {
     private field: Field;
-    private  static readonly ninzu: number = 4;
+    private static readonly ninzu: number = 4;
     private junban: number = 0;
     private players: Player[];
-    private numOfAction: number;
-    private acttionCounter = 0;
     constructor(field0: Field)
     {
-        this.numOfAction = 5;
         this.field = field0;
         this.players = new Array<Player>(PlayerControler.ninzu);
         for (let i = 0; i < PlayerControler.ninzu; i++)
@@ -30,28 +27,12 @@ export default class PlayerControler
         }
         this.ShowJunban();
     }
-    ArrowButtonClick(direction: Direction): void
-    {
-        if (this.players[this.junban].move(direction, this.field) === false)
-        {
-            Message.AddMessage("そこには行けません。<br>");
-            return;
-        }
-        this.CountUpActtion();
-        GameManager.Draw();
-    }
-    PassButtonClick():void
-    {
-        this.ChangeToNextPlayer();
-    }
     get Players(): Player[]
     {
         return this.players;
     }
     ChangeToNextPlayer(): void
     {
-        this.acttionCounter = 0;
-        GameManager.bombControler.ChangePlayer(this.players[this.junban])
         this.junban++
         this.junban %= PlayerControler.ninzu;
         this.ShowJunban();
@@ -62,25 +43,8 @@ export default class PlayerControler
         Message.AddImage(this.players[this.junban].imagePath);
         Message.AddMessage("の番です。<br>")
     }
-     BombButtonClick():void
+    get TurnPlayer()
     {
-        if (GameManager.bombControler.PutBomb(this.players[this.junban]))
-        {
-            this.CountUpActtion();
-        }
-        else
-        {
-            Message.AddMessage("そこには置けません。<br>");
-         }
-         GameManager.Draw();
-    }
-     CountUpActtion()
-    {
-        this.acttionCounter++;
-        if (this.acttionCounter >= this.numOfAction)
-        {
-            this.ChangeToNextPlayer();
-        }
-
+        return this.players[this.junban];
     }
 }

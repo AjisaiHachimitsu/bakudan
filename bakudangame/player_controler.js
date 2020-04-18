@@ -1,12 +1,10 @@
 import Player from "./player.js";
 import { Position } from "./field.js";
 import Message from "./message.js";
-import GameManager from "./game_manager.js";
+//import GameManager from "./game_manager.js";
 export default class PlayerControler {
     constructor(field0) {
         this.junban = 0;
-        this.acttionCounter = 0;
-        this.numOfAction = 5;
         this.field = field0;
         this.players = new Array(PlayerControler.ninzu);
         for (let i = 0; i < PlayerControler.ninzu; i++) {
@@ -24,23 +22,10 @@ export default class PlayerControler {
         }
         this.ShowJunban();
     }
-    ArrowButtonClick(direction) {
-        if (this.players[this.junban].move(direction, this.field) === false) {
-            Message.AddMessage("そこには行けません。<br>");
-            return;
-        }
-        this.CountUpActtion();
-        GameManager.Draw();
-    }
-    PassButtonClick() {
-        this.ChangeToNextPlayer();
-    }
     get Players() {
         return this.players;
     }
     ChangeToNextPlayer() {
-        this.acttionCounter = 0;
-        GameManager.bombControler.ChangePlayer(this.players[this.junban]);
         this.junban++;
         this.junban %= PlayerControler.ninzu;
         this.ShowJunban();
@@ -50,20 +35,8 @@ export default class PlayerControler {
         Message.AddImage(this.players[this.junban].imagePath);
         Message.AddMessage("の番です。<br>");
     }
-    BombButtonClick() {
-        if (GameManager.bombControler.PutBomb(this.players[this.junban])) {
-            this.CountUpActtion();
-        }
-        else {
-            Message.AddMessage("そこには置けません。<br>");
-        }
-        GameManager.Draw();
-    }
-    CountUpActtion() {
-        this.acttionCounter++;
-        if (this.acttionCounter >= this.numOfAction) {
-            this.ChangeToNextPlayer();
-        }
+    get TurnPlayer() {
+        return this.players[this.junban];
     }
 }
 PlayerControler.ninzu = 4;

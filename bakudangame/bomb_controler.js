@@ -1,7 +1,7 @@
 import Bomb from "./bomb.js";
 import List from "./list.js";
 import { fieldStatus } from "./field.js";
-import GameManager from "./game_manager.js";
+//import GameManager from "./game_manager.js";
 export default class BombControler {
     constructor(field) {
         this.bombs = new List();
@@ -17,7 +17,7 @@ export default class BombControler {
     get Bombs() {
         return this.bombs;
     }
-    ChangePlayer(player) {
+    TurnPassed(player) {
         for (this.bombs.First(); this.bombs.IsNull === false; this.bombs.Next()) {
             if (this.bombs.Value.putPlayer === player) {
                 this.bombs.Value.CountUp();
@@ -34,7 +34,6 @@ export default class BombControler {
             else
                 this.bombs.Next();
         }
-        GameManager.Draw();
     }
 }
 BombControler.explosionTime = 3;

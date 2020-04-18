@@ -2,32 +2,32 @@
 import List from "./list.js";
 import Player from "./player.js";
 import Field, { fieldStatus } from "./field.js";
-import GameManager from "./game_manager.js";
+//import GameManager from "./game_manager.js";
 export default class BombControler
 {
     private static readonly explosionTime = 3;
     private bombs: List<Bomb>;
-    private  field: Field;
-    constructor(field:Field)
+    private field: Field;
+    constructor(field: Field)
     {
         this.bombs = new List<Bomb>();
         this.field = field;
     }
 
-     PutBomb(putPlayer: Player):boolean
+    PutBomb(putPlayer: Player): boolean
     {
         if (this.field.GetField(putPlayer.Position) === fieldStatus.BOMB) return false;
         this.bombs.add(new Bomb(putPlayer))
         this.field.PutBomb(putPlayer.Position);
         return true;
     }
-     get Bombs()
+    get Bombs()
     {
         return this.bombs;
     }
-    ChangePlayer(player: Player)
+    TurnPassed(player: Player)
     {
-        for (this.bombs.First(); this.bombs.IsNull === false; this.bombs.Next() )
+        for (this.bombs.First(); this.bombs.IsNull === false; this.bombs.Next())
         {
             if (this.bombs.Value.putPlayer === player)
             {
@@ -36,11 +36,11 @@ export default class BombControler
             if (this.bombs.Value.counter >= BombControler.explosionTime)
             {
                 this.field.ElaseBomb(this.bombs.Value.position)
-                this.bombs.Value.Explosion(this.bombs,this.field);
+                this.bombs.Value.Explosion(this.bombs, this.field);
 
             }
         }
-        for (this.bombs.First(); this.bombs.IsNull as any===false ;)
+        for (this.bombs.First(); this.bombs.IsNull as boolean === false;)
         {
             if (this.bombs.Value.IsExplosion)
             {
@@ -48,7 +48,6 @@ export default class BombControler
             }
             else this.bombs.Next()
         }
-        GameManager.Draw();
     }
-    
+
 }

@@ -22,21 +22,21 @@ export default class Input
         }
         getCell(0, 1).innerHTML = '<button id="up-button">↑</button>';
         let upButton = document.getElementById("up-button") as HTMLButtonElement;
-        upButton.onclick = function () { GameManager.playerControler.ArrowButtonClick(Direction.TOUP); };
+        upButton.onclick = function () { GameManager.ArrowButtonClick(Direction.TOUP); };
         getCell(1, 0).innerHTML = '<button id="left-button">←</button>';
         let leftButton = document.getElementById("left-button") as HTMLButtonElement;
-        leftButton.onclick = function () { GameManager.playerControler.ArrowButtonClick(Direction.TOLEFT); };
+        leftButton.onclick = function () { GameManager.ArrowButtonClick(Direction.TOLEFT); };
         getCell(1, 2).innerHTML = '<button id="right-button">→</button>';
         let rightButton = document.getElementById("right-button") as HTMLButtonElement;
-        rightButton.onclick = function () { GameManager.playerControler.ArrowButtonClick(Direction.TORIGHT); };
+        rightButton.onclick = function () { GameManager.ArrowButtonClick(Direction.TORIGHT); };
         getCell(2, 1).innerHTML = '<button id="down-button">↓</button>';
         let downButton = document.getElementById("down-button") as HTMLButtonElement;
-        downButton.onclick = function () { GameManager.playerControler.ArrowButtonClick(Direction.TODOWN); };
+        downButton.onclick = function () { GameManager.ArrowButtonClick(Direction.TODOWN); };
         getCell(1, 1).innerHTML = '<button id="bomb-button">Bomb!</button>';
         let bombButton = document.getElementById("bomb-button") as HTMLButtonElement;
-        bombButton.onclick = function () { GameManager.playerControler.BombButtonClick(); };
+        bombButton.onclick = function () { GameManager.BombButtonClick(); };
          getCell(2, 2).innerHTML = '<button id="pass-button">Pass</button>';
         let passButton = document.getElementById("pass-button") as HTMLButtonElement;
-        passButton.onclick = function () { GameManager.playerControler.PassButtonClick(); };
+        passButton.onclick = function () { GameManager.PassButtonClick(); };
     }
 }
