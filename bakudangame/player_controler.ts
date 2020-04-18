@@ -1,8 +1,6 @@
 ﻿import Player, { Direction } from "./player.js"
 import Field, { Position } from "./field.js";
-import Output from "./output.js";
 import Message from "./message.js";
-import BombControler from "./bomb_controler.js";
 //import GameManager from "./game_manager.js";
 
 export default class PlayerControler

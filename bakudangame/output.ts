@@ -2,7 +2,6 @@
 import Player from "./player.js";
 import List from "./list.js";
 import Bomb from "./bomb.js";
-import BombControler from "./bomb_controler.js";
 
 export default class Output
 {

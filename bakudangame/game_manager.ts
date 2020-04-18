@@ -1,7 +1,5 @@
 ﻿
 import Player, { Direction } from "./player.js";
-import List from "./list.js";
-import Bomb from "./bomb.js";
 import Field from "./field.js";
 import PlayerControler from "./player_controler.js";
 import BombControler from "./bomb_controler.js";
@@ -74,7 +72,7 @@ export default class GameManager
                 this.field.EraseExplosion();
                 this.Draw()
             }
-            setTimeout(eraseExplosion, 100);
+            setTimeout(eraseExplosion, 500);
         } while (this.playerControler.TurnPlayer.Iskilled);
     }
 }

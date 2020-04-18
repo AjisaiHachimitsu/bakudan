@@ -47,7 +47,7 @@ export default class GameManager {
                 this.field.EraseExplosion();
                 this.Draw();
             };
-            setTimeout(eraseExplosion, 100);
+            setTimeout(eraseExplosion, 500);
         } while (this.playerControler.TurnPlayer.Iskilled);
     }
 }
