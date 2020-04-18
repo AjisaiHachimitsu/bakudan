@@ -66,4 +66,8 @@ export default class Field
             }
         }
     }
+    PutBomb(position: Position)
+    {
+        this.mainfield[position.y][position.x] = fieldStatus.BOMB;
+    }
 }

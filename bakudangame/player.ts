@@ -11,7 +11,7 @@ export enum Direction
 export default class Player
 {
     imagePath: string;
-    position: Position;
+    private position: Position;
 
     constructor(img: string, position0: Position)
     {
@@ -36,11 +36,15 @@ export default class Player
                 target = this.position.Left;
                 break;
         }
-        if (field.GetField(target) != fieldStatus.NONE)
+        if (field.GetField(target) !== fieldStatus.NONE)
         {
             return false;
         }
         this.position = target;
         return true;
+    }
+    get Position()
+    {
+        return this.position;
     }
 }

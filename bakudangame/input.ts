@@ -31,8 +31,10 @@ export default class Input
         getCell(2, 1).innerHTML = '<button id="down-button">↓</button>';
         let downButton = document.getElementById("down-button") as HTMLButtonElement;
         downButton.onclick = function () { PlayerControler.ArrowButtonClick(Direction.TODOWN); };
-        getCell(1, 1).innerHTML = '<button>Bomb!</button>';
-        getCell(2, 2).innerHTML = '<button id="pass-button">Pass</button>';
+        getCell(1, 1).innerHTML = '<button id="bomb-button">Bomb!</button>';
+        let bombButton = document.getElementById("bomb-button") as HTMLButtonElement;
+        bombButton.onclick = function () { PlayerControler.BombButtonClick(); };
+         getCell(2, 2).innerHTML = '<button id="pass-button">Pass</button>';
         let passButton = document.getElementById("pass-button") as HTMLButtonElement;
         passButton.onclick = function () { PlayerControler.PassButtonClick(); };
     }

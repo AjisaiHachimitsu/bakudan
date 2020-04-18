@@ -1,4 +1,5 @@
 import { fieldStatus, Position } from "./field.js";
+import BombControler from "./bomb_controler.js";
 export default class Output {
     static start(table0) {
         this.table = table0;
@@ -20,13 +21,24 @@ export default class Output {
     }
     static PlayerDraw(players) {
         for (let item of players)
-            this.AccessCell(item.position.y, item.position.x).innerHTML += '<img src="' + item.imagePath + '"/>';
+            this.AccessCell(item.Position.y, item.Position.x).innerHTML += '<img src="' + item.imagePath + '"/>';
     }
-    static AccessCell(i, j) {
-        return this.table.rows[i].cells[j];
+    static BombDraw(bombs) {
+        for (bombs.First(); bombs.IsNull === false; bombs.Next()) {
+            this.AccessCell(bombs.Value.position).innerHTML += '<img src="' + BombControler.imagePath + '"/>';
+        }
     }
-    static Draw(field, players) {
+    static AccessCell(value1, value2) {
+        if (typeof (value1) === "number") {
+            return this.table.rows[value1].cells[value2];
+        }
+        else {
+            return this.table.rows[value1.y].cells[value1.x];
+        }
+    }
+    static Draw(field, players, bombs) {
         this.FieldDraw(field);
+        this.BombDraw(bombs);
         this.PlayerDraw(players);
     }
 }

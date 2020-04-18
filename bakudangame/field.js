@@ -47,5 +47,8 @@ export default class Field {
     GetField(position) {
         return this.mainfield[position.y][position.x];
     }
+    PutBomb(position) {
+        this.mainfield[position.y][position.x] = fieldStatus.BOMB;
+    }
 }
 //# sourceMappingURL=field.js.map

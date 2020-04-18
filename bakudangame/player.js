@@ -28,11 +28,14 @@ export default class Player {
                 target = this.position.Left;
                 break;
         }
-        if (field.GetField(target) != fieldStatus.NONE) {
+        if (field.GetField(target) !== fieldStatus.NONE) {
             return false;
         }
         this.position = target;
         return true;
+    }
+    get Position() {
+        return this.position;
     }
 }
 //# sourceMappingURL=player.js.map

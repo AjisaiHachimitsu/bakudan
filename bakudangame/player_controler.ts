@@ -2,6 +2,8 @@
 import Field, { Position } from "./field.js";
 import Output from "./output.js";
 import Message from "./message.js";
+import BombControler from "./bomb_controler.js";
+import GameManager from "./game_manager.js";
 
 export default class PlayerControler
 {
@@ -26,7 +28,6 @@ export default class PlayerControler
             else y0 = this.field.height - 2;//bottom
             this.players[i] = new Player(path, new Position(x0, y0))
         }
-        Output.Draw(this.field, this.players);
         this.ShowJunban();
     }
     static ArrowButtonClick(direction: Direction): void
@@ -36,12 +37,8 @@ export default class PlayerControler
             Message.AddMessage("そこには行けません。<br>");
             return;
         }
-        Output.Draw(this.field,this.players);
-        this.acttionCounter++;
-        if (this.acttionCounter >= this.numOfAction)
-        {
-            this.ChangeToNextPlayer();
-        }
+        this.CountUpActtion();
+        GameManager.Draw();
     }
     static PassButtonClick():void
     {
@@ -63,5 +60,25 @@ export default class PlayerControler
         Message.ClearMessage();
         Message.AddImage(this.players[this.junban].imagePath);
         Message.AddMessage("の番です。<br>")
+    }
+    static BombButtonClick():void
+    {
+        if (BombControler.PutBomb(this.players[this.junban]))
+        {
+            this.CountUpActtion();
+        }
+        else
+        {
+            Message.AddMessage("そこには置けません。<br>");
+        }
+    }
+    private static CountUpActtion()
+    {
+        this.acttionCounter++;
+        if (this.acttionCounter >= this.numOfAction)
+        {
+            this.ChangeToNextPlayer();
+        }
+
     }
 }

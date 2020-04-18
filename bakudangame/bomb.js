@@ -1,8 +1,8 @@
 export default class Bomb {
-    constructor(position0, putPlayer0) {
+    constructor(putPlayer0) {
         this.counter = 0;
         this.putPlayer = putPlayer0;
-        this.position = position0;
+        this.position = this.putPlayer.Position;
     }
     CountUp() {
         this.counter++;
