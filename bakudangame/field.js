@@ -50,5 +50,8 @@ export default class Field {
     PutBomb(position) {
         this.mainfield[position.y][position.x] = fieldStatus.BOMB;
     }
+    ElaseBomb(position) {
+        this.mainfield[position.y][position.x] = fieldStatus.NONE;
+    }
 }
 //# sourceMappingURL=field.js.map

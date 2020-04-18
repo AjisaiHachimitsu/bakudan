@@ -70,4 +70,8 @@ export default class Field
     {
         this.mainfield[position.y][position.x] = fieldStatus.BOMB;
     }
+    ElaseBomb(position: Position)
+    {
+        this.mainfield[position.y][position.x] = fieldStatus.NONE;
+    }
 }

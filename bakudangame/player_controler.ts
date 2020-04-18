@@ -51,6 +51,7 @@ export default class PlayerControler
     ChangeToNextPlayer(): void
     {
         this.acttionCounter = 0;
+        GameManager.bombControler.ChangePlayer(this.players[this.junban])
         this.junban++
         this.junban %= PlayerControler.ninzu;
         this.ShowJunban();
@@ -70,7 +71,8 @@ export default class PlayerControler
         else
         {
             Message.AddMessage("そこには置けません。<br>");
-        }
+         }
+         GameManager.Draw();
     }
      CountUpActtion()
     {

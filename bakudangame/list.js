@@ -6,21 +6,25 @@ class listnode {
 }
 export default class List {
     constructor() {
-        this.firstnode = null;
+        this.length = 0;
+        this.firstnode = new listnode(null);
+        this.lastnode = this.firstnode;
     }
     add(data) {
-        if (this.firstnode == null) {
-            this.firstnode = new listnode(data);
-            this.lastnode = this.firstnode;
-            this.iterator = this.firstnode;
-        }
-        else {
-            this.lastnode = this.lastnode.next = new listnode(data);
-        }
+        this.lastnode.data = data;
+        this.lastnode = this.lastnode.next = new listnode(null);
+        this.length++;
     }
     delete() {
-        this.iterator.data = this.iterator.next.data;
-        this.iterator.next = this.iterator.next.next;
+        if (this.iterator.next === this.lastnode) {
+            this.lastnode = this.iterator;
+            this.lastnode.data = null;
+        }
+        else {
+            this.iterator.data = this.iterator.next.data;
+            this.iterator.next = this.iterator.next.next;
+        }
+        this.length--;
     }
     Next() {
         this.iterator = this.iterator.next;
@@ -29,13 +33,16 @@ export default class List {
         this.iterator = this.firstnode;
     }
     get IsNull() {
-        return this.iterator == null;
+        return this.iterator.data == null;
     }
     get Value() {
         return this.iterator.data;
     }
     set Value(data) {
         this.iterator.data = data;
+    }
+    get Length() {
+        return this.length;
     }
 }
 //# sourceMappingURL=list.js.map

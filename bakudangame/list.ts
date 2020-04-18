@@ -15,27 +15,32 @@ export default class List<T>
     private firstnode: listnode<T>;
     private lastnode: listnode<T>;
     private iterator: listnode<T>
+    private length: number = 0;
     constructor()
     {
-        this.firstnode = null;
+        this.firstnode = new listnode<T>(null);
+        this.lastnode = this.firstnode;
     }
     add(data: T)
     {
-        if (this.firstnode == null)
-        {
-            this.firstnode = new listnode<T>(data);
-            this.lastnode = this.firstnode;
-            this.iterator = this.firstnode;
-        }
-        else
-        {
-            this.lastnode = this.lastnode.next = new listnode<T>(data);
-        }
+        this.lastnode.data = data;
+        this.lastnode = this.lastnode.next = new listnode<T>(null);
+        this.length++;
     }
     delete()
     {
-        this.iterator.data = this.iterator.next.data;
-        this.iterator.next = this.iterator.next.next;
+        if (this.iterator.next === this.lastnode)
+        {
+            this.lastnode = this.iterator;
+            this.lastnode.data = null;
+        }
+        else
+        {
+            this.iterator.data = this.iterator.next.data;
+            this.iterator.next = this.iterator.next.next;
+        }
+
+        this.length--;
     }
     Next()
     {
@@ -47,7 +52,7 @@ export default class List<T>
     }
     get IsNull(): boolean
     {
-        return this.iterator == null;
+        return this.iterator.data == null;
     }
     get Value(): T
     {
@@ -56,5 +61,9 @@ export default class List<T>
     set Value(data: T)
     {
         this.iterator.data = data;
+    }
+    get Length()
+    {
+        return this.length;
     }
 }
