@@ -15,11 +15,11 @@ window.onload = () =>
 
     let field = new Field(21, 15);
     Messge.start(document.getElementById("message"));
-    PlayerControler.start(field);
+    let playerControler=new PlayerControler(field);
     Output.start((document.getElementById("maintable") as HTMLTableElement));
-    BombControler.start(field);
+    let bombControler=new BombControler(field);
     Input.start((document.getElementById("buttontable")) as HTMLTableElement);
-    GameManager.start(field);
+    GameManager.start(field,playerControler,bombControler);
 
     
 

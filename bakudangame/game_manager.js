@@ -1,15 +1,13 @@
-import PlayerControler from "./player_controler.js";
-import BombControler from "./bomb_controler.js";
 import Output from "./output.js";
 export default class GameManager {
-    static start(field) {
+    static start(field, playerControler, bombCotroler) {
         this.field = field;
-        this.players = PlayerControler.GetPlayers();
-        this.bombs = BombControler.GetBombs();
+        this.playerControler = playerControler;
+        this.bombControler = bombCotroler;
         this.Draw();
     }
     static Draw() {
-        Output.Draw(this.field, this.players, this.bombs);
+        Output.Draw(this.field, this.playerControler.Players, this.bombControler.Bombs);
     }
 }
 //# sourceMappingURL=game_manager.js.map

@@ -5,24 +5,24 @@ import Field, { fieldStatus } from "./field.js";
 export default class BombControler
 {
     private static readonly explosionTime = 3;
-    private static bombs: List<Bomb>;
-    static imagePath: string;
-    private static field: Field;
-    static start(field:Field)
+    private bombs: List<Bomb>;
+    static readonly imagePath: string = "img/bomb/bomb_002.png";
+    private  field: Field;
+    constructor(field:Field)
     {
         this.bombs = new List<Bomb>();
-        this.imagePath = "img/bomb/bomb_002.png"
+        BombControler.imagePath 
         this.field = field;
     }
 
-    static PutBomb(putPlayer: Player):boolean
+     PutBomb(putPlayer: Player):boolean
     {
         if (this.field.GetField(putPlayer.Position) === fieldStatus.BOMB) return false;
         this.bombs.add(new Bomb(putPlayer))
         this.field.PutBomb(putPlayer.Position);
         return true;
     }
-    static GetBombs()
+     get Bombs()
     {
         return this.bombs;
     }

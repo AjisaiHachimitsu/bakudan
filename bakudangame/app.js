@@ -10,11 +10,11 @@ function main() {
 window.onload = () => {
     let field = new Field(21, 15);
     Messge.start(document.getElementById("message"));
-    PlayerControler.start(field);
+    let playerControler = new PlayerControler(field);
     Output.start(document.getElementById("maintable"));
-    BombControler.start(field);
+    let bombControler = new BombControler(field);
     Input.start((document.getElementById("buttontable")));
-    GameManager.start(field);
+    GameManager.start(field, playerControler, bombControler);
 };
 //Output.PlayerDraw(PlayerControler.players[0]);
 //# sourceMappingURL=app.js.map

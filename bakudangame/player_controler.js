@@ -1,14 +1,15 @@
 import Player from "./player.js";
 import { Position } from "./field.js";
 import Message from "./message.js";
-import BombControler from "./bomb_controler.js";
 import GameManager from "./game_manager.js";
 export default class PlayerControler {
-    static start(field0) {
+    constructor(field0) {
+        this.junban = 0;
+        this.acttionCounter = 0;
         this.numOfAction = 3;
         this.field = field0;
-        this.players = new Array(this.ninzu);
-        for (let i = 0; i < this.ninzu; i++) {
+        this.players = new Array(PlayerControler.ninzu);
+        for (let i = 0; i < PlayerControler.ninzu; i++) {
             let path = "img/char" + i + "/char" + i + "_001.png";
             let x0, y0;
             if (i % 2 === 0)
@@ -23,7 +24,7 @@ export default class PlayerControler {
         }
         this.ShowJunban();
     }
-    static ArrowButtonClick(direction) {
+    ArrowButtonClick(direction) {
         if (this.players[this.junban].move(direction, this.field) === false) {
             Message.AddMessage("そこには行けません。<br>");
             return;
@@ -31,32 +32,32 @@ export default class PlayerControler {
         this.CountUpActtion();
         GameManager.Draw();
     }
-    static PassButtonClick() {
+    PassButtonClick() {
         this.ChangeToNextPlayer();
     }
-    static GetPlayers() {
+    get Players() {
         return this.players;
     }
-    static ChangeToNextPlayer() {
+    ChangeToNextPlayer() {
         this.acttionCounter = 0;
         this.junban++;
-        this.junban %= this.ninzu;
+        this.junban %= PlayerControler.ninzu;
         this.ShowJunban();
     }
-    static ShowJunban() {
+    ShowJunban() {
         Message.ClearMessage();
         Message.AddImage(this.players[this.junban].imagePath);
         Message.AddMessage("の番です。<br>");
     }
-    static BombButtonClick() {
-        if (BombControler.PutBomb(this.players[this.junban])) {
+    BombButtonClick() {
+        if (GameManager.bombControler.PutBomb(this.players[this.junban])) {
             this.CountUpActtion();
         }
         else {
             Message.AddMessage("そこには置けません。<br>");
         }
     }
-    static CountUpActtion() {
+    CountUpActtion() {
         this.acttionCounter++;
         if (this.acttionCounter >= this.numOfAction) {
             this.ChangeToNextPlayer();
@@ -64,6 +65,4 @@ export default class PlayerControler {
     }
 }
 PlayerControler.ninzu = 4;
-PlayerControler.junban = 0;
-PlayerControler.acttionCounter = 0;
 //# sourceMappingURL=player_controler.js.map

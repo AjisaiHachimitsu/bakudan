@@ -1,5 +1,5 @@
-import PlayerControler from "./player_controler.js";
 import { Direction } from "./player.js";
+import GameManager from "./game_manager.js";
 export default class Input {
     static start(inputTable0) {
         this.inputTable = inputTable0;
@@ -14,22 +14,22 @@ export default class Input {
         };
         getCell(0, 1).innerHTML = '<button id="up-button">↑</button>';
         let upButton = document.getElementById("up-button");
-        upButton.onclick = function () { PlayerControler.ArrowButtonClick(Direction.TOUP); };
+        upButton.onclick = function () { GameManager.playerControler.ArrowButtonClick(Direction.TOUP); };
         getCell(1, 0).innerHTML = '<button id="left-button">←</button>';
         let leftButton = document.getElementById("left-button");
-        leftButton.onclick = function () { PlayerControler.ArrowButtonClick(Direction.TOLEFT); };
+        leftButton.onclick = function () { GameManager.playerControler.ArrowButtonClick(Direction.TOLEFT); };
         getCell(1, 2).innerHTML = '<button id="right-button">→</button>';
         let rightButton = document.getElementById("right-button");
-        rightButton.onclick = function () { PlayerControler.ArrowButtonClick(Direction.TORIGHT); };
+        rightButton.onclick = function () { GameManager.playerControler.ArrowButtonClick(Direction.TORIGHT); };
         getCell(2, 1).innerHTML = '<button id="down-button">↓</button>';
         let downButton = document.getElementById("down-button");
-        downButton.onclick = function () { PlayerControler.ArrowButtonClick(Direction.TODOWN); };
+        downButton.onclick = function () { GameManager.playerControler.ArrowButtonClick(Direction.TODOWN); };
         getCell(1, 1).innerHTML = '<button id="bomb-button">Bomb!</button>';
         let bombButton = document.getElementById("bomb-button");
-        bombButton.onclick = function () { PlayerControler.BombButtonClick(); };
+        bombButton.onclick = function () { GameManager.playerControler.BombButtonClick(); };
         getCell(2, 2).innerHTML = '<button id="pass-button">Pass</button>';
         let passButton = document.getElementById("pass-button");
-        passButton.onclick = function () { PlayerControler.PassButtonClick(); };
+        passButton.onclick = function () { GameManager.playerControler.PassButtonClick(); };
     }
 }
 //# sourceMappingURL=input.js.map

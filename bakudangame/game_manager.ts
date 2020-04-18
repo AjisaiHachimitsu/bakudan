@@ -9,18 +9,18 @@ import Output from "./output.js";
 
 export default class GameManager
 {
-    static players: Player[];
-    static bombs: List<Bomb>
     static field: Field;
-    static start(field:Field)
+    static playerControler: PlayerControler;
+    static bombControler: BombControler;
+    static start(field:Field,playerControler:PlayerControler,bombCotroler:BombControler)
     {
         this.field = field;
-        this.players = PlayerControler.GetPlayers();
-        this.bombs = BombControler.GetBombs();
+        this.playerControler = playerControler;
+        this.bombControler = bombCotroler;
         this.Draw()
     }
     static Draw()
     {
-        Output.Draw(this.field, this.players, this.bombs);
+        Output.Draw(this.field, this.playerControler.Players, this.bombControler.Bombs);
     }
 }
