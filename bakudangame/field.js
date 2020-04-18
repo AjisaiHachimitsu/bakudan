@@ -1,4 +1,3 @@
-import GameManager from "./game_manager.js";
 export var fieldStatus;
 (function (fieldStatus) {
     fieldStatus[fieldStatus["NONE"] = 0] = "NONE";
@@ -54,19 +53,19 @@ export default class Field {
     PutBomb(position) {
         this.mainfield[position.y][position.x] = fieldStatus.BOMB;
     }
-    ElaseBomb(position) {
-        this.mainfield[position.y][position.x] = fieldStatus.NONE;
-    }
     IsOutOfField(position) {
         return position.x < 0 || position.x > this.width || position.y < 0 || position.y > this.height;
     }
     Explosion(position) {
         this.mainfield[position.y][position.x] = fieldStatus.EXPLOSION;
-        let clearExplosion = () => {
-            this.mainfield[position.y][position.x] = fieldStatus.NONE;
-            GameManager.Draw();
-        };
-        setTimeout(clearExplosion, 1000);
+    }
+    EraseExplosion() {
+        for (let i = 0; i < this.height; i++) {
+            for (let j = 0; j < this.width; j++) {
+                if (this.mainfield[i][j] === fieldStatus.EXPLOSION)
+                    this.mainfield[i][j] = fieldStatus.NONE;
+            }
+        }
     }
 }
 //# sourceMappingURL=field.js.map

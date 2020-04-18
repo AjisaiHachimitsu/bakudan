@@ -5,6 +5,7 @@ import Message from "./message.js";
 export default class PlayerControler {
     constructor(field0) {
         this.junban = 0;
+        this.numOfAlive = PlayerControler.ninzu;
         this.field = field0;
         this.players = new Array(PlayerControler.ninzu);
         for (let i = 0; i < PlayerControler.ninzu; i++) {
@@ -37,6 +38,13 @@ export default class PlayerControler {
     }
     get TurnPlayer() {
         return this.players[this.junban];
+    }
+    CheckKilled() {
+        for (let i = 0; i < PlayerControler.ninzu; i++) {
+            if (this.players[i].CheckKilled(this.field)) {
+                this.numOfAlive--;
+            }
+        }
     }
 }
 PlayerControler.ninzu = 4;

@@ -7,12 +7,14 @@ import BombControler from "./bomb_controler.js";
 
 export default class PlayerControler
 {
+    private numOfAlive: number;
     private field: Field;
     private static readonly ninzu: number = 4;
     private junban: number = 0;
     private players: Player[];
     constructor(field0: Field)
     {
+        this.numOfAlive = PlayerControler.ninzu;
         this.field = field0;
         this.players = new Array<Player>(PlayerControler.ninzu);
         for (let i = 0; i < PlayerControler.ninzu; i++)
@@ -46,5 +48,16 @@ export default class PlayerControler
     get TurnPlayer()
     {
         return this.players[this.junban];
+    }
+    CheckKilled()
+    {
+        for (let i = 0; i < PlayerControler.ninzu;i++)
+        {
+            if (this.players[i].CheckKilled(this.field))
+            {
+                this.numOfAlive--;
+            }
+
+        }
     }
 }

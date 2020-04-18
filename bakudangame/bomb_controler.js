@@ -23,7 +23,6 @@ export default class BombControler {
                 this.bombs.Value.CountUp();
             }
             if (this.bombs.Value.counter >= BombControler.explosionTime) {
-                this.field.ElaseBomb(this.bombs.Value.position);
                 this.bombs.Value.Explosion(this.bombs, this.field);
             }
         }

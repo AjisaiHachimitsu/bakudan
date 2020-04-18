@@ -1,5 +1,4 @@
-﻿import GameManager from "./game_manager.js";
-
+﻿
 export enum fieldStatus
 {
     NONE,
@@ -24,26 +23,26 @@ export class Position
     }
     get Left(): Position
     {
-        return new Position(this.x- 1, this.y);
+        return new Position(this.x - 1, this.y);
     } get Up(): Position
     {
-        return new Position(this.x, this.y-1);
+        return new Position(this.x, this.y - 1);
     } get Down(): Position
     {
-        return new Position(this.x, this.y+1);
+        return new Position(this.x, this.y + 1);
     }
     static IsEq(a: Position, b: Position)
     {
         return a.x === b.x && a.y === b.y;
     }
-    
+
 }
 export default class Field
 {
     readonly width: number;
     readonly height: number;
     private mainfield: number[][];
-    GetField(position:Position): fieldStatus
+    GetField(position: Position): fieldStatus
     {
         return this.mainfield[position.y][position.x];
     }
@@ -77,22 +76,23 @@ export default class Field
     {
         this.mainfield[position.y][position.x] = fieldStatus.BOMB;
     }
-    ElaseBomb(position: Position)
-    {
-        this.mainfield[position.y][position.x] = fieldStatus.NONE;
-    }
     IsOutOfField(position: Position): boolean
     {
         return position.x < 0 || position.x > this.width || position.y < 0 || position.y > this.height;
     }
     Explosion(position: Position)
     {
-        this.mainfield[position.y][position.x] = fieldStatus.EXPLOSION
-        let clearExplosion = () =>
+        this.mainfield[position.y][position.x] = fieldStatus.EXPLOSION;
+    }
+    EraseExplosion(): void
+    {
+        for (let i = 0; i < this.height; i++)
         {
-            this.mainfield[position.y][position.x] = fieldStatus.NONE;
-            GameManager.Draw();
+            for (let j = 0; j < this.width; j++)
+            {
+                if (this.mainfield[i][j] === fieldStatus.EXPLOSION)
+                    this.mainfield[i][j] = fieldStatus.NONE;
+            }
         }
-        setTimeout(clearExplosion, 1000);
     }
 }

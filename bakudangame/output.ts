@@ -46,8 +46,11 @@ export default class Output
     }
     private static PlayerDraw(players: Player[]): void
     {
-        for (let item of players)
-            this.AccessCell(item.Position.y, item.Position.x).innerHTML += '<img src="' + item.imagePath + '"/>';
+        for (let i = 0; i < players.length; i++)
+        {
+            if (players[i].Iskilled) continue;
+            this.AccessCell(players[i].Position).innerHTML += '<img src="' + players[i].imagePath + '"/>';
+        }
     }
     private static BombDraw(bombs: List<Bomb>)
     {
