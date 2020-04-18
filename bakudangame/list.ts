@@ -41,6 +41,10 @@ export default class List<T>
     {
         this.iterator = this.iterator.next;
     }
+    First()
+    {
+        this.iterator = this.firstnode;
+    }
     get IsNull(): boolean
     {
         return this.iterator == null;
@@ -48,5 +52,9 @@ export default class List<T>
     get Value(): T
     {
         return this.iterator.data;
+    }
+    set Value(data: T)
+    {
+        this.iterator.data = data;
     }
 }

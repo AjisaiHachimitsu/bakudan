@@ -85,6 +85,7 @@
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="bomb.ts" />
+    <TypeScriptCompile Include="bomb_controler.ts" />
     <TypeScriptCompile Include="field.ts" />
     <TypeScriptCompile Include="input.ts" />
     <TypeScriptCompile Include="list.ts" />

@@ -25,11 +25,17 @@ export default class List {
     Next() {
         this.iterator = this.iterator.next;
     }
+    First() {
+        this.iterator = this.firstnode;
+    }
     get IsNull() {
         return this.iterator == null;
     }
     get Value() {
         return this.iterator.data;
+    }
+    set Value(data) {
+        this.iterator.data = data;
     }
 }
 //# sourceMappingURL=list.js.map
