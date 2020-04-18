@@ -15,7 +15,7 @@ export default class PlayerControler
     private acttionCounter = 0;
     constructor(field0: Field)
     {
-        this.numOfAction = 3;
+        this.numOfAction = 5;
         this.field = field0;
         this.players = new Array<Player>(PlayerControler.ninzu);
         for (let i = 0; i < PlayerControler.ninzu; i++)

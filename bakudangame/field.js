@@ -1,3 +1,4 @@
+import GameManager from "./game_manager.js";
 export var fieldStatus;
 (function (fieldStatus) {
     fieldStatus[fieldStatus["NONE"] = 0] = "NONE";
@@ -61,6 +62,11 @@ export default class Field {
     }
     Explosion(position) {
         this.mainfield[position.y][position.x] = fieldStatus.EXPLOSION;
+        let clearExplosion = () => {
+            this.mainfield[position.y][position.x] = fieldStatus.NONE;
+            GameManager.Draw();
+        };
+        setTimeout(clearExplosion, 1000);
     }
 }
 //# sourceMappingURL=field.js.map

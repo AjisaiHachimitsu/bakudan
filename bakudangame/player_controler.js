@@ -6,7 +6,7 @@ export default class PlayerControler {
     constructor(field0) {
         this.junban = 0;
         this.acttionCounter = 0;
-        this.numOfAction = 3;
+        this.numOfAction = 5;
         this.field = field0;
         this.players = new Array(PlayerControler.ninzu);
         for (let i = 0; i < PlayerControler.ninzu; i++) {

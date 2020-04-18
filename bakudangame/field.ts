@@ -1,4 +1,6 @@
-﻿export enum fieldStatus
+﻿import GameManager from "./game_manager.js";
+
+export enum fieldStatus
 {
     NONE,
     BLOCK,
@@ -85,6 +87,12 @@ export default class Field
     }
     Explosion(position: Position)
     {
-        this.mainfield[position.y][position.x]=fieldStatus.EXPLOSION
+        this.mainfield[position.y][position.x] = fieldStatus.EXPLOSION
+        let clearExplosion = () =>
+        {
+            this.mainfield[position.y][position.x] = fieldStatus.NONE;
+            GameManager.Draw();
+        }
+        setTimeout(clearExplosion, 1000);
     }
 }
