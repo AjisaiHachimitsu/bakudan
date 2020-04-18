@@ -5,7 +5,6 @@ import GameManager from "./game_manager.js";
 export default class BombControler {
     constructor(field) {
         this.bombs = new List();
-        BombControler.imagePath;
         this.field = field;
     }
     PutBomb(putPlayer) {
@@ -19,12 +18,17 @@ export default class BombControler {
         return this.bombs;
     }
     ChangePlayer(player) {
-        for (this.bombs.First(); this.bombs.IsNull === false;) {
+        for (this.bombs.First(); this.bombs.IsNull === false; this.bombs.Next()) {
             if (this.bombs.Value.putPlayer === player) {
                 this.bombs.Value.CountUp();
             }
             if (this.bombs.Value.counter >= BombControler.explosionTime) {
                 this.field.ElaseBomb(this.bombs.Value.position);
+                this.bombs.Value.Explosion(this.bombs, this.field);
+            }
+        }
+        for (this.bombs.First(); this.bombs.IsNull === false;) {
+            if (this.bombs.Value.IsExplosion) {
                 this.bombs.delete();
             }
             else
@@ -33,7 +37,5 @@ export default class BombControler {
         GameManager.Draw();
     }
 }
-BombControler.explosionSize = 3;
 BombControler.explosionTime = 3;
-BombControler.imagePath = "img/bomb/bomb_002.png";
 //# sourceMappingURL=bomb_controler.js.map

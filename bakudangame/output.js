@@ -1,5 +1,4 @@
 import { fieldStatus, Position } from "./field.js";
-import BombControler from "./bomb_controler.js";
 export default class Output {
     static start(table0) {
         this.table = table0;
@@ -12,10 +11,19 @@ export default class Output {
             this.table.insertRow();
             for (let j = 0; j < field.width; j++) {
                 let cell = this.table.rows[i].insertCell();
-                if (field.GetField(new Position(j, i)) === fieldStatus.BLOCK)
-                    cell.style.backgroundColor = this.blockCollor;
-                else
-                    cell.style.backgroundColor = this.fieldColor;
+                cell.style.backgroundColor = this.fieldColor;
+                switch (field.GetField(new Position(j, i))) {
+                    case fieldStatus.BLOCK:
+                        cell.style.backgroundColor = this.blockCollor;
+                        break;
+                    case fieldStatus.BOMB:
+                        cell.innerHTML += '<img src="' + this.bombimagePath + '"/>';
+                        break;
+                    case fieldStatus.EXPLOSION:
+                        cell.innerHTML += '<img src="' + this.explosionimagePath + '"/>';
+                        break;
+                    default:
+                }
             }
         }
     }
@@ -25,7 +33,7 @@ export default class Output {
     }
     static BombDraw(bombs) {
         for (bombs.First(); bombs.IsNull === false; bombs.Next()) {
-            this.AccessCell(bombs.Value.position).innerHTML += '<img src="' + BombControler.imagePath + '"/>';
+            this.AccessCell(bombs.Value.position).innerHTML += '<img src="' + this.bombimagePath + '"/>';
         }
     }
     static AccessCell(value1, value2) {
@@ -38,8 +46,10 @@ export default class Output {
     }
     static Draw(field, players, bombs) {
         this.FieldDraw(field);
-        this.BombDraw(bombs);
+        //this.BombDraw(bombs);
         this.PlayerDraw(players);
     }
 }
+Output.bombimagePath = "img/bomb/bomb_002.png";
+Output.explosionimagePath = "img/explosion/bomb_033.png";
 //# sourceMappingURL=output.js.map

@@ -30,6 +30,11 @@ export class Position
     {
         return new Position(this.x, this.y+1);
     }
+    static IsEq(a: Position, b: Position)
+    {
+        return a.x === b.x && a.y === b.y;
+    }
+    
 }
 export default class Field
 {
@@ -73,5 +78,13 @@ export default class Field
     ElaseBomb(position: Position)
     {
         this.mainfield[position.y][position.x] = fieldStatus.NONE;
+    }
+    IsOutOfField(position: Position): boolean
+    {
+        return position.x < 0 || position.x > this.width || position.y < 0 || position.y > this.height;
+    }
+    Explosion(position: Position)
+    {
+        this.mainfield[position.y][position.x]=fieldStatus.EXPLOSION
     }
 }

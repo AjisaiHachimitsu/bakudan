@@ -9,6 +9,8 @@ export default class Output
     private static table: HTMLTableElement;
     private static blockCollor: string;
     private static fieldColor: string;
+    static readonly bombimagePath: string = "img/bomb/bomb_002.png";
+    static readonly explosionimagePath: string = "img/explosion/bomb_033.png";
     static start(table0: HTMLTableElement)
     {
         this.table = table0;
@@ -25,10 +27,20 @@ export default class Output
             for (let j = 0; j < field.width; j++)
             {
                 let cell = this.table.rows[i].insertCell();
-                if (field.GetField(new Position(j, i)) === fieldStatus.BLOCK)
-                    cell.style.backgroundColor = this.blockCollor;
-                else
-                    cell.style.backgroundColor = this.fieldColor;
+                cell.style.backgroundColor = this.fieldColor;
+                switch (field.GetField(new Position(j, i)))
+                {
+                    case fieldStatus.BLOCK:
+                        cell.style.backgroundColor = this.blockCollor;
+                        break;
+                    case fieldStatus.BOMB:
+                        cell.innerHTML += '<img src="' + this.bombimagePath + '"/>'
+                        break;
+                    case fieldStatus.EXPLOSION:
+                        cell.innerHTML += '<img src="' + this.explosionimagePath + '"/>'
+                        break;
+                    default:
+                }
             }
         }
     }
@@ -41,12 +53,12 @@ export default class Output
     {
         for (bombs.First(); bombs.IsNull === false; bombs.Next())
         {
-            this.AccessCell(bombs.Value.position).innerHTML += '<img src="' + BombControler.imagePath + '"/>'
+            this.AccessCell(bombs.Value.position).innerHTML += '<img src="' + this.bombimagePath + '"/>'
         }
     }
     private static AccessCell(i: number, j: number): HTMLTableCellElement;
     private static AccessCell(position: Position): HTMLTableCellElement;
-    private static AccessCell(value1: number|Position, value2?: number)
+    private static AccessCell(value1: number | Position, value2?: number)
     {
         if (typeof (value1) === "number")
         {
@@ -57,10 +69,10 @@ export default class Output
             return this.table.rows[value1.y].cells[value1.x];
         }
     }
-    static Draw(field: Field, players: Player[],bombs:List<Bomb>)
+    static Draw(field: Field, players: Player[], bombs: List<Bomb>)
     {
         this.FieldDraw(field);
-        this.BombDraw(bombs);
+        //this.BombDraw(bombs);
         this.PlayerDraw(players)
     }
 }

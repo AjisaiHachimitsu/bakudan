@@ -23,6 +23,9 @@ export class Position {
     get Down() {
         return new Position(this.x, this.y + 1);
     }
+    static IsEq(a, b) {
+        return a.x === b.x && a.y === b.y;
+    }
 }
 export default class Field {
     constructor(width0, height0) {
@@ -52,6 +55,12 @@ export default class Field {
     }
     ElaseBomb(position) {
         this.mainfield[position.y][position.x] = fieldStatus.NONE;
+    }
+    IsOutOfField(position) {
+        return position.x < 0 || position.x > this.width || position.y < 0 || position.y > this.height;
+    }
+    Explosion(position) {
+        this.mainfield[position.y][position.x] = fieldStatus.EXPLOSION;
     }
 }
 //# sourceMappingURL=field.js.map

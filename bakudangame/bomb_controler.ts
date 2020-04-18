@@ -5,15 +5,12 @@ import Field, { fieldStatus } from "./field.js";
 import GameManager from "./game_manager.js";
 export default class BombControler
 {
-    private static readonly explosionSize: number = 3;
     private static readonly explosionTime = 3;
     private bombs: List<Bomb>;
-    static readonly imagePath: string = "img/bomb/bomb_002.png";
     private  field: Field;
     constructor(field:Field)
     {
         this.bombs = new List<Bomb>();
-        BombControler.imagePath 
         this.field = field;
     }
 
@@ -30,7 +27,7 @@ export default class BombControler
     }
     ChangePlayer(player: Player)
     {
-        for (this.bombs.First(); this.bombs.IsNull === false; )
+        for (this.bombs.First(); this.bombs.IsNull === false; this.bombs.Next() )
         {
             if (this.bombs.Value.putPlayer === player)
             {
@@ -39,8 +36,15 @@ export default class BombControler
             if (this.bombs.Value.counter >= BombControler.explosionTime)
             {
                 this.field.ElaseBomb(this.bombs.Value.position)
-                this.bombs.delete();
+                this.bombs.Value.Explosion(this.bombs,this.field);
 
+            }
+        }
+        for (this.bombs.First(); this.bombs.IsNull as any===false ;)
+        {
+            if (this.bombs.Value.IsExplosion)
+            {
+                this.bombs.delete();
             }
             else this.bombs.Next()
         }
