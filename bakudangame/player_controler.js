@@ -39,13 +39,6 @@ export default class PlayerControler {
     get TurnPlayer() {
         return this.players[this.junban];
     }
-    CheckKilled() {
-        for (let i = 0; i < PlayerControler.ninzu; i++) {
-            if (this.players[i].CheckKilled(this.field)) {
-                this.numOfAlive--;
-            }
-        }
-    }
 }
 PlayerControler.ninzu = 4;
 //# sourceMappingURL=player_controler.js.map

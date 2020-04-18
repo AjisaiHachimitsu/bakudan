@@ -36,7 +36,12 @@ export default class Output
                         cell.innerHTML += '<img src="' + this.bombimagePath + '"/>'
                         break;
                     case fieldStatus.EXPLOSION:
+                        let elaseExplosion = () =>
+                        {
+                            cell.innerHTML = "";
+                        }
                         cell.innerHTML += '<img src="' + this.explosionimagePath + '"/>'
+                        setTimeout(elaseExplosion, 300);
                         break;
                     default:
                 }

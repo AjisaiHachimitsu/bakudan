@@ -9,7 +9,7 @@ export default class Bomb {
     CountUp() {
         this.counter++;
     }
-    Explosion(bombs, field) {
+    Explosion(bombs, field, players) {
         if (this.isExplosion)
             return;
         this.isExplosion = true;
@@ -21,11 +21,15 @@ export default class Bomb {
                 //alert([target.x,target.y])
                 if (field.GetField(target) === fieldStatus.BLOCK)
                     break;
+                for (let i = 0; i < players.length; i++) {
+                    if (Position.IsEq(players[i].Position, target))
+                        players[i].Killed(this.putPlayer);
+                }
                 if (field.GetField(target) === fieldStatus.BOMB) {
                     for (bombs.First(); bombs.IsNull === false; bombs.Next()) {
                         if (Position.IsEq(bombs.Value.position, target)) {
                             //alert(bombs.Value.isExplosion);
-                            bombs.Value.Explosion(bombs, field);
+                            bombs.Value.Explosion(bombs, field, players);
                             break;
                         }
                     }

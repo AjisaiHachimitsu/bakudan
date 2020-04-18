@@ -12,7 +12,7 @@ export default class Player
 {
     imagePath: string;
     private position: Position;
-    private isKilled: boolean=false;
+    private isKilled: boolean = false;
     constructor(img: string, position0: Position)
     {
         this.imagePath = img;
@@ -47,17 +47,12 @@ export default class Player
     {
         return this.position;
     }
-    get Iskilled():boolean
+    get Iskilled(): boolean
     {
         return this.isKilled;
     }
-    CheckKilled(field: Field):boolean
+    Killed(killPlayer: Player)
     {
-        if (field.GetField(this.position) === fieldStatus.EXPLOSION)
-        {
-            this.isKilled = true;
-            return true;
-        }
-        return false;
+        this.isKilled = true;
     }
 }

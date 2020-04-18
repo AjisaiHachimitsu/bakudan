@@ -41,12 +41,8 @@ export default class Player {
     get Iskilled() {
         return this.isKilled;
     }
-    CheckKilled(field) {
-        if (field.GetField(this.position) === fieldStatus.EXPLOSION) {
-            this.isKilled = true;
-            return true;
-        }
-        return false;
+    Killed(killPlayer) {
+        this.isKilled = true;
     }
 }
 //# sourceMappingURL=player.js.map

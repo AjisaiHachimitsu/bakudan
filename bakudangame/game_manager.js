@@ -38,16 +38,11 @@ export default class GameManager {
     }
     static ChangeToNextTurn() {
         do {
-            this.bombControler.TurnPassed(this.playerControler.TurnPlayer);
-            this.playerControler.CheckKilled();
+            this.bombControler.TurnPassed(this.playerControler.TurnPlayer, this.playerControler.Players);
             this.playerControler.ChangeToNextPlayer();
             this.acttionCounter = 0;
             GameManager.Draw();
-            let eraseExplosion = () => {
-                this.field.EraseExplosion();
-                this.Draw();
-            };
-            setTimeout(eraseExplosion, 500);
+            this.field.EraseExplosion();
         } while (this.playerControler.TurnPlayer.Iskilled);
     }
 }

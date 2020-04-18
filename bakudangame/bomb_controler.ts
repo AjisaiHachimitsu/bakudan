@@ -25,7 +25,7 @@ export default class BombControler
     {
         return this.bombs;
     }
-    TurnPassed(player: Player)
+    TurnPassed(player: Player,players:Player[])
     {
         for (this.bombs.First(); this.bombs.IsNull === false; this.bombs.Next())
         {
@@ -35,7 +35,7 @@ export default class BombControler
             }
             if (this.bombs.Value.counter >= BombControler.explosionTime)
             {
-                this.bombs.Value.Explosion(this.bombs, this.field);
+                this.bombs.Value.Explosion(this.bombs, this.field,players);
 
             }
         }

@@ -47,15 +47,4 @@ export default class PlayerControler
     {
         return this.players[this.junban];
     }
-    CheckKilled()
-    {
-        for (let i = 0; i < PlayerControler.ninzu;i++)
-        {
-            if (this.players[i].CheckKilled(this.field))
-            {
-                this.numOfAlive--;
-            }
-
-        }
-    }
 }

@@ -17,7 +17,7 @@ export default class Bomb
     {
         this.counter++;
     }
-    Explosion(bombs: List<Bomb>, field: Field)
+    Explosion(bombs: List<Bomb>, field: Field,players:Player[])
     {
         if (this.isExplosion) return;
         this.isExplosion = true;
@@ -30,6 +30,11 @@ export default class Bomb
                 let target = new Position(j * directions[i][0] + this.position.x, j * directions[i][1] + this.position.y);
                 //alert([target.x,target.y])
                 if (field.GetField(target) === fieldStatus.BLOCK) break;
+                for (let i = 0; i < players.length; i++)
+                {
+                    if (Position.IsEq(players[i].Position, target))
+                        players[i].Killed(this.putPlayer);
+                }
                 if (field.GetField(target) === fieldStatus.BOMB)
                 {
                     for (bombs.First(); bombs.IsNull === false; bombs.Next())
@@ -37,7 +42,7 @@ export default class Bomb
                         if (Position.IsEq(bombs.Value.position, target))
                         {
                             //alert(bombs.Value.isExplosion);
-                            bombs.Value.Explosion(bombs, field);
+                            bombs.Value.Explosion(bombs, field,players);
                             break;
                         }
                     }

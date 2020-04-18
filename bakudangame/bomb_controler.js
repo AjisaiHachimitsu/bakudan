@@ -17,13 +17,13 @@ export default class BombControler {
     get Bombs() {
         return this.bombs;
     }
-    TurnPassed(player) {
+    TurnPassed(player, players) {
         for (this.bombs.First(); this.bombs.IsNull === false; this.bombs.Next()) {
             if (this.bombs.Value.putPlayer === player) {
                 this.bombs.Value.CountUp();
             }
             if (this.bombs.Value.counter >= BombControler.explosionTime) {
-                this.bombs.Value.Explosion(this.bombs, this.field);
+                this.bombs.Value.Explosion(this.bombs, this.field, players);
             }
         }
         for (this.bombs.First(); this.bombs.IsNull === false;) {
