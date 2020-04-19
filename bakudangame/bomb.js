@@ -13,10 +13,9 @@ export default class Bomb {
         if (this.isExplosion)
             return;
         this.isExplosion = true;
-        field.Explosion(this.position);
         let directions = [[-1, 0], [1, 0], [0, -1], [0, 1]];
         for (let i = 0; i < 4; i++) {
-            for (let j = 1; j <= Bomb.explosionSize; j++) {
+            for (let j = 0; j <= Bomb.explosionSize; j++) {
                 let target = new Position(j * directions[i][0] + this.position.x, j * directions[i][1] + this.position.y);
                 //alert([target.x,target.y])
                 if (field.GetField(target) === fieldStatus.BLOCK)

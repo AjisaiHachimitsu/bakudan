@@ -5,14 +5,14 @@ import Message from "./message.js";
 
 export default class PlayerControler
 {
-    private numOfAlive: number;
+    private numOfArive: number;
     private field: Field;
     private static readonly ninzu: number = 4;
     private junban: number = 0;
     private players: Player[];
     constructor(field0: Field)
     {
-        this.numOfAlive = PlayerControler.ninzu;
+        this.numOfArive = PlayerControler.ninzu;
         this.field = field0;
         this.players = new Array<Player>(PlayerControler.ninzu);
         for (let i = 0; i < PlayerControler.ninzu; i++)
@@ -46,5 +46,14 @@ export default class PlayerControler
     get TurnPlayer()
     {
         return this.players[this.junban];
+    }
+    get NumOfArive():number
+    {
+        let a = 0;
+        for (let i = 0; i < this.players.length; i++)
+        {
+            if (this.players[i].IsKilled === false) a++;
+        }
+        return a;
     }
 }

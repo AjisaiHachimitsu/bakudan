@@ -61,13 +61,13 @@ export default class GameManager
     private static ChangeToNextTurn()
     {
         this.acttionCounter = 0;
-
         do
         {
             this.bombControler.TurnPassed(this.playerControler.TurnPlayer, this.playerControler.Players)
             this.playerControler.ChangeToNextPlayer();
             GameManager.Draw();
             this.field.EraseExplosion();
-        } while (this.playerControler.TurnPlayer.Iskilled);
+            if (this.playerControler.NumOfArive <= 1) break;
+        } while (this.playerControler.TurnPlayer.IsKilled);
     }
 }

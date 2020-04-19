@@ -43,7 +43,9 @@ export default class GameManager {
             this.playerControler.ChangeToNextPlayer();
             GameManager.Draw();
             this.field.EraseExplosion();
-        } while (this.playerControler.TurnPlayer.Iskilled);
+            if (this.playerControler.NumOfArive <= 1)
+                break;
+        } while (this.playerControler.TurnPlayer.IsKilled);
     }
 }
 GameManager.acttionCounter = 0;

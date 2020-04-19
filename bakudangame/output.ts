@@ -52,7 +52,7 @@ export default class Output
     {
         for (let i = 0; i < players.length; i++)
         {
-            if (players[i].Iskilled) continue;
+            if (players[i].IsKilled) continue;
             this.AccessCell(players[i].Position).innerHTML += '<img src="' + players[i].imagePath + '"/>';
         }
     }

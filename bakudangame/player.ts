@@ -13,10 +13,12 @@ export default class Player
     imagePath: string;
     private position: Position;
     private isKilled: boolean = false;
-    constructor(img: string, position0: Position)
+    readonly isCpu:boolean
+    constructor(img: string, position0: Position,isCpu=false)
     {
         this.imagePath = img;
         this.position = position0;
+        this.isCpu = isCpu;
     }
     move(direction: Direction, field: Field): boolean
     {
@@ -47,7 +49,7 @@ export default class Player
     {
         return this.position;
     }
-    get Iskilled(): boolean
+    get IsKilled(): boolean
     {
         return this.isKilled;
     }

@@ -8,10 +8,11 @@ export var Direction;
 })(Direction || (Direction = {}));
 ;
 export default class Player {
-    constructor(img, position0) {
+    constructor(img, position0, isCpu = false) {
         this.isKilled = false;
         this.imagePath = img;
         this.position = position0;
+        this.isCpu = isCpu;
     }
     move(direction, field) {
         let target;
@@ -38,7 +39,7 @@ export default class Player {
     get Position() {
         return this.position;
     }
-    get Iskilled() {
+    get IsKilled() {
         return this.isKilled;
     }
     Killed(killPlayer) {

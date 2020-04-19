@@ -33,7 +33,7 @@ export default class Output {
     }
     static PlayerDraw(players) {
         for (let i = 0; i < players.length; i++) {
-            if (players[i].Iskilled)
+            if (players[i].IsKilled)
                 continue;
             this.AccessCell(players[i].Position).innerHTML += '<img src="' + players[i].imagePath + '"/>';
         }
