@@ -11,7 +11,7 @@ export default class GameManager
     private static playerControler: PlayerControler;
     private static bombControler: BombControler;
     private static acttionCounter = 0;
-    private static readonly numOfAction: number=5;
+    private static readonly numOfAction: number = 5;
     static start(field: Field, playerControler: PlayerControler, bombCotroler: BombControler)
     {
         this.field = field;
@@ -30,8 +30,8 @@ export default class GameManager
             Message.AddMessage("そこには行けません。<br>");
             return;
         }
-        this.CountUpActtion();
         GameManager.Draw();
+        this.CountUpActtion();
     }
     static PassButtonClick(): void
     {
@@ -41,13 +41,13 @@ export default class GameManager
     {
         if (GameManager.bombControler.PutBomb(this.playerControler.TurnPlayer))
         {
+            GameManager.Draw();
             this.CountUpActtion();
         }
         else
         {
             Message.AddMessage("そこには置けません。<br>");
         }
-        GameManager.Draw();
     }
     private static CountUpActtion()
     {
@@ -60,11 +60,12 @@ export default class GameManager
     }
     private static ChangeToNextTurn()
     {
+        this.acttionCounter = 0;
+
         do
         {
-            this.bombControler.TurnPassed(this.playerControler.TurnPlayer,this.playerControler.Players)
+            this.bombControler.TurnPassed(this.playerControler.TurnPlayer, this.playerControler.Players)
             this.playerControler.ChangeToNextPlayer();
-            this.acttionCounter = 0;
             GameManager.Draw();
             this.field.EraseExplosion();
         } while (this.playerControler.TurnPlayer.Iskilled);

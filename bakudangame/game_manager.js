@@ -15,20 +15,20 @@ export default class GameManager {
             Message.AddMessage("そこには行けません。<br>");
             return;
         }
-        this.CountUpActtion();
         GameManager.Draw();
+        this.CountUpActtion();
     }
     static PassButtonClick() {
         this.ChangeToNextTurn();
     }
     static BombButtonClick() {
         if (GameManager.bombControler.PutBomb(this.playerControler.TurnPlayer)) {
+            GameManager.Draw();
             this.CountUpActtion();
         }
         else {
             Message.AddMessage("そこには置けません。<br>");
         }
-        GameManager.Draw();
     }
     static CountUpActtion() {
         this.acttionCounter++;
@@ -37,10 +37,10 @@ export default class GameManager {
         }
     }
     static ChangeToNextTurn() {
+        this.acttionCounter = 0;
         do {
             this.bombControler.TurnPassed(this.playerControler.TurnPlayer, this.playerControler.Players);
             this.playerControler.ChangeToNextPlayer();
-            this.acttionCounter = 0;
             GameManager.Draw();
             this.field.EraseExplosion();
         } while (this.playerControler.TurnPlayer.Iskilled);
