@@ -23,7 +23,12 @@ export default class PlayerControler
             else x0 = field0.width - 2;//right
             if (Math.floor(i / 2) === 0) y0 = 1;//top
             else y0 = field0.height - 2;//bottom
-            this.players[i] = new Player(path, new Position(x0, y0))
+            let isCpu: boolean[] = [false, true, true, true];
+            if (i == 0)
+            {
+                this.players[i] = new Player(path, new Position(x0, y0), isCpu[i]);
+            }
+
         }
         this.ShowJunban();
     }
