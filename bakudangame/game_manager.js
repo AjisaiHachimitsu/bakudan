@@ -22,7 +22,7 @@ export default class GameManager {
         this.ChangeToNextTurn();
     }
     static BombButtonClick() {
-        if (GameManager.bombControler.PutBomb(this.playerControler.TurnPlayer)) {
+        if (GameManager.bombControler.PutBomb(this.playerControler.TurnPlayer, this.field)) {
             GameManager.Draw();
             this.CountUpActtion();
         }
@@ -39,7 +39,7 @@ export default class GameManager {
     static ChangeToNextTurn() {
         this.acttionCounter = 0;
         do {
-            this.bombControler.TurnPassed(this.playerControler.TurnPlayer, this.playerControler.Players);
+            this.bombControler.TurnPassed(this.playerControler.TurnPlayer, this.playerControler.Players, this.field);
             this.playerControler.ChangeToNextPlayer();
             GameManager.Draw();
             this.field.EraseExplosion();

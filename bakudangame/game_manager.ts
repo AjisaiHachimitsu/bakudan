@@ -39,7 +39,7 @@ export default class GameManager
     }
     static BombButtonClick(): void
     {
-        if (GameManager.bombControler.PutBomb(this.playerControler.TurnPlayer))
+        if (GameManager.bombControler.PutBomb(this.playerControler.TurnPlayer,this.field))
         {
             GameManager.Draw();
             this.CountUpActtion();
@@ -63,7 +63,7 @@ export default class GameManager
         this.acttionCounter = 0;
         do
         {
-            this.bombControler.TurnPassed(this.playerControler.TurnPlayer, this.playerControler.Players)
+            this.bombControler.TurnPassed(this.playerControler.TurnPlayer, this.playerControler.Players,this.field)
             this.playerControler.ChangeToNextPlayer();
             GameManager.Draw();
             this.field.EraseExplosion();

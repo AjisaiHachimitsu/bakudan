@@ -7,25 +7,25 @@ export default class BombControler
 {
     private static readonly explosionTime = 3;
     private bombs: List<Bomb>;
-    private field: Field;
+    //private readonly field: Field;
     constructor(field: Field)
     {
         this.bombs = new List<Bomb>();
-        this.field = field;
+        //this.field = field;
     }
 
-    PutBomb(putPlayer: Player): boolean
+    PutBomb(putPlayer: Player,field:Field): boolean
     {
-        if (this.field.GetField(putPlayer.Position) === fieldStatus.BOMB) return false;
+        if (field.GetField(putPlayer.Position) === fieldStatus.BOMB) return false;
         this.bombs.add(new Bomb(putPlayer))
-        this.field.PutBomb(putPlayer.Position);
+        field.PutBomb(putPlayer.Position);
         return true;
     }
     get Bombs()
     {
         return this.bombs;
     }
-    TurnPassed(player: Player,players:Player[])
+    TurnPassed(player: Player,players:Player[],field:Field)
     {
         for (this.bombs.First(); this.bombs.IsNull === false; this.bombs.Next())
         {
@@ -35,7 +35,7 @@ export default class BombControler
             }
             if (this.bombs.Value.counter >= BombControler.explosionTime)
             {
-                this.bombs.Value.Explosion(this.bombs, this.field,players);
+                this.bombs.Value.Explosion(this.bombs, field,players);
 
             }
         }

@@ -6,7 +6,7 @@ export default class PlayerControler {
     constructor(field0) {
         this.junban = 0;
         this.numOfArive = PlayerControler.ninzu;
-        this.field = field0;
+        //this.field = field0;
         this.players = new Array(PlayerControler.ninzu);
         for (let i = 0; i < PlayerControler.ninzu; i++) {
             let path = "img/char" + i + "/char" + i + "_001.png";
@@ -14,11 +14,11 @@ export default class PlayerControler {
             if (i % 2 === 0)
                 x0 = 1; //left
             else
-                x0 = this.field.width - 2; //right
+                x0 = field0.width - 2; //right
             if (Math.floor(i / 2) === 0)
                 y0 = 1; //top
             else
-                y0 = this.field.height - 2; //bottom
+                y0 = field0.height - 2; //bottom
             this.players[i] = new Player(path, new Position(x0, y0));
         }
         this.ShowJunban();
@@ -48,5 +48,6 @@ export default class PlayerControler {
         return a;
     }
 }
+//private field: Field;
 PlayerControler.ninzu = 4;
 //# sourceMappingURL=player_controler.js.map
