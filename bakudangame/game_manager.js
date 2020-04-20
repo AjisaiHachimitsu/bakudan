@@ -1,6 +1,6 @@
 import Output from "./output.js";
 import Message from "./message.js";
-export default class GameManager {
+export class GameManager {
     static start(field, playerControler, bombCotroler) {
         this.field = field;
         this.playerControler = playerControler;

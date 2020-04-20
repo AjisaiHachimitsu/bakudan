@@ -5,7 +5,7 @@ import PlayerControler from "./player_controler.js";
 import BombControler from "./bomb_controler.js";
 import Output from "./output.js";
 import Message from "./message.js";
-export default class GameManager
+export class GameManager
 {
     private static field: Field;
     private static playerControler: PlayerControler;
