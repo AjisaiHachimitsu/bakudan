@@ -1,4 +1,5 @@
 ﻿import { default as Field, fieldStatus, Position } from "./field.js";
+import BombControler from "./bomb_controler.js";
 
 export enum Direction
 {
@@ -13,8 +14,8 @@ export default class Player
     imagePath: string;
     private position: Position;
     private isKilled: boolean = false;
-    readonly isCpu:boolean
-    constructor(img: string, position0: Position,isCpu=false)
+    readonly isCpu: boolean
+    constructor(img: string, position0: Position, isCpu = false)
     {
         this.imagePath = img;
         this.position = position0;
@@ -44,6 +45,10 @@ export default class Player
         }
         this.position = target;
         return true;
+    }
+    PutBomb(field: Field, bombControler: BombControler): boolean
+    {
+        return bombControler.PutBomb(this, field);
     }
     get Position()
     {

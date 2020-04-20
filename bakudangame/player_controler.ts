@@ -23,11 +23,10 @@ export default class PlayerControler
             else x0 = field0.width - 2;//right
             if (Math.floor(i / 2) === 0) y0 = 1;//top
             else y0 = field0.height - 2;//bottom
+
             let isCpu: boolean[] = [false, true, true, true];
-            if (i == 0)
-            {
-                this.players[i] = new Player(path, new Position(x0, y0), isCpu[i]);
-            }
+            this.players[i] = new Player(path, new Position(x0, y0), isCpu[i]);
+
 
         }
         this.ShowJunban();
@@ -52,7 +51,7 @@ export default class PlayerControler
     {
         return this.players[this.junban];
     }
-    get NumOfArive():number
+    get NumOfArive(): number
     {
         let a = 0;
         for (let i = 0; i < this.players.length; i++)

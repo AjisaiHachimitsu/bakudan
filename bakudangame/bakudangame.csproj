@@ -86,6 +86,7 @@
     <TypeScriptCompile Include="app.ts" />
     <TypeScriptCompile Include="bomb.ts" />
     <TypeScriptCompile Include="bomb_controler.ts" />
+    <TypeScriptCompile Include="cpu.ts" />
     <TypeScriptCompile Include="field.ts" />
     <TypeScriptCompile Include="game_manager.ts" />
     <TypeScriptCompile Include="input.ts" />

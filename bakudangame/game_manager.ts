@@ -11,7 +11,7 @@ export class GameManager
     private static playerControler: PlayerControler;
     private static bombControler: BombControler;
     private static acttionCounter = 0;
-    private static readonly numOfAction: number = 5;
+    private static readonly numOfAction: number = 6;
     static start(field: Field, playerControler: PlayerControler, bombCotroler: BombControler)
     {
         this.field = field;
@@ -39,7 +39,7 @@ export class GameManager
     }
     static BombButtonClick(): void
     {
-        if (GameManager.bombControler.PutBomb(this.playerControler.TurnPlayer,this.field))
+        if (GameManager.playerControler.TurnPlayer.PutBomb(this.field,this.bombControler))
         {
             GameManager.Draw();
             this.CountUpActtion();
@@ -65,9 +65,9 @@ export class GameManager
         {
             this.bombControler.TurnPassed(this.playerControler.TurnPlayer, this.playerControler.Players,this.field)
             this.playerControler.ChangeToNextPlayer();
-            GameManager.Draw();
-            this.field.EraseExplosion();
             if (this.playerControler.NumOfArive <= 1) break;
         } while (this.playerControler.TurnPlayer.IsKilled);
+        GameManager.Draw();
+        this.field.EraseExplosion();
     }
 }

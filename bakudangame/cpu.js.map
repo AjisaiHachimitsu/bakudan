@@ -1,1 +1,1 @@
-{"version":3,"file":"cpu.js","sourceRoot":"","sources":["cpu.ts"],"names":[],"mappings":"AAAA,MAAM,CAAC,OAAO,OAAO,GAAG;CAGvB"}
+{"version":3,"file":"cpu.js","sourceRoot":"","sources":["cpu.ts"],"names":[],"mappings":"AAGA,MAAM,CAAC,OAAO,OAAO,GAAG;IAEpB,gBAAgB,CAAC,UAAkB,EAAE,KAAY;IAGjD,CAAC;CACJ"}

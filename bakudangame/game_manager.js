@@ -22,7 +22,7 @@ export class GameManager {
         this.ChangeToNextTurn();
     }
     static BombButtonClick() {
-        if (GameManager.bombControler.PutBomb(this.playerControler.TurnPlayer, this.field)) {
+        if (GameManager.playerControler.TurnPlayer.PutBomb(this.field, this.bombControler)) {
             GameManager.Draw();
             this.CountUpActtion();
         }
@@ -41,13 +41,13 @@ export class GameManager {
         do {
             this.bombControler.TurnPassed(this.playerControler.TurnPlayer, this.playerControler.Players, this.field);
             this.playerControler.ChangeToNextPlayer();
-            GameManager.Draw();
-            this.field.EraseExplosion();
             if (this.playerControler.NumOfArive <= 1)
                 break;
         } while (this.playerControler.TurnPlayer.IsKilled);
+        GameManager.Draw();
+        this.field.EraseExplosion();
     }
 }
 GameManager.acttionCounter = 0;
-GameManager.numOfAction = 5;
+GameManager.numOfAction = 6;
 //# sourceMappingURL=game_manager.js.map

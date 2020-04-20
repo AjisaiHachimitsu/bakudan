@@ -36,6 +36,9 @@ export default class Player {
         this.position = target;
         return true;
     }
+    PutBomb(field, bombControler) {
+        return bombControler.PutBomb(this, field);
+    }
     get Position() {
         return this.position;
     }
