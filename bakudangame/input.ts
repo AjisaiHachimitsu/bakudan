@@ -1,6 +1,6 @@
 ﻿import Playercontroler from "./player_controler.js";
 import { Direction } from "./player.js";
-import GameManager from "./game_manager.js";
+import { GameManager } from "./game_manager.js";
 
 export default class Input 
 {

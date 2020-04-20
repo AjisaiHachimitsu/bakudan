@@ -1,5 +1,5 @@
 import { Direction } from "./player.js";
-import GameManager from "./game_manager.js";
+import { GameManager } from "./game_manager.js";
 export default class Input {
     static start(inputTable0) {
         this.inputTable = inputTable0;
