@@ -23,11 +23,11 @@ export default class BombControler
     }
     CheckPutBomb(putPlayer:Readonly< Player>,field:Readonly< Field>): boolean
     {
-        return field.GetField(putPlayer.Position) === fieldStatus.BOMB
+        return field.GetField(putPlayer.Position) !== fieldStatus.BOMB
     }
     PutBomb(putPlayer: Player,field:Field): boolean
     {
-        if (this.CheckPutBomb(putPlayer,field)) return false;
+        if (this.CheckPutBomb(putPlayer,field)===false) return false;
         this.bombs.add(new Bomb(putPlayer))
         field.PutBomb(putPlayer.Position);
         return true;

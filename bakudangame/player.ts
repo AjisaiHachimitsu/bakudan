@@ -1,5 +1,6 @@
 ﻿import { default as Field, fieldStatus, Position } from "./field.js";
 import BombControler from "./bomb_controler.js";
+import Message from "./message.js";
 
 export enum Direction
 {
@@ -45,25 +46,29 @@ export default class Player
                 target = this.position.Left;
                 break;
         }
-        return field.GetField(target) !== fieldStatus.NONE
+        return field.GetField(target) === fieldStatus.NONE
 
     }
-    Move(direction: Direction, field:Readonly< Field>): boolean
+    Move(direction: Direction, field: Readonly<Field>): boolean
     {
         let target: Position;
         switch (direction)
         {
             case Direction.TODOWN:
                 target = this.position.Down;
+                Message.AddMessage("↓ ");
                 break;
             case Direction.TOUP:
                 target = this.position.Up;
+                Message.AddMessage("↑ ");
                 break;
             case Direction.TORIGHT:
                 target = this.position.Right;
+                Message.AddMessage("→ ");
                 break;
             case Direction.TOLEFT:
                 target = this.position.Left;
+                Message.AddMessage("← ");
                 break;
         }
         if (field.GetField(target) !== fieldStatus.NONE)
@@ -79,6 +84,7 @@ export default class Player
     }
     PutBomb(field: Field, bombControler: BombControler): boolean
     {
+        Message.AddMessage("B ");
         return bombControler.PutBomb(this, field);
     }
     get Position()

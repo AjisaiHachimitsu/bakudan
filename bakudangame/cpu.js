@@ -1,34 +1,31 @@
-class Action {
-    constructor(check, action) {
-        this.check = check;
-        this.action = action;
-    }
-}
 export default class Cpu {
+    //private allActions: (() => boolean)[][];
     constructor(numOfAction, playerControler, bombControler, field) {
         this.numOfAction = numOfAction;
         this.playerControler = playerControler.Copy();
         this.bombControler = bombControler.Copy();
         this.field = field.Copy();
-        this.allActions = [];
-    }
-    ExplorNextAction() {
-    }
-    ExplorAllAction() {
-        let actionSet = new Array(6);
+        this.actionSet = [];
+        this.checkActionSet = [];
         for (let i = 0; i < 4; i++) {
-            actionSet[i] = new Action(() => { return this.playerControler.TurnPlayer.CheckMove(i, this.field); }, () => { return this.playerControler.TurnPlayer.Move(i, this.field); });
+            this.actionSet[i] = (player, field, bombControler) => { return player.Move(i, field); };
+            this.checkActionSet[i] = (player, field, bombControler) => { return player.CheckMove(i, field); };
         }
-        actionSet[4] = new Action(() => { return this.playerControler.TurnPlayer.CheckPutBomb(this.field, this.bombControler); }, () => { return this.playerControler.TurnPlayer.PutBomb(this.field, this.bombControler); });
-        //actionSet[5] = null;
-        let actions = [];
-        while (actions.length < this.numOfAction) {
-            if (actionSet[0].check)
-                actions.push(actionSet[0].action);
-            else
-                break;
+        this.actionSet.push((player, field, bombControler) => { return player.PutBomb(field, bombControler); });
+        this.checkActionSet.push((player, field, bombControler) => { return player.CheckPutBomb(field, bombControler); });
+    }
+    RandomActions(player, field, bombControler) {
+        //let actions: ((player:Player) => boolean)[] = [];
+        for (let i = 0; i < this.numOfAction; i++) {
+            let a;
+            do {
+                if (Math.random() < 0.05)
+                    return;
+                a = Math.floor(Math.random() * this.actionSet.length);
+            } while (this.checkActionSet[a](this.playerControler.TurnPlayer, this.field, this.bombControler) === false);
+            this.actionSet[a](this.playerControler.TurnPlayer, this.field, this.bombControler);
+            this.actionSet[a](player, field, bombControler);
         }
-        this.allActions.push(actions);
     }
 }
 //# sourceMappingURL=cpu.js.map

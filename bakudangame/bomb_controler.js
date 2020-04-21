@@ -14,10 +14,10 @@ export default class BombControler {
         return a;
     }
     CheckPutBomb(putPlayer, field) {
-        return field.GetField(putPlayer.Position) === fieldStatus.BOMB;
+        return field.GetField(putPlayer.Position) !== fieldStatus.BOMB;
     }
     PutBomb(putPlayer, field) {
-        if (this.CheckPutBomb(putPlayer, field))
+        if (this.CheckPutBomb(putPlayer, field) === false)
             return false;
         this.bombs.add(new Bomb(putPlayer));
         field.PutBomb(putPlayer.Position);

@@ -1,5 +1,6 @@
 import Output from "./output.js";
 import Message from "./message.js";
+import Cpu from "./cpu.js";
 export class GameManager {
     static start(field, playerControler, bombCotroler) {
         this.field = field;
@@ -38,12 +39,17 @@ export class GameManager {
     }
     static ChangeToNextTurn() {
         this.acttionCounter = 0;
+        Message.ClearMessage();
         do {
+            if (this.playerControler.TurnPlayer.isCpu && this.playerControler.TurnPlayer.IsKilled === false) {
+                let cpu = new Cpu(this.numOfAction, this.playerControler, this.bombControler, this.field);
+                cpu.RandomActions(this.playerControler.TurnPlayer, this.field, this.bombControler);
+            }
             this.bombControler.TurnPassed(this.playerControler.TurnPlayer, this.playerControler.Players, this.field);
             this.playerControler.ChangeToNextPlayer();
             if (this.playerControler.NumOfArive <= 1)
                 break;
-        } while (this.playerControler.TurnPlayer.IsKilled);
+        } while (this.playerControler.TurnPlayer.IsKilled || this.playerControler.TurnPlayer.isCpu);
         GameManager.Draw();
         this.field.EraseExplosion();
     }

@@ -55,7 +55,8 @@ export default class PlayerControler
     }
     ShowJunban(): void
     {
-        Message.ClearMessage();
+        //Message.ClearMessage();
+        Message.BeginNewLine();
         Message.AddImage(this.players[this.junban].imagePath);
         Message.AddMessage("の番です。<br>")
     }

@@ -1,4 +1,5 @@
 import { fieldStatus } from "./field.js";
+import Message from "./message.js";
 export var Direction;
 (function (Direction) {
     Direction[Direction["TODOWN"] = 0] = "TODOWN";
@@ -35,22 +36,26 @@ export default class Player {
                 target = this.position.Left;
                 break;
         }
-        return field.GetField(target) !== fieldStatus.NONE;
+        return field.GetField(target) === fieldStatus.NONE;
     }
     Move(direction, field) {
         let target;
         switch (direction) {
             case Direction.TODOWN:
                 target = this.position.Down;
+                Message.AddMessage("↓ ");
                 break;
             case Direction.TOUP:
                 target = this.position.Up;
+                Message.AddMessage("↑ ");
                 break;
             case Direction.TORIGHT:
                 target = this.position.Right;
+                Message.AddMessage("→ ");
                 break;
             case Direction.TOLEFT:
                 target = this.position.Left;
+                Message.AddMessage("← ");
                 break;
         }
         if (field.GetField(target) !== fieldStatus.NONE) {
@@ -63,6 +68,7 @@ export default class Player {
         return bombControler.CheckPutBomb(this, field);
     }
     PutBomb(field, bombControler) {
+        Message.AddMessage("B ");
         return bombControler.PutBomb(this, field);
     }
     get Position() {
