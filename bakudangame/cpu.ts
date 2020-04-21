@@ -11,8 +11,8 @@ export default class Cpu
     private playerControler: PlayerControler;
     private bombControler: BombControler;
     private field: Field;
-    private actionSet: ((player:Player,field:Field,bombControler:BombControler)=>boolean)[];
-    private checkActionSet: ((player: Player, field: Field, bombControler: BombControler) => boolean)[];
+    private actionSet: ((player:Player,field:Field,bombControler?:BombControler)=>boolean)[];
+    private checkActionSet: ((player: Player, field: Field, bombControler?: BombControler) => boolean)[];
     //private allActions: (() => boolean)[][];
     
     
@@ -28,8 +28,8 @@ export default class Cpu
         this.checkActionSet = [];
         for (let i = 0; i < 4; i++)
         {
-            this.actionSet[i] = (player: Player, field: Field, bombControler: BombControler) => { return player.Move(i, field) };
-            this.checkActionSet[i] = (player: Player, field: Field, bombControler: BombControler) => { return player.CheckMove(i, field) };
+            this.actionSet[i] = (player: Player, field: Field) => { return player.Move(i, field) };
+            this.checkActionSet[i] = (player: Player, field: Field) => { return player.CheckMove(i, field) };
         }
         this.actionSet.push((player: Player, field: Field, bombControler: BombControler) => { return player.PutBomb(field, bombControler) })
         this.checkActionSet.push((player: Player, field: Field, bombControler: BombControler) => { return player.CheckPutBomb(field, bombControler) });

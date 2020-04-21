@@ -8,8 +8,8 @@ export default class Cpu {
         this.actionSet = [];
         this.checkActionSet = [];
         for (let i = 0; i < 4; i++) {
-            this.actionSet[i] = (player, field, bombControler) => { return player.Move(i, field); };
-            this.checkActionSet[i] = (player, field, bombControler) => { return player.CheckMove(i, field); };
+            this.actionSet[i] = (player, field) => { return player.Move(i, field); };
+            this.checkActionSet[i] = (player, field) => { return player.CheckMove(i, field); };
         }
         this.actionSet.push((player, field, bombControler) => { return player.PutBomb(field, bombControler); });
         this.checkActionSet.push((player, field, bombControler) => { return player.CheckPutBomb(field, bombControler); });
