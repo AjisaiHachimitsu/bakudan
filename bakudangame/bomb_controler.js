@@ -13,8 +13,11 @@ export default class BombControler {
         a.bombs = this.bombs.Copy(function (bomb) { return bomb.Copy(); });
         return a;
     }
+    CheckPutBomb(putPlayer, field) {
+        return field.GetField(putPlayer.Position) === fieldStatus.BOMB;
+    }
     PutBomb(putPlayer, field) {
-        if (field.GetField(putPlayer.Position) === fieldStatus.BOMB)
+        if (this.CheckPutBomb(putPlayer, field))
             return false;
         this.bombs.add(new Bomb(putPlayer));
         field.PutBomb(putPlayer.Position);

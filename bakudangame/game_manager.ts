@@ -25,7 +25,7 @@ export class GameManager
     }
     static ArrowButtonClick(direction: Direction): void
     {
-        if (this.playerControler.TurnPlayer.move(direction, this.field) === false)
+        if (this.playerControler.TurnPlayer.Move(direction, this.field) === false)
         {
             Message.AddMessage("そこには行けません。<br>");
             return;

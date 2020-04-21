@@ -1,10 +1,24 @@
 export default class Cpu {
-    ExploreAllAction(turnPlayer, field) {
-        let actions = new Array(5);
+    constructor(numOfAction, playerControler, bombControler, field) {
+        this.numOfAction = numOfAction;
+        this.playerControler = playerControler.Copy();
+        this.bombControler = bombControler.Copy();
+        this.field = field.Copy();
+        this.allActions = [];
+    }
+    ExplorNextAction() {
+    }
+    ExplorAllAction() {
+        let actionSet = new Array(6);
         for (let i = 0; i < 4; i++) {
-            actions[i] = function () { return turnPlayer.move(i, field); };
+            actionSet[i] = () => { return this.playerControler.TurnPlayer.move(i, this.field); };
         }
-        //actions[length - 1] = function () {return turnPlayer.PutBomb(field,)}
+        actionSet[4] = () => { return this.playerControler.TurnPlayer.PutBomb(this.field, this.bombControler); };
+        actionSet[5] = null;
+        let actions = [];
+        for (let i = 0; i < this.numOfAction; i++) {
+            actions.push(actionSet[0]);
+        }
     }
 }
 //# sourceMappingURL=cpu.js.map

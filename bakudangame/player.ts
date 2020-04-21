@@ -27,8 +27,28 @@ export default class Player
         a.isKilled = this.isKilled;
         return a;
     }
+    CheckMove(direction: Direction, field: Readonly<Field>): boolean
+    {
+        let target: Position;
+        switch (direction)
+        {
+            case Direction.TODOWN:
+                target = this.position.Down;
+                break;
+            case Direction.TOUP:
+                target = this.position.Up;
+                break;
+            case Direction.TORIGHT:
+                target = this.position.Right;
+                break;
+            case Direction.TOLEFT:
+                target = this.position.Left;
+                break;
+        }
+        return field.GetField(target) !== fieldStatus.NONE
 
-    move(direction: Direction, field:Readonly< Field>): boolean
+    }
+    Move(direction: Direction, field:Readonly< Field>): boolean
     {
         let target: Position;
         switch (direction)
@@ -52,6 +72,10 @@ export default class Player
         }
         this.position = target;
         return true;
+    }
+    CheckPutBomb(field: Readonly<Field>, bombControler: Readonly<BombControler>): boolean
+    {
+        return bombControler.CheckPutBomb(this, field);
     }
     PutBomb(field: Field, bombControler: BombControler): boolean
     {

@@ -109,7 +109,7 @@ export default class Field//コピーメソッドあり
             }
         }
     }
-    copy(): Field
+    Copy(): Field
     {
         return new Field(this.width, this.height, this.mainfield)
     }

@@ -79,7 +79,7 @@ export default class Field //コピーメソッドあり
             }
         }
     }
-    copy() {
+    Copy() {
         return new Field(this.width, this.height, this.mainfield);
     }
 }

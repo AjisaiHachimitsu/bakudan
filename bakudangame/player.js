@@ -19,7 +19,25 @@ export default class Player {
         a.isKilled = this.isKilled;
         return a;
     }
-    move(direction, field) {
+    CheckMove(direction, field) {
+        let target;
+        switch (direction) {
+            case Direction.TODOWN:
+                target = this.position.Down;
+                break;
+            case Direction.TOUP:
+                target = this.position.Up;
+                break;
+            case Direction.TORIGHT:
+                target = this.position.Right;
+                break;
+            case Direction.TOLEFT:
+                target = this.position.Left;
+                break;
+        }
+        return field.GetField(target) !== fieldStatus.NONE;
+    }
+    Move(direction, field) {
         let target;
         switch (direction) {
             case Direction.TODOWN:
@@ -40,6 +58,9 @@ export default class Player {
         }
         this.position = target;
         return true;
+    }
+    CheckPutBomb(field, bombControler) {
+        return bombControler.CheckPutBomb(this, field);
     }
     PutBomb(field, bombControler) {
         return bombControler.PutBomb(this, field);
