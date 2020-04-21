@@ -21,7 +21,7 @@ export default class Player
         this.position = position0;
         this.isCpu = isCpu;
     }
-    move(direction: Direction, field: Field): boolean
+    move(direction: Direction, field:Readonly< Field>): boolean
     {
         let target: Position;
         switch (direction)

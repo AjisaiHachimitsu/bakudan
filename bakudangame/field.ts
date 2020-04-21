@@ -42,7 +42,7 @@ export default class Field
     readonly width: number;
     readonly height: number;
     private mainfield: number[][];
-    GetField(position: Position): fieldStatus
+    GetField(position:Readonly < Position>): fieldStatus
     {
         return this.mainfield[position.y][position.x];
     }
@@ -72,15 +72,15 @@ export default class Field
             }
         }
     }
-    PutBomb(position: Position)
+    PutBomb( position:Readonly< Position>)
     {
         this.mainfield[position.y][position.x] = fieldStatus.BOMB;
     }
-    IsOutOfField(position: Position): boolean
+    IsOutOfField(position:Readonly< Position>): boolean
     {
         return position.x < 0 || position.x > this.width || position.y < 0 || position.y > this.height;
     }
-    Explosion(position: Position)
+    Explosion(position:Readonly< Position>)
     {
         this.mainfield[position.y][position.x] = fieldStatus.EXPLOSION;
     }

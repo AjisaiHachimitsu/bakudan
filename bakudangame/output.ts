@@ -17,7 +17,7 @@ export default class Output
         this.fieldColor = "lightgreen";
     }
 
-    private static FieldDraw(field: Field): void
+    private static FieldDraw(field:Readonly< Field>): void
     {
         this.table.innerHTML = "";
         for (let i = 0; i < field.height; i++)
@@ -48,7 +48,7 @@ export default class Output
             }
         }
     }
-    private static PlayerDraw(players: Player[]): void
+    private static PlayerDraw(players:readonly Readonly< Player>[]): void
     {
         for (let i = 0; i < players.length; i++)
         {
@@ -56,7 +56,7 @@ export default class Output
             this.AccessCell(players[i].Position).innerHTML += '<img src="' + players[i].imagePath + '"/>';
         }
     }
-    private static BombDraw(bombs: List<Bomb>)
+    private static BombDraw(bombs:Readonly< List<Readonly< Bomb>>>)
     {
         for (bombs.First(); bombs.IsNull === false; bombs.Next())
         {
@@ -65,7 +65,7 @@ export default class Output
     }
     private static AccessCell(i: number, j: number): HTMLTableCellElement;
     private static AccessCell(position: Position): HTMLTableCellElement;
-    private static AccessCell(value1: number | Position, value2?: number)
+    private static AccessCell(value1: number |Readonly< Position>, value2?: number)
     {
         if (typeof (value1) === "number")
         {
@@ -76,7 +76,7 @@ export default class Output
             return this.table.rows[value1.y].cells[value1.x];
         }
     }
-    static Draw(field: Field, players: Player[], bombs: List<Bomb>)
+    static Draw(field:Readonly< Field>, players:readonly Readonly< Player>[], bombs:Readonly< List<Readonly< Bomb>>>)
     {
         this.FieldDraw(field);
         //this.BombDraw(bombs);
