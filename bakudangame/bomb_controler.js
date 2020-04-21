@@ -3,10 +3,15 @@ import List from "./list.js";
 import { fieldStatus } from "./field.js";
 //import GameManager from "./game_manager.js";
 export default class BombControler {
-    //private readonly field: Field;
-    constructor(field) {
+    constructor() {
         this.bombs = new List();
         //this.field = field;
+    }
+    //private readonly field: Field;
+    Copy() {
+        let a = new BombControler();
+        a.bombs = this.bombs.Copy(function (bomb) { return bomb.Copy(); });
+        return a;
     }
     PutBomb(putPlayer, field) {
         if (field.GetField(putPlayer.Position) === fieldStatus.BOMB)

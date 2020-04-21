@@ -10,6 +10,16 @@ export default class List {
         this.firstnode = new listnode(null);
         this.lastnode = this.firstnode;
     }
+    Copy(copyFunction) {
+        let a = new List();
+        for (this.First(); this.IsNull === false; this.Next()) {
+            if (copyFunction == undefined)
+                a.add(this.Value);
+            else
+                a.add(copyFunction(this.Value));
+        }
+        return a;
+    }
     add(data) {
         this.lastnode.data = data;
         this.lastnode = this.lastnode.next = new listnode(null);

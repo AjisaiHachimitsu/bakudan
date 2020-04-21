@@ -8,10 +8,17 @@ export default class Bomb
     readonly putPlayer: Player;
     private isExplosion: boolean = false;
     counter: number = 0;
+    Copy():Bomb
+    {
+        let a = new Bomb(this.putPlayer);
+        a.isExplosion = this.isExplosion;
+        a.counter = this.counter;
+        return a;
+    }
     constructor(putPlayer0: Player)
     {
         this.putPlayer = putPlayer0
-        this.position = this.putPlayer.Position;
+        this.position = this.putPlayer.Position.Copy();
     }
     CountUp()
     {

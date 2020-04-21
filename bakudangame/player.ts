@@ -14,13 +14,20 @@ export default class Player
     imagePath: string;
     private position: Position;
     private isKilled: boolean = false;
-    readonly isCpu: boolean
+    readonly isCpu: boolean;
     constructor(img: string, position0: Position, isCpu = false)
     {
         this.imagePath = img;
         this.position = position0;
         this.isCpu = isCpu;
     }
+    Copy(): Player
+    {
+        let a = new Player(this.imagePath, this.position.Copy(), this.isCpu)
+        a.isKilled = this.isKilled;
+        return a;
+    }
+
     move(direction: Direction, field:Readonly< Field>): boolean
     {
         let target: Position;

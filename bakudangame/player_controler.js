@@ -5,9 +5,10 @@ import Message from "./message.js";
 export default class PlayerControler {
     constructor(field0) {
         this.junban = 0;
-        this.numOfArive = PlayerControler.ninzu;
         //this.field = field0;
         this.players = new Array(PlayerControler.ninzu);
+        if (field0 == undefined)
+            return;
         for (let i = 0; i < PlayerControler.ninzu; i++) {
             let path = "img/char" + i + "/char" + i + "_001.png";
             let x0, y0;
@@ -23,6 +24,15 @@ export default class PlayerControler {
             this.players[i] = new Player(path, new Position(x0, y0), isCpu[i]);
         }
         this.ShowJunban();
+    }
+    Copy() {
+        let a = new PlayerControler();
+        a.junban = this.junban;
+        a.players = [];
+        for (let i = 0; i < this.players.length; i++) {
+            a.players[i] = this.players[i].Copy();
+        }
+        return a;
     }
     get Players() {
         return this.players;

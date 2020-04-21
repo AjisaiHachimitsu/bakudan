@@ -5,16 +5,28 @@ import Message from "./message.js";
 
 export default class PlayerControler
 {
-    private numOfArive: number;
     //private field: Field;
     private static readonly ninzu: number = 4;
     private junban: number = 0;
     private players: Player[];
-    constructor(field0: Field)
+
+    Copy():PlayerControler
     {
-        this.numOfArive = PlayerControler.ninzu;
+        let a = new PlayerControler();
+        a.junban = this.junban;
+        a.players=[]
+        for (let i = 0; i < this.players.length; i++)
+        {
+            a.players[i] = this.players[i].Copy();
+        }
+        return a;
+    }
+
+    constructor(field0?: Field)
+    {
         //this.field = field0;
         this.players = new Array<Player>(PlayerControler.ninzu);
+        if (field0 == undefined) return;
         for (let i = 0; i < PlayerControler.ninzu; i++)
         {
             let path = "img/char" + i + "/char" + i + "_001.png";

@@ -8,7 +8,15 @@ export default class BombControler
     private static readonly explosionTime = 3;
     private bombs: List<Bomb>;
     //private readonly field: Field;
-    constructor(field: Field)
+
+    Copy():BombControler
+    {
+        let a = new BombControler();
+        a.bombs = this.bombs.Copy(function (bomb: Bomb) { return bomb.Copy() });
+        return a;
+    }
+
+    constructor()
     {
         this.bombs = new List<Bomb>();
         //this.field = field;

@@ -14,6 +14,11 @@ export default class Player {
         this.position = position0;
         this.isCpu = isCpu;
     }
+    Copy() {
+        let a = new Player(this.imagePath, this.position.Copy(), this.isCpu);
+        a.isKilled = this.isKilled;
+        return a;
+    }
     move(direction, field) {
         let target;
         switch (direction) {

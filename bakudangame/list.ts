@@ -16,6 +16,16 @@ export default class List<T>
     private lastnode: listnode<T>;
     private iterator: listnode<T>
     private length: number = 0;
+    Copy(copyFunction?:(t:T)=>T): List<T>//
+    {
+        let a = new List<T>();
+        for (this.First(); this.IsNull === false; this.Next())
+        {
+            if (copyFunction == undefined) a.add(this.Value);
+            else a.add(copyFunction(this.Value));
+        }
+        return a;
+    }
     constructor()
     {
         this.firstnode = new listnode<T>(null);
@@ -66,4 +76,5 @@ export default class List<T>
     {
         return this.length;
     }
+    
 }

@@ -8,7 +8,7 @@ export enum fieldStatus
 
 };
 
-export class Position
+export class Position//コピーメソッドあり
 {
     x: number;
     y: number;
@@ -35,52 +35,66 @@ export class Position
     {
         return a.x === b.x && a.y === b.y;
     }
+    Copy(): Position
+    {
+        return new Position(this.x, this.y)
+    }
 
 }
-export default class Field
+export default class Field//コピーメソッドあり
 {
     readonly width: number;
     readonly height: number;
-    private mainfield: number[][];
-    GetField(position:Readonly < Position>): fieldStatus
+    private mainfield: fieldStatus[][];
+    GetField(position: Readonly<Position>): fieldStatus
     {
         return this.mainfield[position.y][position.x];
     }
 
-    constructor(width0: number, height0: number)
+    constructor(width0: number, height0: number, mainfield0?: fieldStatus[][])
     {
         this.width = width0;
         this.height = height0;
         this.mainfield = [];
-        for (let i = 0; i < this.height; i++)
+        if (mainfield0 == undefined)
         {
-            this.mainfield[i] = [];
-            for (let j = 0; j < this.width; j++)
+            for (let i = 0; i < this.height; i++)
             {
-                if (i % 2 === 0 && j % 2 === 0)
+                this.mainfield[i] = [];
+                for (let j = 0; j < this.width; j++)
                 {
-                    this.mainfield[i][j] = fieldStatus.BLOCK;
-                }
-                else
-                {
-                    this.mainfield[i][j] = fieldStatus.NONE;
-                }
-                if (i === 0 || i === this.height - 1 || j === 0 || j === this.width - 1)
-                {
-                    this.mainfield[i][j] = fieldStatus.BLOCK;
+                    if (i % 2 === 0 && j % 2 === 0)
+                    {
+                        this.mainfield[i][j] = fieldStatus.BLOCK;
+                    }
+                    else
+                    {
+                        this.mainfield[i][j] = fieldStatus.NONE;
+                    }
+                    if (i === 0 || i === this.height - 1 || j === 0 || j === this.width - 1)
+                    {
+                        this.mainfield[i][j] = fieldStatus.BLOCK;
+                    }
                 }
             }
         }
+        else
+        {
+            for (let i = 0; i < this.height; i++)
+            {
+                this.mainfield[i] = mainfield0[i].concat();
+            }
+        }
     }
-    PutBomb( position:Readonly< Position>)
+    PutBomb(position: Readonly<Position>)
     {
         this.mainfield[position.y][position.x] = fieldStatus.BOMB;
     }
-    IsOutOfField(position:Readonly< Position>): boolean
+    IsOutOfField(position: Readonly<Position>): boolean
     {
         return position.x < 0 || position.x > this.width || position.y < 0 || position.y > this.height;
     }
-    Explosion(position:Readonly< Position>)
+    Explosion(position: Readonly<Position>)
     {
         this.mainfield[position.y][position.x] = fieldStatus.EXPLOSION;
     }
@@ -94,5 +108,9 @@ export default class Field
                     this.mainfield[i][j] = fieldStatus.NONE;
             }
         }
+    }
+    copy(): Field
+    {
+        return new Field(this.width, this.height, this.mainfield)
     }
 }

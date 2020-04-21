@@ -12,7 +12,7 @@ window.onload = () => {
     Messge.start(document.getElementById("message"));
     let playerControler = new PlayerControler(field);
     Output.start(document.getElementById("maintable"));
-    let bombControler = new BombControler(field);
+    let bombControler = new BombControler();
     Input.start((document.getElementById("buttontable")));
     GameManager.start(field, playerControler, bombControler);
 };
