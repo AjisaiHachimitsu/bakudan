@@ -1,3 +1,9 @@
+class Action {
+    constructor(check, action) {
+        this.check = check;
+        this.action = action;
+    }
+}
 export default class Cpu {
     constructor(numOfAction, playerControler, bombControler, field) {
         this.numOfAction = numOfAction;
@@ -11,14 +17,18 @@ export default class Cpu {
     ExplorAllAction() {
         let actionSet = new Array(6);
         for (let i = 0; i < 4; i++) {
-            actionSet[i] = () => { return this.playerControler.TurnPlayer.move(i, this.field); };
+            actionSet[i] = new Action(() => { return this.playerControler.TurnPlayer.CheckMove(i, this.field); }, () => { return this.playerControler.TurnPlayer.Move(i, this.field); });
         }
-        actionSet[4] = () => { return this.playerControler.TurnPlayer.PutBomb(this.field, this.bombControler); };
-        actionSet[5] = null;
+        actionSet[4] = new Action(() => { return this.playerControler.TurnPlayer.CheckPutBomb(this.field, this.bombControler); }, () => { return this.playerControler.TurnPlayer.PutBomb(this.field, this.bombControler); });
+        //actionSet[5] = null;
         let actions = [];
-        for (let i = 0; i < this.numOfAction; i++) {
-            actions.push(actionSet[0]);
+        while (actions.length < this.numOfAction) {
+            if (actionSet[0].check)
+                actions.push(actionSet[0].action);
+            else
+                break;
         }
+        this.allActions.push(actions);
     }
 }
 //# sourceMappingURL=cpu.js.map
