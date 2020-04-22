@@ -19,6 +19,7 @@ export class GameManager
         this.playerControler = playerControler;
         this.bombControler = bombCotroler;
         this.Draw()
+        this.ShowNumOfAction();
     }
     static Draw()
     {
@@ -53,12 +54,20 @@ export class GameManager
     private static CountUpActtion()
     {
         this.acttionCounter++;
+        this.ShowNumOfAction();
+        
         if (this.acttionCounter >= this.numOfAction)
         {
             this.ChangeToNextTurn();
         }
-
     }
+
+    private static ShowNumOfAction()
+    {
+        let message = "あと" + String(this.numOfAction - this.acttionCounter) + "回行動できます。<br>";
+        Message.AddMessage(message);
+    }
+
     private static ChangeToNextTurn()
     {
         this.acttionCounter = 0;
@@ -75,6 +84,7 @@ export class GameManager
             if (this.playerControler.NumOfArive <= 1) break;
         } while (this.playerControler.TurnPlayer.IsKilled || this.playerControler.TurnPlayer.isCpu);
         GameManager.Draw();
+        this.ShowNumOfAction();
         this.field.EraseExplosion();
     }
 }
