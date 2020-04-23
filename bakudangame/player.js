@@ -11,6 +11,7 @@ export var Direction;
 export default class Player {
     constructor(img, position0, isCpu = false) {
         this.isKilled = false;
+        this.isCopied = false;
         this.imagePath = img;
         this.position = position0;
         this.isCpu = isCpu;
@@ -18,6 +19,7 @@ export default class Player {
     Copy() {
         let a = new Player(this.imagePath, this.position.Copy(), this.isCpu);
         a.isKilled = this.isKilled;
+        a.isCopied = true;
         return a;
     }
     CheckMove(direction, field) {
@@ -43,19 +45,23 @@ export default class Player {
         switch (direction) {
             case Direction.TODOWN:
                 target = this.position.Down;
-                Message.AddMessage("↓ ");
+                if (!this.isCopied)
+                    Message.AddMessage("↓ ");
                 break;
             case Direction.TOUP:
                 target = this.position.Up;
-                Message.AddMessage("↑ ");
+                if (!this.isCopied)
+                    Message.AddMessage("↑ ");
                 break;
             case Direction.TORIGHT:
                 target = this.position.Right;
-                Message.AddMessage("→ ");
+                if (!this.isCopied)
+                    Message.AddMessage("→ ");
                 break;
             case Direction.TOLEFT:
                 target = this.position.Left;
-                Message.AddMessage("← ");
+                if (!this.isCopied)
+                    Message.AddMessage("← ");
                 break;
         }
         if (field.GetField(target) !== fieldStatus.NONE) {
@@ -68,7 +74,8 @@ export default class Player {
         return bombControler.CheckPutBomb(this, field);
     }
     PutBomb(field, bombControler) {
-        Message.AddMessage("B ");
+        if (!this.isCopied)
+            Message.AddMessage("B ");
         return bombControler.PutBomb(this, field);
     }
     get Position() {

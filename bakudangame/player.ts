@@ -16,6 +16,7 @@ export default class Player
     private position: Position;
     private isKilled: boolean = false;
     readonly isCpu: boolean;
+    private isCopied = false;
     constructor(img: string, position0: Position, isCpu = false)
     {
         this.imagePath = img;
@@ -26,6 +27,7 @@ export default class Player
     {
         let a = new Player(this.imagePath, this.position.Copy(), this.isCpu)
         a.isKilled = this.isKilled;
+        a.isCopied = true;
         return a;
     }
     CheckMove(direction: Direction, field: Readonly<Field>): boolean
@@ -56,19 +58,19 @@ export default class Player
         {
             case Direction.TODOWN:
                 target = this.position.Down;
-                Message.AddMessage("↓ ");
+                if (!this.isCopied) Message.AddMessage("↓ ");
                 break;
             case Direction.TOUP:
                 target = this.position.Up;
-                Message.AddMessage("↑ ");
+                if (!this.isCopied) Message.AddMessage("↑ ");
                 break;
             case Direction.TORIGHT:
                 target = this.position.Right;
-                Message.AddMessage("→ ");
+                if (!this.isCopied) Message.AddMessage("→ ");
                 break;
             case Direction.TOLEFT:
                 target = this.position.Left;
-                Message.AddMessage("← ");
+                if (!this.isCopied) Message.AddMessage("← ");
                 break;
         }
         if (field.GetField(target) !== fieldStatus.NONE)
@@ -84,7 +86,7 @@ export default class Player
     }
     PutBomb(field: Field, bombControler: BombControler): boolean
     {
-        Message.AddMessage("B ");
+        if (!this.isCopied) Message.AddMessage("B ");
         return bombControler.PutBomb(this, field);
     }
     get Position()
