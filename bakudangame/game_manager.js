@@ -49,7 +49,7 @@ export class GameManager {
         do {
             if (this.playerControler.TurnPlayer.isCpu && this.playerControler.TurnPlayer.IsKilled === false) {
                 let cpu = new Cpu(this.numOfAction, this.playerControler, this.bombControler, this.field);
-                //cpu.RandomActions(this.playerControler.TurnPlayer,this.field,this.bombControler);
+                cpu.RandomActions(this.playerControler, this.field, this.bombControler);
             }
             this.bombControler.TurnPassed(this.playerControler.TurnPlayer, this.playerControler.Players, this.field);
             this.playerControler.ChangeToNextPlayer();

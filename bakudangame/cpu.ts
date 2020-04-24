@@ -7,6 +7,10 @@ class TreenodeWithAction
 {
     treenode: GameTreeNode;
     action: (gameTreeNode: GameTreeNode) => boolean;
+    Copy()
+    {
+        return new TreenodeWithAction(this.treenode.Copy(), this.action);
+    }
     constructor(treenode: GameTreeNode, action: (gameTreeNode: GameTreeNode) => boolean)
     {
         this.treenode = treenode;
@@ -70,25 +74,27 @@ export default class Cpu
 
     }
 
-    private CreateActionTree(treeNodeWithAction: TreenodeWithAction, depth: number) : TreenodeWithAction[]
+    private CreateActionTree(treeNodeWithAction:Readonly< TreenodeWithAction>, depth: number): TreenodeWithAction[][]
     {
-        let array: TreenodeWithAction[] = [];
+        let array: TreenodeWithAction[][] = [];
         for (let i = 0; i < this.actionSet.length; i++)
         {
             if (this.checkActionSet[i](treeNodeWithAction.treenode))
             {
-                let a = treeNodeWithAction.treenode.Copy();
-                this.actionSet[i](a)
+                let a = treeNodeWithAction.Copy();
+                this.actionSet[i](a.treenode)
+                a.action = this.actionSet[i]
                 if (depth <= 0)
                 {
-                    array.push(new TreenodeWithAction(treeNodeWithAction.treenode, this.actionSet[i]))
+                    array.push([a])
                 }
                 else
                 {
-                    let b = this.CreateActionTree(new TreenodeWithAction(a, this.actionSet[i]), depth - 1)
+                    let b = this.CreateActionTree(a, depth - 1)
                     for (let j = 0; j < b.length; j++)
                     {
-                        array.push(b[j])
+                        array.push([a].concat(b[j]));
+
                     }
                 }
             }
@@ -97,25 +103,21 @@ export default class Cpu
         return array;
 
     }
-    private NecstActions()
+    private NextActions()
     {
-        let tree = new GameTreeNode(this.playerControler, this.bombControler, this.field);
+        let tree = new TreenodeWithAction( new GameTreeNode(this.playerControler, this.bombControler, this.field),null);
+        return this.CreateActionTree(tree,this.numOfAction);
     }
 
-    //RandomActions(player: Player, field: Field, bombControler: BombControler)
-    //{
-    //    //let actions: ((player:Player) => boolean)[] = [];
-    //    for (let i = 0; i < this.numOfAction; i++)
-    //    {
-    //        let a: number
-    //        do
-    //        {
-    //            if (Math.random() < 0.05) return;
-    //            a = Math.floor(Math.random() * this.actionSet.length)
-    //        } while (this.checkActionSet[a](this.playerControler.TurnPlayer, this.field, this.bombControler) === false)
-    //        this.actionSet[a](this.playerControler.TurnPlayer, this.field, this.bombControler)
-    //        this.actionSet[a](player, field, bombControler);
-    //    }
+    RandomActions(playerControler : PlayerControler, field: Field, bombControler: BombControler)
+    {
+        let tree = this.NextActions()
+        let rand =Math.floor( Math.random() * tree.length);
+        for (let j = 0; j < tree[rand].length; j++)
+        {
+            if (tree[rand][j] != null)
+                tree[rand][j].action(new GameTreeNode(playerControler, bombControler, field));
+        }
 
-    //}
+    }
 }

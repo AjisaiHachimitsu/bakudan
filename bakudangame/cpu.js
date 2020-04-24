@@ -3,6 +3,9 @@ class TreenodeWithAction {
         this.treenode = treenode;
         this.action = action;
     }
+    Copy() {
+        return new TreenodeWithAction(this.treenode.Copy(), this.action);
+    }
 }
 class GameTreeNode {
     constructor(playerControler, bombControler, field) {
@@ -38,15 +41,16 @@ export default class Cpu {
         let array = [];
         for (let i = 0; i < this.actionSet.length; i++) {
             if (this.checkActionSet[i](treeNodeWithAction.treenode)) {
-                let a = treeNodeWithAction.treenode.Copy();
-                this.actionSet[i](a);
+                let a = treeNodeWithAction.Copy();
+                this.actionSet[i](a.treenode);
+                a.action = this.actionSet[i];
                 if (depth <= 0) {
-                    array.push(new TreenodeWithAction(treeNodeWithAction.treenode, this.actionSet[i]));
+                    array.push([a]);
                 }
                 else {
-                    let b = this.CreateActionTree(new TreenodeWithAction(a, this.actionSet[i]), depth - 1);
+                    let b = this.CreateActionTree(a, depth - 1);
                     for (let j = 0; j < b.length; j++) {
-                        array.push(b[j]);
+                        array.push([a].concat(b[j]));
                     }
                 }
             }
@@ -54,8 +58,17 @@ export default class Cpu {
         array.push(null);
         return array;
     }
-    NecstActions() {
-        let tree = new GameTreeNode(this.playerControler, this.bombControler, this.field);
+    NextActions() {
+        let tree = new TreenodeWithAction(new GameTreeNode(this.playerControler, this.bombControler, this.field), null);
+        return this.CreateActionTree(tree, this.numOfAction);
+    }
+    RandomActions(playerControler, field, bombControler) {
+        let tree = this.NextActions();
+        let rand = Math.floor(Math.random() * tree.length);
+        for (let j = 0; j < tree[rand].length; j++) {
+            if (tree[rand][j] != null)
+                tree[rand][j].action(new GameTreeNode(playerControler, bombControler, field));
+        }
     }
 }
 //# sourceMappingURL=cpu.js.map
