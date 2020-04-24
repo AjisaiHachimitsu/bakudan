@@ -3,7 +3,7 @@ import Field from "./field.js";
 import PlayerControler from "./player_controler.js";
 import BombControler from "./bomb_controler.js";
 
-class TreenodeWithAction
+class TreenodeWithAction//継承で書き直し
 {
     treenode: GameTreeNode;
     action: (gameTreeNode: GameTreeNode) => boolean;

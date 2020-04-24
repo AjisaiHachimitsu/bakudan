@@ -1,4 +1,5 @@
-class TreenodeWithAction {
+class TreenodeWithAction //継承で書き直し
+ {
     constructor(treenode, action) {
         this.treenode = treenode;
         this.action = action;
