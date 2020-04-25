@@ -14,7 +14,7 @@ class TreenodeWithAction extends GameTreeNode {
         this.action = action;
     }
     Copy() {
-        return new TreenodeWithAction(this.playerControler, this.bombControler, this.field, this.action);
+        return new TreenodeWithAction(this.playerControler.Copy(), this.bombControler.Copy(), this.field.Copy(), this.action);
     }
 }
 export default class Cpu {
@@ -39,9 +39,9 @@ export default class Cpu {
     }
     CreateActionTree(treeNodeWithAction, depth) {
         let array = [];
-        let a = treeNodeWithAction.Copy();
         for (let i = 0; i < this.actionSet.length; i++) {
             if (this.checkActionSet[i](treeNodeWithAction)) {
+                let a = treeNodeWithAction.Copy();
                 this.actionSet[i](a);
                 a.action = this.actionSet[i];
                 if (depth <= 1) {

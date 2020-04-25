@@ -29,7 +29,7 @@ class TreenodeWithAction extends GameTreeNode
     action: (gameTreeNode: GameTreeNode) => boolean;
     Copy()
     {
-        return new TreenodeWithAction(this.playerControler, this.bombControler, this.field, this.action);
+        return new TreenodeWithAction(this.playerControler.Copy(), this.bombControler.Copy(), this.field.Copy(), this.action);
     }
     constructor(playerControler: PlayerControler, bombControler: BombControler, field: Field, action: (gameTreeNode: GameTreeNode) => boolean)
     {
@@ -78,11 +78,11 @@ export default class Cpu
     private CreateActionTree(treeNodeWithAction:Readonly< TreenodeWithAction>, depth: number): TreenodeWithAction[][]
     {
         let array: TreenodeWithAction[][] = [];
-        let a = treeNodeWithAction.Copy();
         for (let i = 0; i < this.actionSet.length; i++)
         {
             if (this.checkActionSet[i](treeNodeWithAction))
             {
+                let a = treeNodeWithAction.Copy();
                 this.actionSet[i](a)
                 a.action = this.actionSet[i]
                 if (depth <= 1)
