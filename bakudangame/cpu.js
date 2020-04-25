@@ -55,7 +55,7 @@ export default class Cpu {
                 }
             }
         }
-        array.push([null]);
+        array.push([]);
         return array;
     }
     NextActions() {
