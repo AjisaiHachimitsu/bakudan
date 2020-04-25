@@ -45,7 +45,7 @@ export default class Cpu {
                 let a = treeNodeWithAction.Copy();
                 this.actionSet[i](a.treenode);
                 a.action = this.actionSet[i];
-                if (depth <= 0) {
+                if (depth <= 1) {
                     array.push([a]);
                 }
                 else {
@@ -65,6 +65,7 @@ export default class Cpu {
     }
     RandomActions(playerControler, field, bombControler) {
         let tree = this.NextActions();
+        //alert(tree.length);
         let rand = Math.floor(Math.random() * tree.length);
         for (let j = 0; j < tree[rand].length; j++) {
             if (tree[rand][j] != null)
