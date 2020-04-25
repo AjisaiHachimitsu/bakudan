@@ -113,7 +113,7 @@ export default class Cpu
     RandomActions(playerControler : PlayerControler, field: Field, bombControler: BombControler)
     {
         let tree = this.NextActions()
-        alert(tree.length);
+        //alert(tree.length);
         let rand =Math.floor( Math.random() * tree.length);
         for (let j = 0; j < tree[rand].length; j++)
         {
