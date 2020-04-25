@@ -3,20 +3,6 @@ import Field from "./field.js";
 import PlayerControler from "./player_controler.js";
 import BombControler from "./bomb_controler.js";
 
-class TreenodeWithAction//継承で書き直し
-{
-    treenode: GameTreeNode;
-    action: (gameTreeNode: GameTreeNode) => boolean;
-    Copy()
-    {
-        return new TreenodeWithAction(this.treenode.Copy(), this.action);
-    }
-    constructor(treenode: GameTreeNode, action: (gameTreeNode: GameTreeNode) => boolean)
-    {
-        this.treenode = treenode;
-        this.action = action;
-    }
-}
 class GameTreeNode
 {
     playerControler: PlayerControler;
@@ -35,6 +21,21 @@ class GameTreeNode
         this.field = field;
     }
 
+}
+
+
+class TreenodeWithAction extends GameTreeNode
+{
+    action: (gameTreeNode: GameTreeNode) => boolean;
+    Copy()
+    {
+        return new TreenodeWithAction(this.playerControler, this.bombControler, this.field, this.action);
+    }
+    constructor(playerControler: PlayerControler, bombControler: BombControler, field: Field, action: (gameTreeNode: GameTreeNode) => boolean)
+    {
+        super(playerControler, bombControler, field);
+        this.action = action;
+    }
 }
 
 export default class Cpu
@@ -79,12 +80,12 @@ export default class Cpu
         let array: TreenodeWithAction[][] = [];
         for (let i = 0; i < this.actionSet.length; i++)
         {
-            if (this.checkActionSet[i](treeNodeWithAction.treenode))
+            if (this.checkActionSet[i](treeNodeWithAction))
             {
                 let a = treeNodeWithAction.Copy();
-                this.actionSet[i](a.treenode)
+                this.actionSet[i](a)
                 a.action = this.actionSet[i]
-                if (depth <= 0)
+                if (depth <= 1)
                 {
                     array.push([a])
                 }
@@ -105,7 +106,7 @@ export default class Cpu
     }
     private NextActions()
     {
-        let tree = new TreenodeWithAction( new GameTreeNode(this.playerControler, this.bombControler, this.field),null);
+        let tree = new TreenodeWithAction( this.playerControler, this.bombControler, this.field,null);
         return this.CreateActionTree(tree,this.numOfAction);
     }
 

@@ -1,13 +1,3 @@
-class TreenodeWithAction //継承で書き直し
- {
-    constructor(treenode, action) {
-        this.treenode = treenode;
-        this.action = action;
-    }
-    Copy() {
-        return new TreenodeWithAction(this.treenode.Copy(), this.action);
-    }
-}
 class GameTreeNode {
     constructor(playerControler, bombControler, field) {
         this.playerControler = playerControler;
@@ -16,6 +6,15 @@ class GameTreeNode {
     }
     Copy() {
         return new GameTreeNode(this.playerControler.Copy(), this.bombControler.Copy(), this.field.Copy());
+    }
+}
+class TreenodeWithAction extends GameTreeNode {
+    constructor(playerControler, bombControler, field, action) {
+        super(playerControler, bombControler, field);
+        this.action = action;
+    }
+    Copy() {
+        return new TreenodeWithAction(this.playerControler, this.bombControler, this.field, this.action);
     }
 }
 export default class Cpu {
@@ -41,11 +40,11 @@ export default class Cpu {
     CreateActionTree(treeNodeWithAction, depth) {
         let array = [];
         for (let i = 0; i < this.actionSet.length; i++) {
-            if (this.checkActionSet[i](treeNodeWithAction.treenode)) {
+            if (this.checkActionSet[i](treeNodeWithAction)) {
                 let a = treeNodeWithAction.Copy();
-                this.actionSet[i](a.treenode);
+                this.actionSet[i](a);
                 a.action = this.actionSet[i];
-                if (depth <= 0) {
+                if (depth <= 1) {
                     array.push([a]);
                 }
                 else {
@@ -60,7 +59,7 @@ export default class Cpu {
         return array;
     }
     NextActions() {
-        let tree = new TreenodeWithAction(new GameTreeNode(this.playerControler, this.bombControler, this.field), null);
+        let tree = new TreenodeWithAction(this.playerControler, this.bombControler, this.field, null);
         return this.CreateActionTree(tree, this.numOfAction);
     }
     RandomActions(playerControler, field, bombControler) {
