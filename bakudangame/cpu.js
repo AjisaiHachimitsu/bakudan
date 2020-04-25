@@ -1,3 +1,4 @@
+import { Direction } from "./player.js";
 class GameTreeNode {
     constructor(playerControler, bombControler, field) {
         this.playerControler = playerControler;
@@ -37,21 +38,24 @@ export default class Cpu {
             return gameTreeNode.playerControler.TurnPlayer.CheckPutBomb(gameTreeNode.field, gameTreeNode.bombControler);
         });
     }
-    CreateActionTree(treeNodeWithAction, depth) {
+    CreateActionTree(treeNodeWithAction, depth, actionIndex) {
         let array = [];
         for (let i = 0; i < this.actionSet.length; i++) {
-            if (this.checkActionSet[i](treeNodeWithAction)) {
-                let a = treeNodeWithAction.Copy();
-                this.actionSet[i](a);
-                a.action = this.actionSet[i];
-                if (depth <= 1) {
-                    array.push([a]);
-                }
-                else {
-                    let b = this.CreateActionTree(a, depth - 1);
-                    for (let j = 0; j < b.length; j++) {
-                        array.push([a].concat(b[j]));
-                    }
+            if (!this.checkActionSet[i](treeNodeWithAction))
+                continue;
+            if ((actionIndex === Direction.TODOWN && i === Direction.TOUP) || (actionIndex === Direction.TOUP && i === Direction.TODOWN) ||
+                (actionIndex === Direction.TOLEFT && i === Direction.TORIGHT) || (actionIndex === Direction.TORIGHT && i === Direction.TOLEFT))
+                continue;
+            let a = treeNodeWithAction.Copy();
+            this.actionSet[i](a);
+            a.action = this.actionSet[i];
+            if (depth <= 1) {
+                array.push([a]);
+            }
+            else {
+                let b = this.CreateActionTree(a, depth - 1, i);
+                for (let j = 0; j < b.length; j++) {
+                    array.push([a].concat(b[j]));
                 }
             }
         }
@@ -64,7 +68,7 @@ export default class Cpu {
     }
     RandomActions(playerControler, field, bombControler) {
         let tree = this.NextActions();
-        alert(tree.length);
+        //alert(tree.length);
         let rand = Math.floor(Math.random() * tree.length);
         for (let j = 0; j < tree[rand].length; j++) {
             if (tree[rand][j] != null)
