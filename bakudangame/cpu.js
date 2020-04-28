@@ -66,14 +66,49 @@ export default class Cpu {
         let tree = new TreenodeWithAction(this.playerControler, this.bombControler, this.field, null);
         return this.CreateActionTree(tree, this.numOfAction);
     }
-    RandomActions(playerControler, field, bombControler) {
+    ChooseActions(playerControler, field, bombControler) {
         let tree = this.NextActions();
         //alert(tree.length);
-        let rand = Math.floor(Math.random() * tree.length);
+        let max = this.value(tree[0][tree[0].length - 1]);
+        let maxIndex = [0];
+        for (let i = 1; i < tree.length; i++) {
+            let a = this.value(tree[i][tree[i].length - 1]);
+            if (a > max) {
+                max = a;
+                maxIndex = [i];
+            }
+            else if (a === max) {
+                maxIndex.push(i);
+            }
+        }
+        let rand = Math.floor(Math.random() * maxIndex.length);
         for (let j = 0; j < tree[rand].length; j++) {
             if (tree[rand][j] != null)
                 tree[rand][j].action(new GameTreeNode(playerControler, bombControler, field));
         }
+    }
+    value(gameTreeNode) {
+        if (!gameTreeNode)
+            return -2; //暫定
+        let gameTreeNode2 = gameTreeNode.Copy();
+        let isdeth = (player) => {
+            let bombs = gameTreeNode2.bombControler.Bombs;
+            for (bombs.First(); bombs.IsNull === false; bombs.Next()) {
+                if (bombs.Value.counter >= 2)
+                    bombs.Value.Explosion(bombs, gameTreeNode2.field, gameTreeNode2.playerControler.Players);
+            }
+            if (player.IsKilled)
+                return true;
+            return false;
+        };
+        if (isdeth(this.playerControler.TurnPlayer))
+            return -1; //自分が死んだら-1
+        let sum = 0;
+        for (let i = 0; i < this.playerControler.Players.length; i++) {
+            if (isdeth(this.playerControler.Players[i]))
+                sum++;
+        }
+        return sum;
     }
 }
 //# sourceMappingURL=cpu.js.map
