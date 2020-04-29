@@ -12,7 +12,7 @@ export class GameManager
     private static playerControler: PlayerControler;
     private static bombControler: BombControler;
     private static acttionCounter = 0;
-    private static readonly numOfAction: number = 6;
+    private static readonly numOfAction: number = 3;
     static start(field: Field, playerControler: PlayerControler, bombCotroler: BombControler)
     {
         this.field = field;

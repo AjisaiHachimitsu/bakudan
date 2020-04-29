@@ -44,6 +44,9 @@ export default class BombControler {
                 i++;
         }
     }
+    static get ExplosionTime() {
+        return this.explosionTime;
+    }
 }
 BombControler.explosionTime = 3;
 //# sourceMappingURL=bomb_controler.js.map

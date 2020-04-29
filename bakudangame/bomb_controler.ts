@@ -61,5 +61,8 @@ export default class BombControler
             else i++;
         }
     }
-
+    static get ExplosionTime()
+    {
+        return this.explosionTime
+    }
 }

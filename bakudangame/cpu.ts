@@ -96,6 +96,11 @@ export default class Cpu
                 let b = this.CreateActionTree(a, depth - 1, i)
                 for (let j = 0; j < b.length; j++)
                 {
+                    //let c:TreenodeWithAction[]=[];
+                    //for (let k = 0; k < b[j].length; k++)
+                    //{
+                    //    c.push(b[j][k].Copy());
+                    //}
                     array.push([a].concat(b[j]));
 
                 }
@@ -108,7 +113,7 @@ export default class Cpu
     }
     private NextActions(): TreenodeWithAction[][]
     {
-        let tree = new TreenodeWithAction(this.playerControler, this.bombControler, this.field, null);
+        let tree = new TreenodeWithAction(this.playerControler, this.bombControler, this.field, null);//.Copy();
         let trees = this.CreateActionTree(tree, this.numOfAction);
         trees[trees.length - 1] = [tree];
         return trees;
@@ -119,13 +124,13 @@ export default class Cpu
         let tree = this.NextActions()
         //alert(tree.length);
 
-        let last =<T> (array: Array<T>) => {return array[array.length-1]}
+        let last = <T>(array: Array<T>) => { return array[array.length - 1] }
 
-        let max = this.value(last(tree[0]));
+        let max = value(last(tree[0]));
         let maxIndex = [0];
         for (let i = 1; i < tree.length; i++)
         {
-            let a = this.value(last(tree[i]))
+            let a = value(last(tree[i]))
             if (a < max)
             {
                 max = a;
@@ -149,26 +154,31 @@ export default class Cpu
 
     }
 
-    private value(gameTreeNode: GameTreeNode): number
+}
+
+function value(gameTreeNode0: Readonly<GameTreeNode>): number
+{
+    let gameTreeNode = gameTreeNode0.Copy();
+    let isdeth = (player: Player) =>
     {
-        let isdeth = (player: Player) =>
+        let bombs = gameTreeNode.bombControler.Bombs;
+        if (player === gameTreeNode.playerControler.TurnPlayer)
         {
-            let bombs = gameTreeNode.bombControler.Bombs;
             for (let i = 0; i < bombs.length; i++)
             {
-                if (bombs[i].counter >= 2)
+                if (bombs[i].counter >= BombControler.ExplosionTime-1)
                     bombs[i].Explosion(bombs, gameTreeNode.field, gameTreeNode.playerControler.Players);
             }
-            if (player.IsKilled) return true;
-            return false;
         }
-        if (isdeth(this.playerControler.TurnPlayer)) return -1;//自分が死んだら-1
-        let sum = 0;
-        for (let i = 0; i < this.playerControler.Players.length; i++)
-        {
-            if (this.playerControler.Players[i].IsKilled) continue;
-            if (isdeth(this.playerControler.Players[i])) sum++
-        }
-        return sum;
+        if (player.IsKilled) return true;
+        return false;
     }
+    if (isdeth(gameTreeNode.playerControler.TurnPlayer)) return -1;//自分が死んだら-1
+    let sum = 0;
+    for (let i = 0; i < gameTreeNode.playerControler.Players.length; i++)
+    {
+        if (gameTreeNode.playerControler.Players[i].IsKilled) continue;
+        if (isdeth(gameTreeNode.playerControler.Players[i])) sum++
+    }
+    return sum;
 }
