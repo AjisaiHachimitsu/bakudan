@@ -10,7 +10,7 @@ class listnode<T>
 }
 
 
-export default class List<T>
+/*export default*/ class List<T>
 {
     private firstnode: listnode<T>;
     private lastnode: listnode<T>;

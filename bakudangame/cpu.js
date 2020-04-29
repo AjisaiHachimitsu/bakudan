@@ -64,15 +64,16 @@ export default class Cpu {
     }
     NextActions() {
         let tree = new TreenodeWithAction(this.playerControler, this.bombControler, this.field, null);
-        return this.CreateActionTree(tree, this.numOfAction);
+        let trees = this.CreateActionTree(tree, this.numOfAction);
+        trees[trees.length - 1] = [tree];
+        return trees;
     }
     Action(playerControler, field, bombControler) {
         let tree = this.NextActions();
         //alert(tree.length);
         let max = this.value(tree[0][tree[0].length - 1]);
         let maxIndex = [0];
-        for (let i = 1; i < tree.length - 1; i++) //最後は空
-         {
+        for (let i = 1; i < tree.length; i++) {
             let a = this.value(tree[i][tree[i].length - 1]);
             if (a > max) {
                 max = a;
@@ -83,17 +84,18 @@ export default class Cpu {
             }
         }
         let rand = Math.floor(Math.random() * maxIndex.length);
-        for (let j = 0; j < tree[rand].length; j++) {
-            if (tree[rand][j] != null)
-                tree[rand][j].action(new GameTreeNode(playerControler, bombControler, field));
+        let actionIndex = maxIndex[rand];
+        for (let j = 0; j < tree[actionIndex].length; j++) {
+            if (tree[actionIndex][j].action != null)
+                tree[actionIndex][j].action(new GameTreeNode(playerControler, bombControler, field));
         }
     }
     value(gameTreeNode) {
         let isdeth = (player) => {
             let bombs = gameTreeNode.bombControler.Bombs;
-            for (bombs.First(); bombs.IsNull === false; bombs.Next()) {
-                if (bombs.Value.counter >= 2)
-                    bombs.Value.Explosion(bombs, gameTreeNode.field, gameTreeNode.playerControler.Players);
+            for (let i = 0; i < bombs.length; i++) {
+                if (bombs[i].counter >= 2)
+                    bombs[i].Explosion(bombs, gameTreeNode.field, gameTreeNode.playerControler.Players);
             }
             if (player.IsKilled)
                 return true;

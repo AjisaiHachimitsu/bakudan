@@ -31,10 +31,10 @@ export default class Bomb {
                         players[k].Killed(this.putPlayer);
                 }
                 if (field.GetField(target) === fieldStatus.BOMB) {
-                    for (bombs.First(); bombs.IsNull === false; bombs.Next()) {
-                        if (Position.IsEq(bombs.Value.position, target)) {
+                    for (let k = 0; k < bombs.length; k++) {
+                        if (Position.IsEq(bombs[k].position, target)) {
                             //alert(bombs.Value.isExplosion);
-                            bombs.Value.Explosion(bombs, field, players);
+                            bombs[k].Explosion(bombs, field, players);
                             break;
                         }
                     }

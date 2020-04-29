@@ -4,7 +4,7 @@ class listnode {
         this.data = data;
     }
 }
-export default class List {
+/*export default*/ class List {
     constructor() {
         this.length = 0;
         this.firstnode = new listnode(null);

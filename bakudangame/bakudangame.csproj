@@ -90,7 +90,6 @@
     <TypeScriptCompile Include="field.ts" />
     <TypeScriptCompile Include="game_manager.ts" />
     <TypeScriptCompile Include="input.ts" />
-    <TypeScriptCompile Include="list.ts" />
     <TypeScriptCompile Include="message.ts" />
     <TypeScriptCompile Include="output.ts" />
     <TypeScriptCompile Include="player.ts" />

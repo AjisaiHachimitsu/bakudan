@@ -3,7 +3,6 @@ import Output from "./output.js";
 import Input from "./input.js";
 import Messge from "./message.js";
 import PlayerControler from "./player_controler.js";
-import List from "./list.js";
 import BombControler from "./bomb_controler.js";
 import { GameManager } from "./game_manager.js";
 function main():void

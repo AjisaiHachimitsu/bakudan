@@ -1,6 +1,5 @@
 ﻿import { fieldStatus, default as Field, Position } from "./field.js"
 import Player from "./player.js";
-import List from "./list.js";
 import Bomb from "./bomb.js";
 
 export default class Output
@@ -56,13 +55,13 @@ export default class Output
             this.AccessCell(players[i].Position).innerHTML += '<img src="' + players[i].imagePath + '"/>';
         }
     }
-    private static BombDraw(bombs:Readonly< List<Readonly< Bomb>>>)
+    /*private static BombDraw(bombs:Readonly<Array<Readonly< Bomb>>>)
     {
-        for (bombs.First(); bombs.IsNull === false; bombs.Next())
+        for (let i = 0; i < bombs.length;i++)
         {
-            this.AccessCell(bombs.Value.position).innerHTML += '<img src="' + this.bombimagePath + '"/>'
+            this.AccessCell(bombs[i].position).innerHTML += '<img src="' + this.bombimagePath + '"/>'
         }
-    }
+    }*/
     private static AccessCell(i: number, j: number): HTMLTableCellElement;
     private static AccessCell(position: Position): HTMLTableCellElement;
     private static AccessCell(value1: number |Readonly< Position>, value2?: number)
@@ -76,7 +75,7 @@ export default class Output
             return this.table.rows[value1.y].cells[value1.x];
         }
     }
-    static Draw(field:Readonly< Field>, players:readonly Readonly< Player>[], bombs:Readonly< List<Readonly< Bomb>>>)
+    static Draw(field:Readonly< Field>, players:readonly Readonly< Player>[], bombs:Readonly< Array<Readonly< Bomb>>>)
     {
         this.FieldDraw(field);
         //this.BombDraw(bombs);

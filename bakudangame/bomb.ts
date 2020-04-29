@@ -1,6 +1,5 @@
 ﻿import Field, { Position, fieldStatus } from "./field.js";
 import Player from "./player";
-import List from "./list";
 export default class Bomb
 {
     private static readonly explosionSize: number = 3;
@@ -24,7 +23,7 @@ export default class Bomb
     {
         this.counter++;
     }
-    Explosion(bombs: List<Bomb>, field: Field,players:Player[])
+    Explosion(bombs: Array<Bomb>, field: Field,players:Player[])
     {
         if (this.isExplosion) return;
         this.isExplosion = true;
@@ -43,12 +42,12 @@ export default class Bomb
                 }
                 if (field.GetField(target) === fieldStatus.BOMB)
                 {
-                    for (bombs.First(); bombs.IsNull === false; bombs.Next())
+                    for (let k = 0; k < bombs.length;k++)
                     {
-                        if (Position.IsEq(bombs.Value.position, target))
+                        if (Position.IsEq(bombs[k].position, target))
                         {
                             //alert(bombs.Value.isExplosion);
-                            bombs.Value.Explosion(bombs, field,players);
+                            bombs[k].Explosion(bombs, field,players);
                             break;
                         }
                     }

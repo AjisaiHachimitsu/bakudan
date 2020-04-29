@@ -38,11 +38,6 @@ export default class Output {
             this.AccessCell(players[i].Position).innerHTML += '<img src="' + players[i].imagePath + '"/>';
         }
     }
-    static BombDraw(bombs) {
-        for (bombs.First(); bombs.IsNull === false; bombs.Next()) {
-            this.AccessCell(bombs.Value.position).innerHTML += '<img src="' + this.bombimagePath + '"/>';
-        }
-    }
     static AccessCell(value1, value2) {
         if (typeof (value1) === "number") {
             return this.table.rows[value1].cells[value2];
