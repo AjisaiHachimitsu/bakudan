@@ -10,11 +10,11 @@ export default class PlayerControler
     private junban: number = 0;
     private players: Player[];
 
-    Copy():PlayerControler
+    Copy(): PlayerControler
     {
         let a = new PlayerControler();
         a.junban = this.junban;
-        a.players=[]
+        a.players = []
         for (let i = 0; i < this.players.length; i++)
         {
             a.players[i] = this.players[i].Copy();
@@ -51,7 +51,7 @@ export default class PlayerControler
     {
         this.junban++
         this.junban %= PlayerControler.ninzu;
-        this.ShowJunban();
+        if (this.TurnPlayer.IsKilled === false) this.ShowJunban();
     }
     ShowJunban(): void
     {

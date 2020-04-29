@@ -12,7 +12,7 @@ function main():void
 window.onload = () =>
 {
 
-    let field = new Field(21, 15);
+    let field = new Field(15, 11);
     Messge.start(document.getElementById("message"));
     let playerControler=new PlayerControler(field);
     Output.start((document.getElementById("maintable") as HTMLTableElement));

@@ -40,7 +40,8 @@ export default class PlayerControler {
     ChangeToNextPlayer() {
         this.junban++;
         this.junban %= PlayerControler.ninzu;
-        this.ShowJunban();
+        if (this.TurnPlayer.IsKilled === false)
+            this.ShowJunban();
     }
     ShowJunban() {
         //Message.ClearMessage();
