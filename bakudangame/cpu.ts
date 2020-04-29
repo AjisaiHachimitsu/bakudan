@@ -82,8 +82,8 @@ export default class Cpu
         for (let i = 0; i < this.actionSet.length; i++)
         {
             if (!this.checkActionSet[i](treeNodeWithAction)) continue;
-            if ((actionIndex === Direction.TODOWN && i === Direction.TOUP) || (actionIndex === Direction.TOUP && i=== Direction.TODOWN)||
-                (actionIndex === Direction.TOLEFT && i===Direction.TORIGHT)|| (actionIndex === Direction.TORIGHT && i === Direction.TOLEFT)) continue;
+            if ((actionIndex === Direction.TODOWN && i === Direction.TOUP) || (actionIndex === Direction.TOUP && i === Direction.TODOWN) ||
+                (actionIndex === Direction.TOLEFT && i === Direction.TORIGHT) || (actionIndex === Direction.TORIGHT && i === Direction.TOLEFT)) continue;
             let a = treeNodeWithAction.Copy();
             this.actionSet[i](a)
             a.action = this.actionSet[i]
@@ -109,7 +109,7 @@ export default class Cpu
     private NextActions(): TreenodeWithAction[][]
     {
         let tree = new TreenodeWithAction(this.playerControler, this.bombControler, this.field, null);
-        let trees=this.CreateActionTree(tree, this.numOfAction);
+        let trees = this.CreateActionTree(tree, this.numOfAction);
         trees[trees.length - 1] = [tree];
         return trees;
     }
@@ -133,14 +133,15 @@ export default class Cpu
             {
                 maxIndex.push(i);
             }
-                
+
         }
+        Message.AddMessage(String(max));
         let rand = Math.floor(Math.random() * maxIndex.length);
         let actionIndex = maxIndex[rand];
         for (let j = 0; j < tree[actionIndex].length; j++)
         {
-        
-            if (tree[   actionIndex][j].action != null)
+
+            if (tree[actionIndex][j].action != null)
                 tree[actionIndex][j].action(new GameTreeNode(playerControler, bombControler, field));
         }
 
@@ -151,7 +152,7 @@ export default class Cpu
         let isdeth = (player: Player) =>
         {
             let bombs = gameTreeNode.bombControler.Bombs;
-            for (let i = 0; i < bombs.length;i++)
+            for (let i = 0; i < bombs.length; i++)
             {
                 if (bombs[i].counter >= 2)
                     bombs[i].Explosion(bombs, gameTreeNode.field, gameTreeNode.playerControler.Players);
@@ -163,7 +164,8 @@ export default class Cpu
         let sum = 0;
         for (let i = 0; i < this.playerControler.Players.length; i++)
         {
-            if(isdeth(this.playerControler.Players[i])) sum++
+            if (this.playerControler.Players[i].IsKilled) continue;
+            if (isdeth(this.playerControler.Players[i])) sum++
         }
         return sum;
     }

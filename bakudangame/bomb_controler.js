@@ -38,7 +38,7 @@ export default class BombControler {
         }
         for (let i = 0; i < this.bombs.length; i++) {
             if (this.bombs[i].IsExplosion) {
-                this.bombs.splice(i);
+                this.bombs.splice(i, 1);
             }
         }
     }

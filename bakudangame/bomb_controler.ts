@@ -56,7 +56,7 @@ export default class BombControler
         {
             if (this.bombs[i].IsExplosion)
             {
-                this.bombs.splice(i);
+                this.bombs.splice(i,1);
             }
         }
     }

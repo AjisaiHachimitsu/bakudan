@@ -1,4 +1,5 @@
 import { Direction } from "./player.js";
+import Message from "./message.js";
 class GameTreeNode {
     constructor(playerControler, bombControler, field) {
         this.playerControler = playerControler;
@@ -83,6 +84,7 @@ export default class Cpu {
                 maxIndex.push(i);
             }
         }
+        Message.AddMessage(String(max));
         let rand = Math.floor(Math.random() * maxIndex.length);
         let actionIndex = maxIndex[rand];
         for (let j = 0; j < tree[actionIndex].length; j++) {
@@ -105,6 +107,8 @@ export default class Cpu {
             return -1; //自分が死んだら-1
         let sum = 0;
         for (let i = 0; i < this.playerControler.Players.length; i++) {
+            if (this.playerControler.Players[i].IsKilled)
+                continue;
             if (isdeth(this.playerControler.Players[i]))
                 sum++;
         }
