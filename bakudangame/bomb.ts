@@ -36,10 +36,10 @@ export default class Bomb
                 let target = new Position(j * directions[i][0] + this.position.x, j * directions[i][1] + this.position.y);
                 //alert([target.x,target.y])
                 if (field.GetField(target) === fieldStatus.BLOCK) break;
-                for (let i = 0; i < players.length; i++)
+                for (let k = 0; k < players.length; k++)
                 {
-                    if (Position.IsEq(players[i].Position, target))
-                        players[i].Killed(this.putPlayer);
+                    if (Position.IsEq(players[k].Position, target))
+                        players[k].Killed(this.putPlayer);
                 }
                 if (field.GetField(target) === fieldStatus.BOMB)
                 {

@@ -66,12 +66,13 @@ export default class Cpu {
         let tree = new TreenodeWithAction(this.playerControler, this.bombControler, this.field, null);
         return this.CreateActionTree(tree, this.numOfAction);
     }
-    ChooseActions(playerControler, field, bombControler) {
+    Action(playerControler, field, bombControler) {
         let tree = this.NextActions();
         //alert(tree.length);
         let max = this.value(tree[0][tree[0].length - 1]);
         let maxIndex = [0];
-        for (let i = 1; i < tree.length; i++) {
+        for (let i = 1; i < tree.length - 1; i++) //最後は空
+         {
             let a = this.value(tree[i][tree[i].length - 1]);
             if (a > max) {
                 max = a;
@@ -88,14 +89,11 @@ export default class Cpu {
         }
     }
     value(gameTreeNode) {
-        if (!gameTreeNode)
-            return -2; //暫定
-        let gameTreeNode2 = gameTreeNode.Copy();
         let isdeth = (player) => {
-            let bombs = gameTreeNode2.bombControler.Bombs;
+            let bombs = gameTreeNode.bombControler.Bombs;
             for (bombs.First(); bombs.IsNull === false; bombs.Next()) {
                 if (bombs.Value.counter >= 2)
-                    bombs.Value.Explosion(bombs, gameTreeNode2.field, gameTreeNode2.playerControler.Players);
+                    bombs.Value.Explosion(bombs, gameTreeNode.field, gameTreeNode.playerControler.Players);
             }
             if (player.IsKilled)
                 return true;

@@ -26,9 +26,9 @@ export default class Bomb {
                 //alert([target.x,target.y])
                 if (field.GetField(target) === fieldStatus.BLOCK)
                     break;
-                for (let i = 0; i < players.length; i++) {
-                    if (Position.IsEq(players[i].Position, target))
-                        players[i].Killed(this.putPlayer);
+                for (let k = 0; k < players.length; k++) {
+                    if (Position.IsEq(players[k].Position, target))
+                        players[k].Killed(this.putPlayer);
                 }
                 if (field.GetField(target) === fieldStatus.BOMB) {
                     for (bombs.First(); bombs.IsNull === false; bombs.Next()) {
