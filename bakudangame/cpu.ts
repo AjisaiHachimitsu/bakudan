@@ -119,12 +119,14 @@ export default class Cpu
         let tree = this.NextActions()
         //alert(tree.length);
 
-        let max = this.value(tree[0][tree[0].length - 1]);
+        let last =<T> (array: Array<T>) => {return array[array.length-1]}
+
+        let max = this.value(last(tree[0]));
         let maxIndex = [0];
         for (let i = 1; i < tree.length; i++)
         {
-            let a = this.value(tree[i][tree[i].length - 1])
-            if (a > max)
+            let a = this.value(last(tree[i]))
+            if (a < max)
             {
                 max = a;
                 maxIndex = [i];

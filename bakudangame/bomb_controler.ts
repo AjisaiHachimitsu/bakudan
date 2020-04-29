@@ -52,12 +52,13 @@ export default class BombControler
 
             }
         }
-        for (let i = 0; i < this.bombs.length;i++)
+        for (let i = 0; i < this.bombs.length;)
         {
             if (this.bombs[i].IsExplosion)
             {
-                this.bombs.splice(i,1);
+                this.bombs.splice(i, 1);
             }
+            else i++;
         }
     }
 

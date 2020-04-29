@@ -36,10 +36,12 @@ export default class BombControler {
                 this.bombs[i].Explosion(this.bombs, field, players);
             }
         }
-        for (let i = 0; i < this.bombs.length; i++) {
+        for (let i = 0; i < this.bombs.length;) {
             if (this.bombs[i].IsExplosion) {
                 this.bombs.splice(i, 1);
             }
+            else
+                i++;
         }
     }
 }
