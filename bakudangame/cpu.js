@@ -102,6 +102,12 @@ export default class Cpu {
 function value(gameTreeNode0) {
     let gameTreeNode = gameTreeNode0.Copy();
     let isdeth = (player) => {
+        let moveAble = false;
+        for (let i = 0; i < 4; i++) {
+            moveAble = moveAble || player.CheckMove(i, gameTreeNode.field);
+        }
+        if (!moveAble)
+            return true;
         let bombs = gameTreeNode.bombControler.Bombs;
         if (player === gameTreeNode.playerControler.TurnPlayer) {
             for (let i = 0; i < bombs.length; i++) {

@@ -161,6 +161,12 @@ function value(gameTreeNode0: Readonly<GameTreeNode>): number
     let gameTreeNode = gameTreeNode0.Copy();
     let isdeth = (player: Player) =>
     {
+        let moveAble = false;
+        for (let i = 0; i < 4; i++)
+        {
+            moveAble = moveAble || player.CheckMove(i, gameTreeNode.field);
+        }
+        if (!moveAble) return true;
         let bombs = gameTreeNode.bombControler.Bombs;
         if (player === gameTreeNode.playerControler.TurnPlayer)
         {
