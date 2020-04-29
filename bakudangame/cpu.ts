@@ -131,7 +131,7 @@ export default class Cpu
         for (let i = 1; i < tree.length; i++)
         {
             let a = value(last(tree[i]))
-            if (a < max)
+            if (a > max)
             {
                 max = a;
                 maxIndex = [i];
@@ -142,7 +142,7 @@ export default class Cpu
             }
 
         }
-        Message.AddMessage(String(max));
+        //Message.AddMessage(String(max));
         let rand = Math.floor(Math.random() * maxIndex.length);
         let actionIndex = maxIndex[rand];
         for (let j = 0; j < tree[actionIndex].length; j++)

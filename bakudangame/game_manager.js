@@ -62,5 +62,5 @@ export class GameManager {
     }
 }
 GameManager.acttionCounter = 0;
-GameManager.numOfAction = 3;
+GameManager.numOfAction = 5;
 //# sourceMappingURL=game_manager.js.map

@@ -10,6 +10,7 @@ export default class Bomb {
         let a = new Bomb(this.putPlayer);
         a.isExplosion = this.isExplosion;
         a.counter = this.counter;
+        a.position = this.position.Copy();
         return a;
     }
     CountUp() {

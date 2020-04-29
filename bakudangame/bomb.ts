@@ -3,15 +3,16 @@ import Player from "./player";
 export default class Bomb
 {
     private static readonly explosionSize: number = 3;
-    readonly position: Position;
+    position: Position;
     readonly putPlayer: Player;
     private isExplosion: boolean = false;
     counter: number = 0;
-    Copy():Bombおかしい
+    Copy():Bomb
     {
         let a = new Bomb(this.putPlayer);
         a.isExplosion = this.isExplosion;
         a.counter = this.counter;
+        a.position = this.position.Copy();
         return a;
     }
     constructor(putPlayer0: Player)
