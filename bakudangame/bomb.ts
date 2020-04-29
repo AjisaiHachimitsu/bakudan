@@ -7,7 +7,7 @@ export default class Bomb
     readonly putPlayer: Player;
     private isExplosion: boolean = false;
     counter: number = 0;
-    Copy():Bomb
+    Copy():Bombおかしい
     {
         let a = new Bomb(this.putPlayer);
         a.isExplosion = this.isExplosion;
