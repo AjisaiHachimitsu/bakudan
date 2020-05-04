@@ -4,13 +4,16 @@ import BombControler from "./bomb_controler.js";
 import Output from "./output.js";
 import Message from "./message.js";
 import Cpu from "./cpu.js";
+import Input from "./input.js";
 export class GameManager {
     static start() {
+        Message.ClearMessage();
         this.field = new Field(15, 11);
         this.playerControler = new PlayerControler(this.field);
         this.bombControler = new BombControler();
         this.Draw();
         this.ShowNumOfAction();
+        Input.ButtonDisable(false);
     }
     static Draw() {
         Output.Draw(this.field, this.playerControler.Players, this.bombControler.Bombs);
@@ -63,6 +66,7 @@ export class GameManager {
                     this.start();
                 };
                 setTimeout(finish, 1000);
+                Input.ButtonDisable(true);
                 break;
             }
         } while (this.playerControler.TurnPlayer.IsKilled || this.playerControler.TurnPlayer.isCpu);

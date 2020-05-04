@@ -30,6 +30,13 @@ export default class Input {
         getCell(2, 2).innerHTML = '<button id="pass-button">Pass</button>';
         let passButton = document.getElementById("pass-button");
         passButton.onclick = function () { GameManager.PassButtonClick(); };
+        this.buttons = [upButton, leftButton, rightButton, downButton, bombButton, passButton];
+        this.ButtonDisable(true);
+    }
+    static ButtonDisable(isdisable) {
+        for (let i = 0; i < this.buttons.length; i++) {
+            this.buttons[i].disabled = isdisable;
+        }
     }
 }
 //# sourceMappingURL=input.js.map

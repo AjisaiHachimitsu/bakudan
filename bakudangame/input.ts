@@ -5,6 +5,7 @@ import { GameManager } from "./game_manager.js";
 export default class Input 
 {
     private static inputTable: HTMLTableElement;
+    private static buttons: HTMLButtonElement[];
     static start(inputTable0: HTMLTableElement)
     {
         this.inputTable = inputTable0;
@@ -38,5 +39,16 @@ export default class Input
          getCell(2, 2).innerHTML = '<button id="pass-button">Pass</button>';
         let passButton = document.getElementById("pass-button") as HTMLButtonElement;
         passButton.onclick = function () { GameManager.PassButtonClick(); };
+
+        this.buttons = [upButton, leftButton, rightButton, downButton, bombButton, passButton];
+        this.ButtonDisable(true);
+        
+    }
+    static ButtonDisable(isdisable: boolean)
+    {
+        for (let i = 0; i < this.buttons.length; i++)
+        {
+            this.buttons[i].disabled=isdisable
+        }
     }
 }

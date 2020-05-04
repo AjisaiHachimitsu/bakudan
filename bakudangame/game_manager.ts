@@ -6,6 +6,7 @@ import BombControler from "./bomb_controler.js";
 import Output from "./output.js";
 import Message from "./message.js";
 import Cpu from "./cpu.js";
+import Input from "./input.js";
 export class GameManager
 {
     private static field: Field;
@@ -15,11 +16,13 @@ export class GameManager
     private static readonly numOfAction: number = 5;
     static start()
     {
+        Message.ClearMessage();
         this. field = new Field(15, 11);
         this. playerControler = new PlayerControler(this.field);
         this. bombControler = new BombControler();
         this.Draw()
         this.ShowNumOfAction();
+        Input.ButtonDisable(false);
     }
     static Draw()
     {
@@ -90,6 +93,7 @@ export class GameManager
                     this.start();
                 }
                 setTimeout(finish, 1000);
+                Input.ButtonDisable(true);
                 break;
             }
         } while (this.playerControler.TurnPlayer.IsKilled || this.playerControler.TurnPlayer.isCpu);
