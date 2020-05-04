@@ -13,11 +13,11 @@ export class GameManager
     private static bombControler: BombControler;
     private static acttionCounter = 0;
     private static readonly numOfAction: number = 5;
-    static start(field: Field, playerControler: PlayerControler, bombCotroler: BombControler)
+    static start()
     {
-        this.field = field;
-        this.playerControler = playerControler;
-        this.bombControler = bombCotroler;
+        this. field = new Field(15, 11);
+        this. playerControler = new PlayerControler(this.field);
+        this. bombControler = new BombControler();
         this.Draw()
         this.ShowNumOfAction();
     }
@@ -81,7 +81,17 @@ export class GameManager
             }
             this.bombControler.TurnPassed(this.playerControler.TurnPlayer, this.playerControler.Players, this.field)
             this.playerControler.ChangeToNextPlayer();
-            if (this.playerControler.NumOfArive <= 1) break;
+            if (this.playerControler.NumOfArive <= 1)
+            {
+                this.Draw();
+                let finish = () =>
+                {
+                    alert("ゲーム終了");
+                    this.start();
+                }
+                setTimeout(finish, 1000);
+                break;
+            }
         } while (this.playerControler.TurnPlayer.IsKilled || this.playerControler.TurnPlayer.isCpu);
         GameManager.Draw();
         this.ShowNumOfAction();
